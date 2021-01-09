@@ -1,0 +1,163 @@
+def packagesName = 'ar.franciscoruiz'
+
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'org.springframework.boot'
+
+    sourceCompatibility = 11
+    targetCompatibility = 11
+
+    group = packagesName
+    version = '1.0-SNAPSHOT'
+
+    repositories {
+        mavenCentral()
+        maven { url 'https://repo.spring.io/milestone' }
+    }
+
+    ext {
+        set('springCloudVersion', "Hoxton.M3")
+    }
+
+    ext {
+        set('elasticsearch.version', '6.8.4')
+    }
+
+    dependencies {
+        implementation 'org.apache.logging.log4j:log4j-core:+'
+        implementation 'org.apache.logging.log4j:log4j-api:+'
+        implementation 'com.vlkan.log4j2:log4j2-logstash-layout:+'
+        implementation 'io.github.cdimascio:java-dotenv:+'
+
+        implementation 'org.hibernate:hibernate-core:+'
+        implementation 'org.springframework:spring-orm:+'
+        implementation 'org.apache.tomcat:tomcat-dbcp:+'
+        implementation 'com.sun.xml.bind:jaxb-impl:+'
+        implementation 'javax.xml.bind:jaxb-api:+'
+        implementation 'com.google.guava:guava:+'
+        implementation 'org.springframework:spring-context-support:+'
+        implementation 'org.reflections:reflections:+'
+        implementation 'org.springframework.boot:spring-boot-starter-amqp'
+        implementation 'org.elasticsearch.client:elasticsearch-rest-client:+'
+        implementation 'org.elasticsearch.client:elasticsearch-rest-high-level-client:+'
+        implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:+'
+        runtime 'mysql:mysql-connector-java:+'
+
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+        testImplementation 'org.mockito:mockito-core:+'
+        testImplementation 'com.github.javafaker:javafaker:+'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:+'
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+    }
+
+    test {
+        useJUnitPlatform()
+
+        testLogging {
+            events "passed", "skipped", "failed"
+        }
+    }
+
+    task view_paths {
+        doLast { task ->
+            println "$task.project.name"
+            println "------------------"
+            println "Main: $sourceSets.main.java.srcDirTrees"
+            println "   Resources: $sourceSets.main.resources.srcDirTrees"
+            println "Tests: $sourceSets.test.java.srcDirTrees"
+            println "   Resources: $sourceSets.test.resources.srcDirTrees"
+        }
+    }
+}
+
+// All subprojects (located in src/*)
+subprojects {
+    group = "${packagesName}.${rootProject.name}"
+
+    sourceSets {
+        main {
+            java { srcDirs = ['main'] }
+            resources { srcDirs = ['main/resources'] }
+        }
+
+        test {
+            java { srcDirs = ['test'] }
+            resources { srcDirs = ['test/resources'] }
+        }
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+
+        testImplementation rootProject.sourceSets.main.output
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+        if (project.name != "shared") {
+            implementation project(":shared")
+            testImplementation project(":shared").sourceSets.test.output
+        }
+    }
+
+    bootJar {
+        enabled = false
+    }
+
+    jar {
+        enabled = true
+    }
+}
+
+// Main project (located in apps/)
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:2.4.1"
+    }
+}
+
+sourceSets {
+    main {
+        java { srcDirs = ['apps/main'] }
+        resources { srcDirs = ['apps/main/resources'] }
+    }
+
+    test {
+        java { srcDirs = ['apps/test'] }
+        resources { srcDirs = ['apps/test/resources'] }
+    }
+}
+
+apply plugin: 'application'
+apply plugin: "org.springframework.boot"
+
+bootJar {
+    baseName = 'wod-x'
+    version = '0.0.1'
+}
+
+mainClassName = "${packagesName}.apps.Starter"
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    implementation project(":accounts")
+    implementation project(":analytics")
+    implementation project(":retentions")
+    implementation project(":shared")
+    implementation project(":workouts")
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation project(":shared").sourceSets.test.output
+}
+

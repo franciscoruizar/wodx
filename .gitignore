@@ -1,0 +1,18 @@
+### Gradle ###
+.gradle
+build/
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+/var/log/*
+!/var/log/.gitkeep
+
+.env.local
+.env.*.local
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr

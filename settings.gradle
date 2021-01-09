@@ -1,0 +1,19 @@
+rootProject.name = 'wod-x'
+
+include ':accounts'
+project(':accounts').projectDir = new File('src/accounts')
+
+include ':analytics'
+project(':analytics').projectDir = new File('src/analytics')
+
+include ':companies'
+project(':companies').projectDir = new File('src/companies')
+
+include ':retentions'
+project(':retentions').projectDir = new File('src/retentions')
+
+include ':shared'
+project(':shared').projectDir = new File('src/shared')
+
+include ':workouts'
+project(':workouts').projectDir = new File('src/workouts')
