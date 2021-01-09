@@ -16,14 +16,6 @@ allprojects {
         maven { url 'https://repo.spring.io/milestone' }
     }
 
-    ext {
-        set('springCloudVersion', "Hoxton.M3")
-    }
-
-    ext {
-        set('elasticsearch.version', '6.8.4')
-    }
-
     dependencies {
         implementation 'org.apache.logging.log4j:log4j-core:+'
         implementation 'org.apache.logging.log4j:log4j-api:+'
@@ -39,8 +31,6 @@ allprojects {
         implementation 'org.springframework:spring-context-support:+'
         implementation 'org.reflections:reflections:+'
         implementation 'org.springframework.boot:spring-boot-starter-amqp'
-        implementation 'org.elasticsearch.client:elasticsearch-rest-client:+'
-        implementation 'org.elasticsearch.client:elasticsearch-rest-high-level-client:+'
         implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:+'
         runtime 'mysql:mysql-connector-java:+'
 
@@ -50,18 +40,8 @@ allprojects {
         testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:+'
     }
 
-    dependencyManagement {
-        imports {
-            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-        }
-    }
-
     test {
         useJUnitPlatform()
-
-        testLogging {
-            events "passed", "skipped", "failed"
-        }
     }
 
     task view_paths {
@@ -142,8 +122,8 @@ apply plugin: 'application'
 apply plugin: "org.springframework.boot"
 
 bootJar {
-    baseName = 'wod-x'
-    version = '0.0.1'
+    baseName 'wod-x'
+    version '0.0.1'
 }
 
 mainClassName = "${packagesName}.apps.Starter"

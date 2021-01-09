@@ -2,7 +2,7 @@ version: '3'
 
 services:
   mysql:
-    container_name: mysql
+    container_name: wodx-mysql
     image: mysql:8
     ports:
       - 3306:3306
@@ -16,18 +16,18 @@ services:
     command: [ "--default-authentication-plugin=mysql_native_password" ]
 
   rabbitmq:
-    container_name: rabbitmq
+    container_name: wodx-rabbitmq
     image: 'rabbitmq:3.7-management'
     restart: unless-stopped
     ports:
       - 5672:5672
       - 15672:15672
     environment:
-      - RABBITMQ_DEFAULT_USER=ecommerce
+      - RABBITMQ_DEFAULT_USER=wodx
       - RABBITMQ_DEFAULT_PASS=lechuga
 
   java:
-    container_name: wodx_java
+    container_name: wodx-java
     build:
       context: .
       dockerfile: Dockerfile

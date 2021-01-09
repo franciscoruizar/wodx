@@ -18,8 +18,8 @@ public class Starter {
             throw new RuntimeException("There are not enough arguments");
         }
 
-        String applicationName = args[0];
-        String commandName = args[1];
+        String  applicationName = args[0];
+        String  commandName     = args[1];
         boolean isServerCommand = commandName.equals("server");
 
         ensureApplicationExist(applicationName);
@@ -71,7 +71,7 @@ public class Starter {
         applications.put("accounts_backend", AccountsBackendApplication.class);
         applications.put("analytics_backend", AnalyticsBackendApplication.class);
         applications.put("retentions_backend", RetentionsBackendApplication.class);
-        applications.put("workouts_frontend", WorkoutsBackendApplication.class);
+        applications.put("workouts_backend", WorkoutsBackendApplication.class);
 
         return applications;
     }
@@ -82,7 +82,7 @@ public class Starter {
         commands.put("accounts_backend", AccountsBackendApplication.commands());
         commands.put("analytics_backend", AnalyticsBackendApplication.commands());
         commands.put("retentions_backend", RetentionsBackendApplication.commands());
-        commands.put("workouts_frontend", WorkoutsBackendApplication.commands());
+        commands.put("workouts_backend", WorkoutsBackendApplication.commands());
 
         return commands;
     }

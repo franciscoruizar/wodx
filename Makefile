@@ -26,4 +26,4 @@ start-retentions_backend:
 	@./gradlew :run --args='retention_backend server domain-events:rabbitmq:consume'
 
 start-workouts_backend:
-	@./gradlew :run --args='accounts_backend server'
+	@./gradlew :run --args='workouts_backend server'

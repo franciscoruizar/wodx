@@ -16,7 +16,7 @@ import java.util.HashMap;
 )
 public class AnalyticsBackendApplication {
     public static HashMap<String, Class<?>> commands() {
-        return new HashMap<String, Class<?>>() {{
+        return new HashMap<>() {{
             put("domain-events:rabbitmq:consume", RabbitMqDomainEventsConsumer.class);
         }};
     }
