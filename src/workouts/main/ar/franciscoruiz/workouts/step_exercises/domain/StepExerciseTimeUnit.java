@@ -1,6 +1,6 @@
-package ar.franciscoruiz.workouts.workout_exercises.domain;
+package ar.franciscoruiz.workouts.step_exercises.domain;
 
-public enum WorkoutExerciseTimeUnit {
+public enum StepExerciseTimeUnit {
     NONE("NONE"),
     SECONDS("SECONDS"),
     MINUTES("MINUTES"),
@@ -8,7 +8,7 @@ public enum WorkoutExerciseTimeUnit {
 
     private final String value;
 
-    WorkoutExerciseTimeUnit(String value) {
+    StepExerciseTimeUnit(String value) {
         this.value = value;
     }
 

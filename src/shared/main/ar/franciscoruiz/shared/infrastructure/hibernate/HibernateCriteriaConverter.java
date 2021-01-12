@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public final class HibernateCriteriaConverter<T> {
     private final CriteriaBuilder                                                 builder;
-    private final HashMap<FilterOperator, BiFunction<Filter, Root<T>, Predicate>> predicateTransformers = new HashMap<FilterOperator, BiFunction<Filter, Root<T>, Predicate>>() {{
+    private final HashMap<FilterOperator, BiFunction<Filter, Root<T>, Predicate>> predicateTransformers = new HashMap<>() {{
         put(FilterOperator.EQUAL, HibernateCriteriaConverter.this::equalsPredicateTransformer);
         put(FilterOperator.NOT_EQUAL, HibernateCriteriaConverter.this::notEqualsPredicateTransformer);
         put(FilterOperator.GT, HibernateCriteriaConverter.this::greaterThanPredicateTransformer);
