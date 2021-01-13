@@ -12,7 +12,7 @@ public final class CompanyResponse implements Response {
         this.description = description;
     }
 
-    public static CompanyResponse fromAggregate(Company company){
+    public static CompanyResponse fromAggregate(Company company) {
         return new CompanyResponse(
             company.id().value(),
             company.description().value()

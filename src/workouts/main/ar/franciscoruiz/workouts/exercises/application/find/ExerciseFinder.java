@@ -16,7 +16,7 @@ public final class ExerciseFinder {
 
     public ExerciseResponse find(ExerciseId id) throws ExerciseNotExist {
         return repository.search(id)
-                         .map(ExerciseResponse::fromAggregate)
-                         .orElseThrow(() -> new ExerciseNotExist(id));
+            .map(ExerciseResponse::fromAggregate)
+            .orElseThrow(() -> new ExerciseNotExist(id));
     }
 }

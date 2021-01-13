@@ -6,5 +6,5 @@ import java.util.Optional;
 public interface RoleRepository {
     Optional<Role> search(RoleId id);
 
-    List<Role> all();
+    List<Role> findAll();
 }

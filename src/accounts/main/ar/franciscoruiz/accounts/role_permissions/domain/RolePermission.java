@@ -1,16 +1,16 @@
 package ar.franciscoruiz.accounts.role_permissions.domain;
 
 import ar.franciscoruiz.accounts.permissions.domain.PermissionId;
-import ar.franciscoruiz.accounts.roles.domain.Role;
+import ar.franciscoruiz.accounts.roles.domain.RoleId;
 
 import java.util.Objects;
 
 public final class RolePermission {
     private final RolePermissionId id;
-    private final Role             role;
+    private final RoleId           role;
     private final PermissionId     permissionId;
 
-    public RolePermission(RolePermissionId id, Role role, PermissionId permissionId) {
+    public RolePermission(RolePermissionId id, RoleId role, PermissionId permissionId) {
         this.id           = id;
         this.role         = role;
         this.permissionId = permissionId;
@@ -26,7 +26,7 @@ public final class RolePermission {
         return this.id;
     }
 
-    public Role role() {
+    public RoleId role() {
         return this.role;
     }
 

@@ -13,6 +13,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import javax.sql.DataSource;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -67,7 +68,7 @@ public final class HibernateConfigurationFactory {
             "classpath:database/%s.sql",
             databaseName
         ));
-        String mysqlSentences = new Scanner(mysqlResource.getInputStream(), "UTF-8").useDelimiter("\\A").next();
+        String mysqlSentences = new Scanner(mysqlResource.getInputStream(), StandardCharsets.UTF_8).useDelimiter("\\A").next();
 
         dataSource.setConnectionInitSqls(new ArrayList<>(Arrays.asList(mysqlSentences.split(";"))));
 
@@ -90,12 +91,14 @@ public final class HibernateConfigurationFactory {
     }
 
     private List<String> subdirectoriesFor(String contextName) {
-        String path = "./src/" + contextName + "/main/tv/codely/" + contextName + "/";
+        String[] packages = getSourcePackageName();
+
+        String path = "./src/" + contextName + "/main/" + packages[0] + "/" + packages[1] + "/" + contextName + "/";
 
         String[] files = new File(path).list((current, name) -> new File(current, name).isDirectory());
 
         if (null == files) {
-            path  = "./main/tv/codely/" + contextName + "/";
+            path  = "./main/" + packages[0] + "/" + packages[1] + "/" + contextName + "/";
             files = new File(path).list((current, name) -> new File(current, name).isDirectory());
         }
 
@@ -120,10 +123,16 @@ public final class HibernateConfigurationFactory {
 
     private Properties hibernateProperties() {
         Properties hibernateProperties = new Properties();
+
         hibernateProperties.put(AvailableSettings.HBM2DDL_AUTO, "none");
         hibernateProperties.put(AvailableSettings.SHOW_SQL, "false");
         hibernateProperties.put(AvailableSettings.DIALECT, "org.hibernate.dialect.MySQL8Dialect");
 
         return hibernateProperties;
+    }
+
+    private String[] getSourcePackageName() {
+        String[] packages = this.getClass().getPackageName().split("\\.");
+        return new String[]{packages[0], packages[1], packages[2]};
     }
 }

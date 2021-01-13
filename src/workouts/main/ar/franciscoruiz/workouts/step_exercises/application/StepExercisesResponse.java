@@ -1,9 +1,6 @@
 package ar.franciscoruiz.workouts.step_exercises.application;
 
 import ar.franciscoruiz.shared.domain.bus.query.Response;
-import ar.franciscoruiz.workouts.exercises.application.ExerciseResponse;
-import ar.franciscoruiz.workouts.step_exercises.application.StepExerciseResponse;
-import ar.franciscoruiz.workouts.step_exercises.domain.StepExercise;
 
 import java.util.List;
 

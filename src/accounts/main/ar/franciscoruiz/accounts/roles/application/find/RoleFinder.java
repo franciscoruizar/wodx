@@ -1,6 +1,5 @@
 package ar.franciscoruiz.accounts.roles.application.find;
 
-import ar.franciscoruiz.accounts.permissions.domain.PermissionNotExist;
 import ar.franciscoruiz.accounts.roles.application.RoleResponse;
 import ar.franciscoruiz.accounts.roles.domain.RoleId;
 import ar.franciscoruiz.accounts.roles.domain.RoleNotExist;
@@ -15,7 +14,7 @@ public final class RoleFinder {
         this.repository = repository;
     }
 
-    public RoleResponse find(RoleId id){
+    public RoleResponse find(RoleId id) {
         return this.repository
             .search(id)
             .map(RoleResponse::fromAggregate)

@@ -1,0 +1,20 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="ar.franciscoruiz.workouts.workouts.domain.Workout" table="workouts">
+        <composite-id name="id" class="ar.franciscoruiz.workouts.workouts.domain.WorkoutId" access="field">
+            <key-property column="id" name="value" length="36" access="field"/>
+        </composite-id>
+
+        <property name="startDate" column="start_date" type="java.time.LocalDateTime" access="field"/>
+
+        <property name="endDate" column="end_date" type="java.time.LocalDateTime" access="field"/>
+
+        <component name="coachId" class="ar.franciscoruiz.shared.domain.users.UserId" access="field">
+            <property name="value" column="coach_id" type="java.lang.String" access="field"/>
+        </component>
+    </class>
+</hibernate-mapping>

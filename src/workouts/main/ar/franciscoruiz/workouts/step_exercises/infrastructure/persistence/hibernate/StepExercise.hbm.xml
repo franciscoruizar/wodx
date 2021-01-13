@@ -1,0 +1,39 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="ar.franciscoruiz.workouts.step_exercises.domain.StepExercise" table="step_exercises">
+        <composite-id name="id" class="ar.franciscoruiz.workouts.step_exercises.domain.StepExerciseId" access="field">
+            <key-property column="id" name="value" length="36" access="field"/>
+        </composite-id>
+
+        <component name="series" class="ar.franciscoruiz.workouts.step_exercises.domain.StepExerciseSeries"
+                   access="field">
+            <property name="value" column="series" type="java.lang.Integer" access="field"/>
+        </component>
+
+        <component name="value" class="ar.franciscoruiz.workouts.step_exercises.domain.StepExerciseValue"
+                   access="field">
+            <property name="value" column="value" type="java.lang.Integer" access="field"/>
+        </component>
+
+        <property name="stepExerciseTimeUnit" column="time_unit_id" access="field">
+            <type name="org.hibernate.type.EnumType">
+                <param name="stepExerciseTimeUnit">
+                    ar.franciscoruiz.workouts.step_exercises.domain.StepExerciseTimeUnit
+                </param>
+                <param name="useNamed">true</param>
+            </type>
+        </property>
+
+        <component name="stepId" class="ar.franciscoruiz.workouts.steps.domain.StepId" access="field">
+            <property name="value" column="step_id" type="java.lang.String" access="field"/>
+        </component>
+
+        <component name="exerciseId" class="ar.franciscoruiz.workouts.exercises.domain.ExerciseId" access="field">
+            <property name="value" column="exercise_id" type="java.lang.String" access="field"/>
+        </component>
+    </class>
+</hibernate-mapping>

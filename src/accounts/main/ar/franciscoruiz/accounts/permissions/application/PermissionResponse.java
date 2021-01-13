@@ -12,18 +12,6 @@ public final class PermissionResponse implements Response {
     private final Boolean read;
     private final Boolean readAll;
 
-    public static PermissionResponse fromAggregate(Permission permission) {
-        return new PermissionResponse(
-            permission.id().value(),
-            permission.entity().value(),
-            permission.create(),
-            permission.update(),
-            permission.delete(),
-            permission.read(),
-            permission.readAll()
-        );
-    }
-
     public PermissionResponse(
         String id,
         String entity,
@@ -40,6 +28,18 @@ public final class PermissionResponse implements Response {
         this.delete  = delete;
         this.read    = read;
         this.readAll = readAll;
+    }
+
+    public static PermissionResponse fromAggregate(Permission permission) {
+        return new PermissionResponse(
+            permission.id().value(),
+            permission.entity().value(),
+            permission.create(),
+            permission.update(),
+            permission.delete(),
+            permission.read(),
+            permission.readAll()
+        );
     }
 
     public String id() {

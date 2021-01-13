@@ -16,7 +16,7 @@ public final class StepTypeFinder {
 
     public StepTypeResponse find(StepTypeId id) throws StepTypeNotExist {
         return repository.search(id)
-                         .map(StepTypeResponse::fromAggregate)
-                         .orElseThrow(() -> new StepTypeNotExist(id));
+            .map(StepTypeResponse::fromAggregate)
+            .orElseThrow(() -> new StepTypeNotExist(id));
     }
 }

@@ -1,0 +1,24 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="ar.franciscoruiz.workouts.steps.domain.Step" table="steps">
+        <composite-id name="id" class="ar.franciscoruiz.workouts.steps.domain.StepId" access="field">
+            <key-property column="id" name="value" length="36" access="field"/>
+        </composite-id>
+
+        <component name="description" class="ar.franciscoruiz.workouts.steps.domain.StepDescription" access="field">
+            <property name="value" column="description" type="java.lang.String" access="field"/>
+        </component>
+
+        <component name="stepTypeId" class="ar.franciscoruiz.workouts.step_types.domain.StepTypeId" access="field">
+            <property name="value" column="step_type_id" type="java.lang.String" access="field"/>
+        </component>
+
+        <component name="workoutId" class="ar.franciscoruiz.workouts.workouts.domain.WorkoutId" access="field">
+            <property name="value" column="workout_id" type="java.lang.String" access="field"/>
+        </component>
+    </class>
+</hibernate-mapping>
