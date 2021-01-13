@@ -5,7 +5,7 @@ import ar.franciscoruiz.shared.domain.users.UserId;
 
 import java.util.Objects;
 
-public abstract class User {
+public final class User {
     private final UserId       id;
     private final UserEmail    email;
     private final UserPassword password;

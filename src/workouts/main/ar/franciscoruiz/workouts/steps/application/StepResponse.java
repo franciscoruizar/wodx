@@ -1,7 +1,7 @@
 package ar.franciscoruiz.workouts.steps.application;
 
 import ar.franciscoruiz.shared.domain.bus.query.Response;
-import ar.franciscoruiz.workouts.step_exercises.StepExercisesResponse;
+import ar.franciscoruiz.workouts.step_exercises.application.StepExercisesResponse;
 import ar.franciscoruiz.workouts.steps.domain.Step;
 
 import java.util.Collections;
@@ -14,10 +14,10 @@ public final class StepResponse implements Response {
     private final StepExercisesResponse stepExercises;
 
     public StepResponse(String id, String description, String stepTypeId, String workoutId) {
-        this.id          = id;
-        this.description = description;
-        this.stepTypeId  = stepTypeId;
-        this.workoutId   = workoutId;
+        this.id            = id;
+        this.description   = description;
+        this.stepTypeId    = stepTypeId;
+        this.workoutId     = workoutId;
         this.stepExercises = new StepExercisesResponse(Collections.emptyList());
     }
 

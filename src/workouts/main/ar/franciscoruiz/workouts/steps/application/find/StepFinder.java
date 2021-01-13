@@ -2,10 +2,9 @@ package ar.franciscoruiz.workouts.steps.application.find;
 
 import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
-import ar.franciscoruiz.workouts.step_exercises.StepExercisesResponse;
+import ar.franciscoruiz.workouts.step_exercises.application.StepExercisesResponse;
 import ar.franciscoruiz.workouts.step_exercises.application.search_by_criteria.SearchStepExercisesByCriteriaQuery;
 import ar.franciscoruiz.workouts.steps.application.StepResponse;
-import ar.franciscoruiz.workouts.steps.application.search_by_criteria.SearchStepsByCriteriaQuery;
 import ar.franciscoruiz.workouts.steps.domain.StepId;
 import ar.franciscoruiz.workouts.steps.domain.StepNotExist;
 import ar.franciscoruiz.workouts.steps.domain.StepRepository;
@@ -26,6 +25,8 @@ public final class StepFinder {
     }
 
     public StepResponse find(StepId id) throws StepNotExist {
+        StepExercisesResponse stepExercises = searchStepExercises(id);
+
         return repository.search(id)
             .map((step) ->
                 new StepResponse(
@@ -33,13 +34,13 @@ public final class StepFinder {
                     step.description().value(),
                     step.stepTypeId().value(),
                     step.workoutId().value(),
-                    searchStepExercises(id)
+                    stepExercises
                 )
             )
             .orElseThrow(() -> new StepNotExist(id));
     }
 
-    private StepExercisesResponse searchStepExercises(StepId id){
+    private StepExercisesResponse searchStepExercises(StepId id) {
         List<HashMap<String, String>> filters = new ArrayList<>() {{
             add(new HashMap<>() {{
                 put("field", "workout_id");

@@ -1,7 +1,6 @@
 package ar.franciscoruiz.workouts.workouts.application;
 
 import ar.franciscoruiz.shared.domain.bus.query.Response;
-import ar.franciscoruiz.shared.domain.users.UserId;
 import ar.franciscoruiz.workouts.steps.application.StepsResponse;
 
 import java.time.LocalDateTime;
@@ -13,9 +12,9 @@ public final class WorkoutResponse implements Response {
     private final LocalDateTime endDate;
     private final String        coachId;
     private final StepsResponse steps;
-    private final List<UserId>  athletes;
+    private final List<String>  athletes;
 
-    public WorkoutResponse(String id, LocalDateTime startDate, LocalDateTime endDate, String coachId, StepsResponse steps, List<UserId> athletes) {
+    public WorkoutResponse(String id, LocalDateTime startDate, LocalDateTime endDate, String coachId, StepsResponse steps, List<String> athletes) {
         this.id        = id;
         this.startDate = startDate;
         this.endDate   = endDate;
@@ -44,7 +43,7 @@ public final class WorkoutResponse implements Response {
         return this.steps;
     }
 
-    public List<UserId> athletes() {
+    public List<String> athletes() {
         return this.athletes;
     }
 }
