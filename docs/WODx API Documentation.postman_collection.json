@@ -1,0 +1,555 @@
+{
+	"info": {
+		"_postman_id": "5320d23e-2d7c-4eda-a1e9-84ba40c6733c",
+		"name": "WODx API Documentation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Accounts",
+			"item": [
+				{
+					"name": "Companies",
+					"item": [
+						{
+							"name": "GET Company",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "Pera",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{username}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8091/companies/{{id}}",
+									"host": [
+										"localhost"
+									],
+									"port": "8091",
+									"path": [
+										"companies",
+										"{{id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST Company",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "Pera",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{username}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"{{id}}\",\n    \"description\": \"{{description}}\",\n    \"mediaUrl\": \"{{mediaUrl}}\",\n    \"latitude\": {{latitude}},\n    \"longitude\": {{longitude}},\n    \"isActive\": {{isActive}}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8091/companies",
+									"host": [
+										"localhost"
+									],
+									"port": "8091",
+									"path": [
+										"companies"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PUT Company",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "Pera",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{username}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"{{id}}\",\n    \"description\": \"{{description}}\",\n    \"mediaUrl\": \"{{mediaUrl}}\",\n    \"latitude\": {{latitude}},\n    \"longitude\": {{longitude}},\n    \"isActive\": {{isActive}}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8091/companies/{{id}}",
+									"host": [
+										"localhost"
+									],
+									"port": "8091",
+									"path": [
+										"companies",
+										"{{id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Roles",
+					"item": [
+						{
+							"name": "GET Role",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "Pera",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{username}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8091/roles/{{id}}",
+									"host": [
+										"localhost"
+									],
+									"port": "8091",
+									"path": [
+										"roles",
+										"{{id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET All Roles",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "Pera",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{username}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8091/roles",
+									"host": [
+										"localhost"
+									],
+									"port": "8091",
+									"path": [
+										"roles"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Athletes",
+					"item": [
+						{
+							"name": "Athlete Register",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"{{id}}\",\n    \"name\": \"{{name}}\",\n    \"surname\": \"{{surname}}\",\n    \"email\": \"{{email}}\",\n    \"password\": \"{{password}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8091/athlete",
+									"host": [
+										"localhost"
+									],
+									"port": "8091",
+									"path": [
+										"athlete"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Users",
+					"item": [
+						{
+							"name": "GET Users By Criteria",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "Pera",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{username}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8091/users?filters%5B0%5D%5Bvalue%5D={{id}}&filters%5B0%5D%5Bfield%5D={{field}}&filters%5B0%5D%5Boperator%5D={{operator}}",
+									"host": [
+										"localhost"
+									],
+									"port": "8091",
+									"path": [
+										"users"
+									],
+									"query": [
+										{
+											"key": "filters%5B0%5D%5Bvalue%5D",
+											"value": "{{id}}"
+										},
+										{
+											"key": "filters%5B0%5D%5Bfield%5D",
+											"value": "{{field}}"
+										},
+										{
+											"key": "filters%5B0%5D%5Boperator%5D",
+											"value": "{{operator}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET User",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8091/users/{{id}}",
+									"host": [
+										"localhost"
+									],
+									"port": "8091",
+									"path": [
+										"users",
+										"{{id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Users and Companies",
+					"item": [
+						{
+							"name": "GET UserCompanies By Criteria",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "Pera",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{username}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8091/users/companies?filters%5B0%5D%5Bvalue%5D={{id}}&filters%5B0%5D%5Bfield%5D={{field}}&filters%5B0%5D%5Boperator%5D={{operator}}",
+									"host": [
+										"localhost"
+									],
+									"port": "8091",
+									"path": [
+										"users",
+										"companies"
+									],
+									"query": [
+										{
+											"key": "filters%5B0%5D%5Bvalue%5D",
+											"value": "{{id}}"
+										},
+										{
+											"key": "filters%5B0%5D%5Bfield%5D",
+											"value": "{{field}}"
+										},
+										{
+											"key": "filters%5B0%5D%5Boperator%5D",
+											"value": "{{operator}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST UserCompany",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"{{id}}\",\n    \"userId\": \"{{userId}}\",\n    \"companyId\": \"{{companyId}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8091/users/companies",
+									"host": [
+										"localhost"
+									],
+									"port": "8091",
+									"path": [
+										"users",
+										"companies"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST UserCompany Copy",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "Pera",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{username}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"{{id}}\",\n    \"userId\": \"{{userId}}\",\n    \"companyId\": \"{{companyId}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8091/users/companies/e1124db4-815e-4ff7-9f65-38b2735a50fe",
+									"host": [
+										"localhost"
+									],
+									"port": "8091",
+									"path": [
+										"users",
+										"companies",
+										"e1124db4-815e-4ff7-9f65-38b2735a50fe"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "Authenticate",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"{{id}}\",\n    \"name\": \"{{name}}\",\n    \"surname\": \"{{surname}}\",\n    \"email\": \"{{email}}\",\n    \"password\": \"{{password}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8091/athlete",
+									"host": [
+										"localhost"
+									],
+									"port": "8091",
+									"path": [
+										"athlete"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Health Check",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "Pera",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8091/health-check",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"health-check"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000"
+		},
+		{
+			"key": "username",
+			"value": "franciscoruizlezcano@gmail.com"
+		},
+		{
+			"key": "id",
+			"value": "e122bb0b-8265-4ab4-9021-d68a44a9c65b"
+		},
+		{
+			"key": "{{email}}",
+			"value": "{{email}}"
+		}
+	]
+}

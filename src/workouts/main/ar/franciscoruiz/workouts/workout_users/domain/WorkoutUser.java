@@ -6,11 +6,11 @@ import ar.franciscoruiz.workouts.workouts.domain.WorkoutId;
 import java.util.Objects;
 
 public final class WorkoutUser {
-    private final WorkoutUserId id;
-    private final WorkoutId     workoutId;
-    private final UserId        athleteId;
+    private final String id;
+    private final String     workoutId;
+    private final String        athleteId;
 
-    public WorkoutUser(WorkoutUserId id, WorkoutId workoutId, UserId athleteId) {
+    public WorkoutUser(String id, String workoutId, String athleteId) {
         this.id        = id;
         this.workoutId = workoutId;
         this.athleteId = athleteId;
@@ -22,28 +22,15 @@ public final class WorkoutUser {
         this.athleteId = null;
     }
 
-    public WorkoutUserId id() {
+    public String id() {
         return this.id;
     }
 
-    public WorkoutId workoutId() {
+    public String workoutId() {
         return this.workoutId;
     }
 
-    public UserId athleteId() {
+    public String athleteId() {
         return this.athleteId;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        WorkoutUser that = (WorkoutUser) o;
-        return Objects.equals(id, that.id) && Objects.equals(workoutId, that.workoutId) && Objects.equals(athleteId, that.athleteId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, workoutId, athleteId);
     }
 }

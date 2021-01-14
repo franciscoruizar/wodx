@@ -1,4 +1,4 @@
-package ar.franciscoruiz.apps.accounts.backend.middleware;
+package ar.franciscoruiz.apps.shared.middleware;
 
 import ar.franciscoruiz.accounts.auth.application.authenticate.AuthenticateUserCommand;
 import ar.franciscoruiz.accounts.auth.domain.InvalidAuthCredentials;

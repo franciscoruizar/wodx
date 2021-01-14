@@ -16,7 +16,7 @@ public final class WorkoutUserCreator {
     }
 
     public void create(WorkoutUserId id, WorkoutId workoutId, UserId athleteId) {
-        WorkoutUser workoutUser = new WorkoutUser(id, workoutId, athleteId);
+        WorkoutUser workoutUser = new WorkoutUser(id.value(), workoutId.value(), athleteId.value());
 
         this.repository.save(workoutUser);
     }

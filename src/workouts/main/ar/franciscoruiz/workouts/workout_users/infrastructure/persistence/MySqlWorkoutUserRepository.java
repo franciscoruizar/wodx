@@ -22,7 +22,7 @@ public final class MySqlWorkoutUserRepository extends HibernateRepository<Workou
 
     @Override
     public Optional<WorkoutUser> search(WorkoutUserId id) {
-        return byId(id);
+        return Optional.ofNullable(sessionFactory.getCurrentSession().byId(aggregateClass).load(id.value()));
     }
 
     @Override

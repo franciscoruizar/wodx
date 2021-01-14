@@ -5,16 +5,10 @@
 
 <hibernate-mapping>
     <class name="ar.franciscoruiz.workouts.workout_users.domain.WorkoutUser" table="workout_users">
-        <composite-id name="id" class="ar.franciscoruiz.workouts.step_types.domain.WorkoutUserId" access="field">
-            <key-property column="id" name="value" length="36" access="field"/>
-        </composite-id>
+        <id column="id" name="value" length="36" access="field"/>
 
-        <component name="workoutId" class="ar.franciscoruiz.workouts.workouts.domain.WorkoutId" access="field">
-            <property name="value" column="workout_id" type="java.lang.String" access="field"/>
-        </component>
+        <property name="workoutId" column="workout_id" type="java.lang.String" access="field"/>
 
-        <component name="userId" class="ar.franciscoruiz.shared.domain.users.UserId" access="field">
-            <property name="value" column="user_id" type="java.lang.String" access="field"/>
-        </component>
+        <property name="workoutId" column="user_id" type="java.lang.String" access="field"/>
     </class>
 </hibernate-mapping>
