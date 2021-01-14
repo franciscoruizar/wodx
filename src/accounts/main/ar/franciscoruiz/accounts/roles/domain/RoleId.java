@@ -6,4 +6,7 @@ public final class RoleId extends Identifier {
     public RoleId(String value) {
         super(value);
     }
+
+    public RoleId() {
+    }
 }

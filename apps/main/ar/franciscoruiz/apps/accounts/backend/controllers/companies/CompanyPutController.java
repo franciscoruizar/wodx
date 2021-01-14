@@ -18,7 +18,10 @@ import java.util.HashMap;
 
 @RestController
 public final class CompanyPutController extends ApiController {
-    public CompanyPutController(QueryBus queryBus, CommandBus commandBus) {
+    public CompanyPutController(
+        QueryBus queryBus,
+        CommandBus commandBus
+    ) {
         super(queryBus, commandBus);
     }
 
@@ -27,7 +30,16 @@ public final class CompanyPutController extends ApiController {
         @PathVariable String id,
         @RequestBody CompanyRequest request
     ) throws CommandHandlerExecutionError {
-        dispatch(new CreateCompanyCommand(id, request.getDescription()));
+        dispatch(
+            new CreateCompanyCommand(
+                id,
+                request.description(),
+                request.mediaUrl(),
+                request.latitude(),
+                request.longitude(),
+                request.isActive()
+            )
+        );
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

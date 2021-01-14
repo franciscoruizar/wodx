@@ -1,7 +1,6 @@
 package ar.franciscoruiz.accounts.companies.application.create;
 
-import ar.franciscoruiz.accounts.companies.domain.CompanyDescription;
-import ar.franciscoruiz.accounts.companies.domain.CompanyId;
+import ar.franciscoruiz.accounts.companies.domain.*;
 import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.bus.command.CommandHandler;
 
@@ -17,7 +16,11 @@ public final class CreateCompanyCommandHandler implements CommandHandler<CreateC
     public void handle(CreateCompanyCommand command) {
         CompanyId          id          = new CompanyId(command.id());
         CompanyDescription description = new CompanyDescription(command.description());
+        CompanyMediaUrl    mediaUrl    = new CompanyMediaUrl(command.mediaUrl());
+        CompanyLatitude    latitude    = new CompanyLatitude(command.latitude());
+        CompanyLongitude   longitude   = new CompanyLongitude(command.longitude());
+        CompanyIsActive    isActive    = new CompanyIsActive(command.isActive());
 
-        this.creator.create(id, description);
+        this.creator.create(id, description, mediaUrl, latitude, longitude, isActive);
     }
 }

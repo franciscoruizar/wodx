@@ -6,6 +6,8 @@ import org.springframework.boot.web.server.ConfigurableWebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.stereotype.Component;
 
+import java.util.logging.Logger;
+
 @Component
 public final class AccountsBackendServerPortCustomizer implements WebServerFactoryCustomizer<ConfigurableWebServerFactory> {
     private final EnvironmentParameter param;
@@ -17,7 +19,8 @@ public final class AccountsBackendServerPortCustomizer implements WebServerFacto
     @Override
     public void customize(ConfigurableWebServerFactory factory) {
         try {
-            factory.setPort(param.getInt("ACCOUNTS_BACKEND_SERVER_PORT"));
+            int port = param.getInt("ACCOUNTS_BACKEND_SERVER_PORT");
+            factory.setPort(port);
         } catch (ParameterNotExist parameterNotExist) {
             parameterNotExist.printStackTrace();
         }

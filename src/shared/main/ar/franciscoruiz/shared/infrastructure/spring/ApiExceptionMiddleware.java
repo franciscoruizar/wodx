@@ -1,95 +1,58 @@
 package ar.franciscoruiz.shared.infrastructure.spring;
 
 import ar.franciscoruiz.shared.domain.DomainError;
-import ar.franciscoruiz.shared.domain.Utils;
-import ar.franciscoruiz.shared.domain.bus.command.CommandHandlerExecutionError;
-import ar.franciscoruiz.shared.domain.bus.query.QueryHandlerExecutionError;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
-import org.springframework.web.util.NestedServletException;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import javax.servlet.*;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Objects;
+import java.util.Date;
 
-public final class ApiExceptionMiddleware implements Filter {
-    private final RequestMappingHandlerMapping mapping;
+@ControllerAdvice
+public class ApiExceptionMiddleware extends ResponseEntityExceptionHandler {
+    @ExceptionHandler(value = {Exception.class})
+    public ResponseEntity<Object> handleAnyException(Exception ex, WebRequest request) {
 
-    public ApiExceptionMiddleware(RequestMappingHandlerMapping mapping) {
-        this.mapping = mapping;
+        String errorMessageDescription = ex.getLocalizedMessage();
+
+        if (errorMessageDescription == null) errorMessageDescription = ex.toString();
+
+        ErrorMessage errorMessage = new ErrorMessage(new Date(), errorMessageDescription);
+
+        return new ResponseEntity<>
+            (
+                errorMessage,
+                new HttpHeaders(),
+                HttpStatus.INTERNAL_SERVER_ERROR
+            );
     }
 
-    @Override
-    public void doFilter(
-        ServletRequest request,
-        ServletResponse response,
-        FilterChain chain
-    ) throws ServletException {
-        HttpServletRequest  httpRequest  = ((HttpServletRequest) request);
-        HttpServletResponse httpResponse = ((HttpServletResponse) response);
+    @ExceptionHandler(value = {NullPointerException.class})
+    public ResponseEntity<Object> handleSpecificExceptions(Exception ex, WebRequest request) {
 
-        try {
-            Object possibleController = (
-                (HandlerMethod) Objects.requireNonNull(
-                    mapping.getHandler(httpRequest)).getHandler()
-            ).getBean();
+        String errorMessageDescription = ex.getLocalizedMessage();
 
-            try {
-                chain.doFilter(request, response);
-            } catch (NestedServletException exception) {
-                if (possibleController instanceof ApiController) {
-                    handleCustomError(response, httpResponse, (ApiController) possibleController, exception);
-                }
-            }
-        } catch (Exception e) {
-            throw new ServletException(e);
-        }
+        if (errorMessageDescription == null) errorMessageDescription = ex.toString();
+
+        ErrorMessage errorMessage = new ErrorMessage(new Date(), errorMessageDescription);
+
+        return new ResponseEntity<>(
+            errorMessage, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
+
     }
 
-    private void handleCustomError(
-        ServletResponse response,
-        HttpServletResponse httpResponse,
-        ApiController possibleController,
-        NestedServletException exception
-    ) throws IOException {
-        HashMap<Class<? extends DomainError>, HttpStatus> errorMapping = possibleController
-            .errorMapping();
-        Throwable error = (
-            exception.getCause() instanceof CommandHandlerExecutionError ||
-                exception.getCause() instanceof QueryHandlerExecutionError
-        )
-            ? exception.getCause().getCause() : exception.getCause();
+    @ExceptionHandler(value = {DomainError.class, RuntimeException.class})
+    public ResponseEntity<Object> handleNotExistsExceptions(Exception ex, WebRequest request) {
 
-        int    statusCode   = statusFor(errorMapping, error);
-        String errorCode    = errorCodeFor(error);
-        String errorMessage = error.getMessage();
+        String errorMessageDescription = ex.getLocalizedMessage();
 
-        httpResponse.reset();
-        httpResponse.setHeader("Content-Type", "application/json");
-        httpResponse.setStatus(statusCode);
-        PrintWriter writer = response.getWriter();
-        writer.write(String.format(
-            "{\"error_code\": \"%s\", \"message\": \"%s\"}",
-            errorCode,
-            errorMessage
-        ));
-        writer.close();
-    }
+        if (errorMessageDescription == null) errorMessageDescription = ex.toString();
 
-    private String errorCodeFor(Throwable error) {
-        if (error instanceof DomainError) {
-            return ((DomainError) error).errorCode();
-        }
+        ErrorMessage errorMessage = new ErrorMessage(new Date(), errorMessageDescription);
 
-        return Utils.toSnake(error.getClass().toString());
-    }
-
-    private int statusFor(HashMap<Class<? extends DomainError>, HttpStatus> errorMapping, Throwable error) {
-        return errorMapping.getOrDefault(error.getClass(), HttpStatus.INTERNAL_SERVER_ERROR).value();
+        return new ResponseEntity<>(errorMessage, new HttpHeaders(), HttpStatus.NOT_FOUND);
     }
 }

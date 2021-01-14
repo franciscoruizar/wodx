@@ -29,7 +29,9 @@ public final class HibernateCriteriaConverter<T> {
         CriteriaQuery<T> hibernateCriteria = builder.createQuery(aggregateClass);
         Root<T>          root              = hibernateCriteria.from(aggregateClass);
 
-        hibernateCriteria.where(formatPredicates(criteria.filters().filters(), root));
+        Predicate[] restrictions = formatPredicates(criteria.filters().filters(), root);
+
+        hibernateCriteria.where(restrictions);
 
         if (criteria.order().hasOrder()) {
             Path<Object> orderBy = root.get(criteria.order().orderBy().value());
@@ -42,15 +44,13 @@ public final class HibernateCriteriaConverter<T> {
     }
 
     private Predicate[] formatPredicates(List<Filter> filters, Root<T> root) {
-        List<Predicate> predicates = filters.stream().map(filter -> formatPredicate(
-            filter,
-            root
-        )).collect(Collectors.toList());
+        List<Predicate> predicates = filters.stream()
+                                            .map(filter -> formatPredicate(filter, root))
+                                            .collect(Collectors.toList());
 
         Predicate[] predicatesArray = new Predicate[predicates.size()];
-        predicatesArray = predicates.toArray(predicatesArray);
 
-        return predicatesArray;
+        return predicates.toArray(predicatesArray);
     }
 
     private Predicate formatPredicate(Filter filter, Root<T> root) {

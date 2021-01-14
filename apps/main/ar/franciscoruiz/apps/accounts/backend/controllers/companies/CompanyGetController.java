@@ -1,37 +1,49 @@
 package ar.franciscoruiz.apps.accounts.backend.controllers.companies;
 
-import ar.franciscoruiz.accounts.companies.application.create.CreateCompanyCommand;
-import ar.franciscoruiz.apps.accounts.shared.dto.companies.CompanyRequest;
+import ar.franciscoruiz.accounts.companies.application.CompanyResponse;
+import ar.franciscoruiz.accounts.companies.application.find.FindCompanyQuery;
+import ar.franciscoruiz.accounts.companies.domain.CompanyNotExist;
 import ar.franciscoruiz.shared.domain.DomainError;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
-import ar.franciscoruiz.shared.domain.bus.command.CommandHandlerExecutionError;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
+import ar.franciscoruiz.shared.domain.bus.query.QueryHandlerExecutionError;
 import ar.franciscoruiz.shared.infrastructure.spring.ApiController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 @RestController
 public final class CompanyGetController extends ApiController {
-    public CompanyGetController(QueryBus queryBus, CommandBus commandBus) {
+    public CompanyGetController(
+        QueryBus queryBus,
+        CommandBus commandBus
+    ) {
         super(queryBus, commandBus);
     }
 
-    @PostMapping(value = "/companies")
-    public ResponseEntity<String> index(
-        @RequestBody CompanyRequest request
-    ) throws CommandHandlerExecutionError {
-        dispatch(new CreateCompanyCommand(request.getId(), request.getDescription()));
+    @GetMapping(value = "/companies/{id}")
+    public ResponseEntity<HashMap<String, Serializable>> index(@PathVariable String id) throws QueryHandlerExecutionError {
+        CompanyResponse response = ask(new FindCompanyQuery(id));
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return ResponseEntity.ok().body(new HashMap<String, Serializable>() {{
+            put("id", response.id());
+            put("description", response.description());
+            put("mediaUrl", response.mediaUrl());
+            put("latitude", response.latitude());
+            put("longitude", response.longitude());
+            put("isActive", response.isActive());
+        }});
     }
 
     @Override
     public HashMap<Class<? extends DomainError>, HttpStatus> errorMapping() {
-        return null;
+        return new HashMap<>() {{
+            put(CompanyNotExist.class, HttpStatus.NOT_FOUND);
+        }};
     }
 }

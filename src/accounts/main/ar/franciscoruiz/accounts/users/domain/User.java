@@ -1,56 +1,78 @@
 package ar.franciscoruiz.accounts.users.domain;
 
-import ar.franciscoruiz.accounts.roles.domain.Role;
+import ar.franciscoruiz.accounts.roles.domain.RoleId;
 import ar.franciscoruiz.shared.domain.users.UserId;
 
-import java.util.Objects;
-
 public final class User {
-    private final UserId       id;
-    private final UserEmail    email;
-    private final UserPassword password;
-    private final Role         role;
+    private final String  id;
+    private final String  name;
+    private final String  surname;
+    private final String  email;
+    private final String  password;
+    private final String  phone;
+    private final Boolean isActive;
+    private final String  roleId;
 
-    public User(UserId id, UserEmail email, UserPassword password, Role role) {
+    public User(
+        String id,
+        String name,
+        String surname,
+        String email,
+        String password,
+        String phone,
+        Boolean isActive,
+        String roleId
+    ) {
         this.id       = id;
+        this.name     = name;
+        this.surname  = surname;
         this.email    = email;
         this.password = password;
-        this.role     = role;
+        this.phone    = phone;
+        this.isActive = isActive;
+        this.roleId   = roleId;
     }
 
     public User() {
         this.id       = null;
+        this.name     = null;
+        this.surname  = null;
         this.email    = null;
         this.password = null;
-        this.role     = null;
+        this.phone    = null;
+        this.isActive = null;
+        this.roleId   = null;
     }
 
-    public UserId id() {
+    public String id() {
         return this.id;
     }
 
-    public UserEmail email() {
+    public String name() {
+        return this.name;
+    }
+
+    public String surname() {
+        return this.surname;
+    }
+
+    public String email() {
         return this.email;
     }
 
-    public UserPassword password() {
+    public String password() {
         return this.password;
     }
 
-    public Role role() {
-        return this.role;
+    public String phone() {
+        return this.phone;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(role, user.role);
+    public Boolean isActive() {
+        return this.isActive;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, email, password, role);
+    public String roleId() {
+        return this.roleId;
     }
 }

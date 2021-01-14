@@ -1,0 +1,25 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="ar.franciscoruiz.accounts.users.domain.User" table="users">
+        <id name="id" column="id" access="field" length="36" />
+
+        <property name="name" column="name" type="string" access="field"/>
+
+        <property name="surname" column="surname" type="string" access="field"/>
+
+        <property name="email" column="email" type="string" access="field"/>
+
+        <property name="password" column="password" type="string" access="field"/>
+
+        <property name="phone" column="phone" type="string" access="field"/>
+
+        <property name="isActive" column="is_active" type="boolean" access="field"/>
+
+        <property name="roleId" column="role_id" type="string" access="field"/>
+
+    </class>
+</hibernate-mapping>

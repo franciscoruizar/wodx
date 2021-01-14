@@ -51,16 +51,19 @@ public final class HibernateConfigurationFactory {
         String username,
         String password
     ) throws IOException {
-        BasicDataSource dataSource = new BasicDataSource();
-        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl(
-            String.format(
-                "jdbc:mysql://%s:%s/%s?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
-                host,
-                port,
-                databaseName
-            )
+        final String DRIVER = "com.mysql.cj.jdbc.Driver";
+
+        final String URL = String.format(
+            "jdbc:mysql://%s:%s/%s?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
+            host,
+            port,
+            databaseName
         );
+
+
+        BasicDataSource dataSource = new BasicDataSource();
+        dataSource.setDriverClassName(DRIVER);
+        dataSource.setUrl(URL);
         dataSource.setUsername(username);
         dataSource.setPassword(password);
 
@@ -125,7 +128,7 @@ public final class HibernateConfigurationFactory {
         Properties hibernateProperties = new Properties();
 
         hibernateProperties.put(AvailableSettings.HBM2DDL_AUTO, "none");
-        hibernateProperties.put(AvailableSettings.SHOW_SQL, "false");
+        hibernateProperties.put(AvailableSettings.SHOW_SQL, "true");
         hibernateProperties.put(AvailableSettings.DIALECT, "org.hibernate.dialect.MySQL8Dialect");
 
         return hibernateProperties;

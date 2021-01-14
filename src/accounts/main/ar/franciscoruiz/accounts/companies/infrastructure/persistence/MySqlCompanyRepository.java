@@ -15,8 +15,8 @@ import java.util.Optional;
 
 @Service
 @Transactional("accounts-transaction_manager")
-public final class MySqlCourseRepository extends HibernateRepository<Company> implements CompanyRepository {
-    public MySqlCourseRepository(@Qualifier("accounts-session_factory") SessionFactory sessionFactory) {
+public final class MySqlCompanyRepository extends HibernateRepository<Company> implements CompanyRepository {
+    public MySqlCompanyRepository(@Qualifier("accounts-session_factory") SessionFactory sessionFactory) {
         super(sessionFactory, Company.class);
     }
 

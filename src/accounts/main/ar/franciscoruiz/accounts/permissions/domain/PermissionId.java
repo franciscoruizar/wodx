@@ -6,4 +6,7 @@ public final class PermissionId extends Identifier {
     public PermissionId(String value) {
         super(value);
     }
+
+    public PermissionId() {
+    }
 }
