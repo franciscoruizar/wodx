@@ -1,4 +1,4 @@
-rootProject.name = 'wod-x'
+rootProject.name = 'wodx'
 
 include ':accounts'
 project(':accounts').projectDir = new File('src/accounts')
