@@ -1,17 +1,12 @@
 package ar.franciscoruiz.workouts.steps.domain;
 
-import ar.franciscoruiz.workouts.step_types.domain.StepTypeId;
-import ar.franciscoruiz.workouts.workouts.domain.WorkoutId;
-
-import java.util.Objects;
-
 public final class Step {
-    private final StepId          id;
-    private final StepDescription description;
-    private final StepTypeId      stepTypeId;
-    private final WorkoutId       workoutId;
+    private final String id;
+    private final String description;
+    private final String stepTypeId;
+    private final String workoutId;
 
-    public Step(StepId id, StepDescription description, StepTypeId stepTypeId, WorkoutId workoutId) {
+    public Step(String id, String description, String stepTypeId, String workoutId) {
         this.id          = id;
         this.description = description;
         this.stepTypeId  = stepTypeId;
@@ -25,32 +20,19 @@ public final class Step {
         this.workoutId   = null;
     }
 
-    public StepId id() {
+    public String id() {
         return this.id;
     }
 
-    public StepDescription description() {
+    public String description() {
         return this.description;
     }
 
-    public StepTypeId stepTypeId() {
+    public String stepTypeId() {
         return this.stepTypeId;
     }
 
-    public WorkoutId workoutId() {
+    public String workoutId() {
         return this.workoutId;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Step step = (Step) o;
-        return Objects.equals(id, step.id) && Objects.equals(description, step.description) && Objects.equals(stepTypeId, step.stepTypeId) && Objects.equals(workoutId, step.workoutId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, description, stepTypeId, workoutId);
     }
 }

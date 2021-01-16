@@ -1,10 +1,8 @@
 package ar.franciscoruiz.apps.workouts.backend.controllers.health_check;
 
-import ar.franciscoruiz.shared.domain.DomainError;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
 import ar.franciscoruiz.shared.infrastructure.spring.ApiController;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,10 +24,5 @@ public final class HealthCheckGetController extends ApiController {
         status.put("status", "ok");
 
         return status;
-    }
-
-    @Override
-    public HashMap<Class<? extends DomainError>, HttpStatus> errorMapping() {
-        return null;
     }
 }

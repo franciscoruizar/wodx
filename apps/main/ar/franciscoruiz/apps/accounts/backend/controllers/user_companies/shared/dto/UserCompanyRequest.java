@@ -1,4 +1,4 @@
-package ar.franciscoruiz.apps.accounts.shared.dto.user_companies;
+package ar.franciscoruiz.apps.accounts.backend.controllers.user_companies.shared.dto;
 
 public final class UserCompanyRequest {
     private String id;

@@ -30,10 +30,10 @@ public final class StepFinder {
         return repository.search(id)
             .map((step) ->
                 new StepResponse(
-                    step.id().value(),
-                    step.description().value(),
-                    step.stepTypeId().value(),
-                    step.workoutId().value(),
+                    step.id(),
+                    step.description(),
+                    step.stepTypeId(),
+                    step.workoutId(),
                     stepExercises
                 )
             )

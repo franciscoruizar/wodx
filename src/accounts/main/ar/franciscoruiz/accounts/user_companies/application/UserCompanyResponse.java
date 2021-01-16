@@ -5,7 +5,7 @@ import ar.franciscoruiz.accounts.users.application.UserResponse;
 import ar.franciscoruiz.shared.domain.bus.query.Response;
 
 public final class UserCompanyResponse implements Response {
-    private final String       id;
+    private final String          id;
     private final UserResponse    user;
     private final CompanyResponse company;
 

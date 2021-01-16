@@ -22,7 +22,7 @@ public final class MySqlExerciseRepository extends HibernateRepository<Exercise>
 
     @Override
     public Optional<Exercise> search(ExerciseId id) {
-        return byId(id);
+        return Optional.ofNullable(sessionFactory.getCurrentSession().byId(aggregateClass).load(id.value()));
     }
 
     @Override

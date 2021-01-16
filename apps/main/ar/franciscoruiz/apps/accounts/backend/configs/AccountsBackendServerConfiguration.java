@@ -1,6 +1,6 @@
 package ar.franciscoruiz.apps.accounts.backend.configs;
 
-import ar.franciscoruiz.apps.accounts.backend.middleware.BasicHttpAuthMiddleware;
+import ar.franciscoruiz.apps.shared.middleware.BasicHttpAuthMiddleware;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;

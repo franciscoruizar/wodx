@@ -1,7 +1,6 @@
 package ar.franciscoruiz.apps.accounts.backend.controllers.sign_up;
 
 import ar.franciscoruiz.accounts.sign_up.application.register.RegisterUserAthleteCommand;
-import ar.franciscoruiz.shared.domain.DomainError;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.command.CommandHandlerExecutionError;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
@@ -11,8 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.HashMap;
 
 @RestController
 public final class SignUpUserPostController extends ApiController {
@@ -36,11 +33,6 @@ public final class SignUpUserPostController extends ApiController {
         );
 
         return new ResponseEntity<>(HttpStatus.CREATED);
-    }
-
-    @Override
-    public HashMap<Class<? extends DomainError>, HttpStatus> errorMapping() {
-        return null;
     }
 }
 

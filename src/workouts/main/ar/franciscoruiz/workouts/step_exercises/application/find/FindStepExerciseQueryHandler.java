@@ -1,12 +1,10 @@
 package ar.franciscoruiz.workouts.step_exercises.application.find;
 
-import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.bus.query.QueryHandler;
 import ar.franciscoruiz.workouts.step_exercises.application.StepExerciseResponse;
 import ar.franciscoruiz.workouts.step_exercises.domain.StepExerciseId;
 import ar.franciscoruiz.workouts.step_exercises.domain.StepExerciseNotExist;
 
-@Service
 public final class FindStepExerciseQueryHandler implements QueryHandler<FindStepExerciseQuery, StepExerciseResponse> {
     private final StepExerciseFinder finder;
 

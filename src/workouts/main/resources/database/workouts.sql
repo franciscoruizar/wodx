@@ -5,16 +5,6 @@ CREATE TABLE IF NOT EXISTS `workouts`.`step_types` (
   PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO `workouts`.`step_types` VALUES('a4eb5e69-de3b-4780-992b-65b36023c465', 'Warm Up', 'english');
-INSERT INTO `workouts`.`step_types` VALUES('dcdb8baf-533f-48cb-a68f-4f8b36180f3d', 'Abs Workout', 'english');
-INSERT INTO `workouts`.`step_types` VALUES('6cf7d718-1bd8-4f17-8239-bd735289ce21', 'Legs Workout', 'english');
-INSERT INTO `workouts`.`step_types` VALUES('345485c4-b985-4c0a-a73d-d872c4686f6d', 'Shoulder Workout', 'english');
-INSERT INTO `workouts`.`step_types` VALUES('958505f4-978d-43a0-a87c-87c356d250fb', 'Back Workout', 'english');
-INSERT INTO `workouts`.`step_types` VALUES('00601101-0413-42c5-aac7-ea3d7b8f3199', 'Elongation Workout', 'english');
-INSERT INTO `workouts`.`step_types` VALUES('4bfcb236-f0f1-42b8-97e7-3170c5c4935e', 'HIIT Workout', 'english');
-INSERT INTO `workouts`.`step_types` VALUES('4ab4401a-5b75-4e48-9248-39ac8db3ffe4', 'EMOM Workout', 'english');
-INSERT INTO `workouts`.`step_types` VALUES('25bcb218-8848-43ab-b088-196c90f1338a', 'AMRAP Workout', 'english');
-
 CREATE TABLE IF NOT EXISTS `workouts`.`workouts` (
   `id` CHAR(36) NOT NULL,
   `start_date` DATETIME NOT NULL,

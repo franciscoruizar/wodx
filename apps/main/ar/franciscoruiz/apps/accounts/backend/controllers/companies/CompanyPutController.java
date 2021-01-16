@@ -1,8 +1,7 @@
 package ar.franciscoruiz.apps.accounts.backend.controllers.companies;
 
 import ar.franciscoruiz.accounts.companies.application.create.CreateCompanyCommand;
-import ar.franciscoruiz.apps.accounts.shared.dto.companies.CompanyRequest;
-import ar.franciscoruiz.shared.domain.DomainError;
+import ar.franciscoruiz.apps.accounts.backend.controllers.companies.shared.dto.CompanyRequest;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.command.CommandHandlerExecutionError;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
@@ -13,8 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.HashMap;
 
 @RestController
 public final class CompanyPutController extends ApiController {
@@ -42,10 +39,5 @@ public final class CompanyPutController extends ApiController {
         );
 
         return new ResponseEntity<>(HttpStatus.CREATED);
-    }
-
-    @Override
-    public HashMap<Class<? extends DomainError>, HttpStatus> errorMapping() {
-        return null;
     }
 }

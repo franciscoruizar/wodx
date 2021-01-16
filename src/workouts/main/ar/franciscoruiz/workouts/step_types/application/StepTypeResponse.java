@@ -6,16 +6,14 @@ import ar.franciscoruiz.workouts.step_types.domain.StepType;
 public final class StepTypeResponse implements Response {
     private final String id;
     private final String description;
-    private final String language;
 
-    public StepTypeResponse(String id, String description, String language) {
+    public StepTypeResponse(String id, String description) {
         this.id          = id;
         this.description = description;
-        this.language    = language;
     }
 
     public static StepTypeResponse fromAggregate(StepType entity) {
-        return new StepTypeResponse(entity.id().value(), entity.description().value(), entity.language().value());
+        return new StepTypeResponse(entity.id(), entity.description());
     }
 
     public String id() {
@@ -24,9 +22,5 @@ public final class StepTypeResponse implements Response {
 
     public String description() {
         return this.description;
-    }
-
-    public String language() {
-        return this.language;
     }
 }

@@ -30,7 +30,7 @@ public final class StepResponse implements Response {
     }
 
     public static StepResponse fromAggregate(Step entity) {
-        return new StepResponse(entity.id().value(), entity.description().value(), entity.stepTypeId().value(), entity.workoutId().value());
+        return new StepResponse(entity.id(), entity.description(), entity.stepTypeId(), entity.workoutId());
     }
 
     public String id() {
@@ -47,5 +47,9 @@ public final class StepResponse implements Response {
 
     public String workoutId() {
         return this.workoutId;
+    }
+
+    public StepExercisesResponse stepExercises() {
+        return this.stepExercises;
     }
 }

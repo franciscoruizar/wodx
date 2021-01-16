@@ -1,7 +1,6 @@
 package ar.franciscoruiz.accounts.role_permissions.application;
 
 import ar.franciscoruiz.accounts.role_permissions.domain.RolePermission;
-import ar.franciscoruiz.accounts.roles.application.RoleResponse;
 import ar.franciscoruiz.shared.domain.bus.query.Response;
 
 public final class RolePermissionResponse implements Response {
@@ -11,7 +10,7 @@ public final class RolePermissionResponse implements Response {
 
     public RolePermissionResponse(String id, String roleId, String permissionId) {
         this.id           = id;
-        this.roleId         = roleId;
+        this.roleId       = roleId;
         this.permissionId = permissionId;
     }
 

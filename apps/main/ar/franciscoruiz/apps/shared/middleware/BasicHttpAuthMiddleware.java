@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Base64;
 
-public final class BasicHttpAuthMiddleware implements Filter{
+public final class BasicHttpAuthMiddleware implements Filter {
     private final CommandBus bus;
 
     public BasicHttpAuthMiddleware(CommandBus bus) {

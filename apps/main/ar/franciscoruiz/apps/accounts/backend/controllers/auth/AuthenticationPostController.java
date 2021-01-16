@@ -1,7 +1,6 @@
 package ar.franciscoruiz.apps.accounts.backend.controllers.auth;
 
 import ar.franciscoruiz.accounts.auth.application.authenticate.AuthenticateUserCommand;
-import ar.franciscoruiz.shared.domain.DomainError;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.command.CommandHandlerExecutionError;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
@@ -11,8 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.HashMap;
 
 @RestController
 public final class AuthenticationPostController extends ApiController {
@@ -27,11 +24,6 @@ public final class AuthenticationPostController extends ApiController {
         dispatch(new AuthenticateUserCommand(request.username(), request.password()));
 
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
-    }
-
-    @Override
-    public HashMap<Class<? extends DomainError>, HttpStatus> errorMapping() {
-        return null;
     }
 }
 

@@ -15,7 +15,7 @@ public final class ExerciseResponse implements Response {
     }
 
     public static ExerciseResponse fromAggregate(Exercise entity) {
-        return new ExerciseResponse(entity.id().value(), entity.description().value(), entity.mediaUrl().value());
+        return new ExerciseResponse(entity.id(), entity.description(), entity.mediaUrl());
     }
 
     public String id() {

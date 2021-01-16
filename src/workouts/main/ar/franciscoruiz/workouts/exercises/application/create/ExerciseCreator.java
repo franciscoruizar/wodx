@@ -12,7 +12,7 @@ public final class ExerciseCreator {
     }
 
     public void create(ExerciseId id, ExerciseDescription description, ExerciseMediaUrl mediaUrl) {
-        Exercise exercise = new Exercise(id, description, mediaUrl);
+        Exercise exercise = new Exercise(id.value(), description.value(), mediaUrl.value());
 
         this.repository.save(exercise);
     }

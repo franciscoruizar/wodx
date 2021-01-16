@@ -6,4 +6,7 @@ public final class WorkoutId extends Identifier {
     public WorkoutId(String value) {
         super(value);
     }
+
+    public WorkoutId() {
+    }
 }

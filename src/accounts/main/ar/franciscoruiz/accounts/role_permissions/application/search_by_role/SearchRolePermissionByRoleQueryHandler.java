@@ -4,8 +4,6 @@ import ar.franciscoruiz.accounts.role_permissions.application.RolePermissionsRes
 import ar.franciscoruiz.accounts.roles.domain.RoleId;
 import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.bus.query.QueryHandler;
-import ar.franciscoruiz.shared.domain.criteria.Filters;
-import ar.franciscoruiz.shared.domain.criteria.Order;
 
 @Service
 public final class SearchRolePermissionByRoleQueryHandler implements QueryHandler<SearchRolePermissionByRoleQuery, RolePermissionsResponse> {

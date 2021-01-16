@@ -17,7 +17,7 @@ public final class StepCreator {
     }
 
     public void create(StepId id, StepDescription description, StepTypeId stepTypeId, WorkoutId workoutId) {
-        Step step = new Step(id, description, stepTypeId, workoutId);
+        Step step = new Step(id.value(), description.value(), stepTypeId.value(), workoutId.value());
 
         this.repository.save(step);
     }

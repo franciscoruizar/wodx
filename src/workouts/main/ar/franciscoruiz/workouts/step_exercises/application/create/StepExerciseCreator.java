@@ -1,12 +1,10 @@
 package ar.franciscoruiz.workouts.step_exercises.application.create;
 
 
-import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.workouts.exercises.domain.ExerciseId;
 import ar.franciscoruiz.workouts.step_exercises.domain.*;
 import ar.franciscoruiz.workouts.steps.domain.StepId;
 
-@Service
 public final class StepExerciseCreator {
     private final StepExerciseRepository repository;
 

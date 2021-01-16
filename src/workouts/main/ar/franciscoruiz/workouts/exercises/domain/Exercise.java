@@ -1,13 +1,11 @@
 package ar.franciscoruiz.workouts.exercises.domain;
 
-import java.util.Objects;
-
 public final class Exercise {
-    private final ExerciseId          id;
-    private final ExerciseDescription description;
-    private final ExerciseMediaUrl    mediaUrl;
+    private final String id;
+    private final String description;
+    private final String mediaUrl;
 
-    public Exercise(ExerciseId id, ExerciseDescription description, ExerciseMediaUrl mediaUrl) {
+    public Exercise(String id, String description, String mediaUrl) {
         this.id          = id;
         this.description = description;
         this.mediaUrl    = mediaUrl;
@@ -19,28 +17,15 @@ public final class Exercise {
         this.mediaUrl    = null;
     }
 
-    public ExerciseId id() {
+    public String id() {
         return this.id;
     }
 
-    public ExerciseDescription description() {
+    public String description() {
         return this.description;
     }
 
-    public ExerciseMediaUrl mediaUrl() {
+    public String mediaUrl() {
         return this.mediaUrl;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Exercise exercise = (Exercise) o;
-        return Objects.equals(id, exercise.id) && Objects.equals(description, exercise.description) && Objects.equals(mediaUrl, exercise.mediaUrl);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, description, mediaUrl);
     }
 }

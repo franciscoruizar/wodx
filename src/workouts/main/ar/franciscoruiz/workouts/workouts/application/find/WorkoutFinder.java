@@ -22,59 +22,19 @@ import java.util.stream.Collectors;
 @Service
 public final class WorkoutFinder {
     private final WorkoutRepository repository;
-    private final QueryBus          queryBus;
 
-    public WorkoutFinder(WorkoutRepository repository, QueryBus queryBus) {
+    public WorkoutFinder(WorkoutRepository repository) {
         this.repository = repository;
-        this.queryBus   = queryBus;
     }
 
     public WorkoutResponse find(WorkoutId id) throws WorkoutNotExist {
         Workout       workout       = this.repository.search(id).orElseThrow(() -> new WorkoutNotExist(id));
-        StepsResponse stepsResponse = searchSteps(id);
-        List<String>  athleteIds    = searchAthletes(id);
 
         return new WorkoutResponse(
             workout.id().value(),
             workout.startDate(),
             workout.endDate(),
-            workout.coachId().value(),
-            stepsResponse,
-            athleteIds
+            workout.coachId().value()
         );
-    }
-
-    private StepsResponse searchSteps(WorkoutId id) {
-        List<HashMap<String, String>> filters = new ArrayList<>() {{
-            add(new HashMap<>() {{
-                put("field", "workout_id");
-                put("operator", "=");
-                put("value", id.value());
-            }});
-        }};
-
-        return this.queryBus.ask(new SearchStepsByCriteriaQuery(filters, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty()));
-    }
-
-    private List<String> searchAthletes(WorkoutId id) {
-        List<HashMap<String, String>> filters = new ArrayList<>() {{
-            add(new HashMap<>() {{
-                put("field", "workout_id");
-                put("operator", "=");
-                put("value", id.value());
-            }});
-        }};
-
-        WorkoutUsersResponse workoutUsersResponse = this.queryBus.ask(new SearchWorkoutUsersByCriteriaQuery(filters, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty()));
-
-        return filterAthleteIds(workoutUsersResponse);
-    }
-
-    private List<String> filterAthleteIds(WorkoutUsersResponse workoutUsersResponse) {
-        return workoutUsersResponse
-            .values()
-            .stream()
-            .map(WorkoutUserResponse::athleteId)
-            .collect(Collectors.toList());
     }
 }

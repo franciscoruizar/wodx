@@ -1,6 +1,5 @@
 package ar.franciscoruiz.workouts.step_exercises.application.search_by_criteria;
 
-import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
 import ar.franciscoruiz.shared.domain.criteria.Criteria;
 import ar.franciscoruiz.shared.domain.criteria.Filters;
@@ -15,7 +14,6 @@ import ar.franciscoruiz.workouts.step_exercises.domain.StepExerciseRepository;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Service
 public final class StepExercisesByCriteriaSearcher {
     private final StepExerciseRepository repository;
     private final QueryBus               queryBus;

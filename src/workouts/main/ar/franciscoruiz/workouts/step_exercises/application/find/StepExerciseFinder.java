@@ -1,6 +1,5 @@
 package ar.franciscoruiz.workouts.step_exercises.application.find;
 
-import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
 import ar.franciscoruiz.workouts.exercises.application.ExerciseResponse;
 import ar.franciscoruiz.workouts.exercises.application.find.FindExerciseQuery;
@@ -10,7 +9,6 @@ import ar.franciscoruiz.workouts.step_exercises.domain.StepExerciseId;
 import ar.franciscoruiz.workouts.step_exercises.domain.StepExerciseNotExist;
 import ar.franciscoruiz.workouts.step_exercises.domain.StepExerciseRepository;
 
-@Service
 public final class StepExerciseFinder {
     private final StepExerciseRepository repository;
     private final QueryBus               queryBus;

@@ -1,7 +1,5 @@
 package ar.franciscoruiz.accounts.user_companies.domain;
 
-import ar.franciscoruiz.shared.domain.users.UserId;
-
 public final class UserCompany {
     private final String id;
     private final String userId;

@@ -2,12 +2,10 @@ package ar.franciscoruiz.apps.accounts.backend.controllers.user_companies;
 
 import ar.franciscoruiz.accounts.user_companies.application.UserCompaniesResponse;
 import ar.franciscoruiz.accounts.user_companies.application.search_by_criteria.SearchUserCompanyByCriteriaQuery;
-import ar.franciscoruiz.shared.domain.DomainError;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
 import ar.franciscoruiz.shared.domain.bus.query.QueryHandlerExecutionError;
 import ar.franciscoruiz.shared.infrastructure.spring.ApiController;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
@@ -56,10 +54,5 @@ public final class UserCompaniesGetController extends ApiController {
                 put("isActive", userCompany.company().isActive());
             }});
         }}).collect(Collectors.toList());
-    }
-
-    @Override
-    public HashMap<Class<? extends DomainError>, HttpStatus> errorMapping() {
-        return null;
     }
 }

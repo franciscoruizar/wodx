@@ -5,17 +5,10 @@
 
 <hibernate-mapping>
     <class name="ar.franciscoruiz.workouts.exercises.domain.Exercise" table="exercises">
-        <composite-id name="id" class="ar.franciscoruiz.workouts.exercises.domain.ExerciseId" access="field">
-            <key-property column="id" name="value" length="36" access="field"/>
-        </composite-id>
+        <id column="id" name="id" length="36" access="field"/>
 
-        <component name="description" class="ar.franciscoruiz.workouts.exercises.domain.ExerciseDescription"
-                   access="field">
-            <property name="value" column="description" type="java.lang.String" access="field"/>
-        </component>
+        <property name="description" column="description" type="java.lang.String" access="field"/>
 
-        <component name="mediaUrl" class="ar.franciscoruiz.workouts.exercises.domain.ExerciseMediaUrl" access="field">
-            <property name="value" column="media_url" type="java.lang.String" access="field"/>
-        </component>
+        <property name="mediaUrl" column="media_url" type="java.lang.String" access="field"/>
     </class>
 </hibernate-mapping>

@@ -6,7 +6,7 @@ public final class Company {
     private final CompanyMediaUrl    mediaUrl;
     private final CompanyLatitude    latitude;
     private final CompanyLongitude   longitude;
-    private final CompanyIsActive isActive;
+    private final CompanyIsActive    isActive;
 
     public Company(
         CompanyId id,

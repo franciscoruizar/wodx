@@ -5,7 +5,7 @@
 
 <hibernate-mapping>
     <class name="ar.franciscoruiz.accounts.users.domain.User" table="users">
-        <id name="id" column="id" access="field" length="36" />
+        <id name="id" column="id" access="field" length="36"/>
 
         <property name="name" column="name" type="string" access="field"/>
 

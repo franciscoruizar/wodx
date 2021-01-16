@@ -22,7 +22,7 @@ public final class MySqlStepRepository extends HibernateRepository<Step> impleme
 
     @Override
     public Optional<Step> search(StepId id) {
-        return byId(id);
+        return Optional.ofNullable(sessionFactory.getCurrentSession().byId(aggregateClass).load(id.value()));
     }
 
     @Override

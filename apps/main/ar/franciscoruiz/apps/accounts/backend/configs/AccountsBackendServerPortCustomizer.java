@@ -6,8 +6,6 @@ import org.springframework.boot.web.server.ConfigurableWebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.stereotype.Component;
 
-import java.util.logging.Logger;
-
 @Component
 public final class AccountsBackendServerPortCustomizer implements WebServerFactoryCustomizer<ConfigurableWebServerFactory> {
     private final EnvironmentParameter param;

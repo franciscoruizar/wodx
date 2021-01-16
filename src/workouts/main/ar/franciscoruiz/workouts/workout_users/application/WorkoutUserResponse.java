@@ -1,9 +1,10 @@
 package ar.franciscoruiz.workouts.workout_users.application;
 
 import ar.franciscoruiz.shared.domain.bus.query.Query;
+import ar.franciscoruiz.shared.domain.bus.query.Response;
 import ar.franciscoruiz.workouts.workout_users.domain.WorkoutUser;
 
-public final class WorkoutUserResponse implements Query {
+public final class WorkoutUserResponse implements Query, Response {
     private final String id;
     private final String workoutId;
     private final String athleteId;
@@ -16,9 +17,9 @@ public final class WorkoutUserResponse implements Query {
 
     public static WorkoutUserResponse fromAggregate(WorkoutUser entity) {
         return new WorkoutUserResponse(
-            entity.id().value(),
-            entity.workoutId().value(),
-            entity.athleteId().value()
+            entity.id(),
+            entity.workoutId(),
+            entity.athleteId()
         );
     }
 

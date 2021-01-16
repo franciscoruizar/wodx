@@ -1,8 +1,5 @@
 package ar.franciscoruiz.accounts.users.domain;
 
-import ar.franciscoruiz.accounts.roles.domain.RoleId;
-import ar.franciscoruiz.shared.domain.users.UserId;
-
 public final class User {
     private final String  id;
     private final String  name;

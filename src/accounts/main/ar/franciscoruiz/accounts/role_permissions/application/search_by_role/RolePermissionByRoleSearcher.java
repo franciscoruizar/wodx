@@ -5,7 +5,6 @@ import ar.franciscoruiz.accounts.role_permissions.application.RolePermissionsRes
 import ar.franciscoruiz.accounts.role_permissions.domain.RolePermissionRepository;
 import ar.franciscoruiz.accounts.roles.domain.RoleId;
 import ar.franciscoruiz.shared.domain.Service;
-import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
 
 import java.util.stream.Collectors;
 

@@ -5,7 +5,8 @@
 
 <hibernate-mapping>
     <class name="ar.franciscoruiz.accounts.role_permissions.domain.RolePermission" table="role_permissions">
-        <composite-id name="id" class="ar.franciscoruiz.accounts.role_permissions.domain.RolePermissionId" access="field">
+        <composite-id name="id" class="ar.franciscoruiz.accounts.role_permissions.domain.RolePermissionId"
+                      access="field">
             <key-property column="id" name="value" length="36" access="field"/>
         </composite-id>
 

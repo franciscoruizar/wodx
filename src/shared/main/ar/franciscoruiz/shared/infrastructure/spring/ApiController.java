@@ -1,13 +1,11 @@
 package ar.franciscoruiz.shared.infrastructure.spring;
 
-import ar.franciscoruiz.shared.domain.DomainError;
 import ar.franciscoruiz.shared.domain.bus.command.Command;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.command.CommandHandlerExecutionError;
 import ar.franciscoruiz.shared.domain.bus.query.Query;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
 import ar.franciscoruiz.shared.domain.bus.query.QueryHandlerExecutionError;
-import org.springframework.http.HttpStatus;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -30,8 +28,6 @@ public abstract class ApiController {
     protected <R> R ask(Query query) throws QueryHandlerExecutionError {
         return queryBus.ask(query);
     }
-
-    abstract public HashMap<Class<? extends DomainError>, HttpStatus> errorMapping();
 
     protected List<HashMap<String, String>> parseFilters(HashMap<String, Serializable> params) {
         int maxParams = params.size();

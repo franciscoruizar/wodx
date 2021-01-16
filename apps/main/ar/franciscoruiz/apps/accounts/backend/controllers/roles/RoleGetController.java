@@ -3,13 +3,10 @@ package ar.franciscoruiz.apps.accounts.backend.controllers.roles;
 import ar.franciscoruiz.accounts.permissions.application.PermissionsResponse;
 import ar.franciscoruiz.accounts.roles.application.RoleResponse;
 import ar.franciscoruiz.accounts.roles.application.find.FindRoleQuery;
-import ar.franciscoruiz.accounts.roles.domain.RoleNotExist;
-import ar.franciscoruiz.shared.domain.DomainError;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
 import ar.franciscoruiz.shared.domain.bus.query.QueryHandlerExecutionError;
 import ar.franciscoruiz.shared.infrastructure.spring.ApiController;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,12 +47,5 @@ public final class RoleGetController extends ApiController {
             put("read", permission.read());
             put("readAll", permission.readAll());
         }})).collect(Collectors.toList());
-    }
-
-    @Override
-    public HashMap<Class<? extends DomainError>, HttpStatus> errorMapping() {
-        return new HashMap<>() {{
-            put(RoleNotExist.class, HttpStatus.NOT_FOUND);
-        }};
     }
 }

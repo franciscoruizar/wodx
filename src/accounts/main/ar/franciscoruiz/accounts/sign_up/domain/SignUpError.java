@@ -1,7 +1,6 @@
 package ar.franciscoruiz.accounts.sign_up.domain;
 
 import ar.franciscoruiz.shared.domain.DomainError;
-import ar.franciscoruiz.shared.domain.users.UserId;
 
 public final class SignUpError extends DomainError {
     public SignUpError() {

@@ -11,16 +11,12 @@ public final class WorkoutResponse implements Response {
     private final LocalDateTime startDate;
     private final LocalDateTime endDate;
     private final String        coachId;
-    private final StepsResponse steps;
-    private final List<String>  athletes;
 
-    public WorkoutResponse(String id, LocalDateTime startDate, LocalDateTime endDate, String coachId, StepsResponse steps, List<String> athletes) {
+    public WorkoutResponse(String id, LocalDateTime startDate, LocalDateTime endDate, String coachId) {
         this.id        = id;
         this.startDate = startDate;
         this.endDate   = endDate;
         this.coachId   = coachId;
-        this.steps     = steps;
-        this.athletes  = athletes;
     }
 
     public String id() {
@@ -37,13 +33,5 @@ public final class WorkoutResponse implements Response {
 
     public String coachId() {
         return this.coachId;
-    }
-
-    public StepsResponse steps() {
-        return this.steps;
-    }
-
-    public List<String> athletes() {
-        return this.athletes;
     }
 }

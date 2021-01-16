@@ -45,8 +45,8 @@ public final class HibernateCriteriaConverter<T> {
 
     private Predicate[] formatPredicates(List<Filter> filters, Root<T> root) {
         List<Predicate> predicates = filters.stream()
-                                            .map(filter -> formatPredicate(filter, root))
-                                            .collect(Collectors.toList());
+            .map(filter -> formatPredicate(filter, root))
+            .collect(Collectors.toList());
 
         Predicate[] predicatesArray = new Predicate[predicates.size()];
 

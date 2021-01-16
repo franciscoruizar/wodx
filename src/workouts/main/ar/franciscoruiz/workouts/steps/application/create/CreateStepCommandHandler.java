@@ -8,15 +8,15 @@ import ar.franciscoruiz.workouts.steps.domain.StepId;
 import ar.franciscoruiz.workouts.workouts.domain.WorkoutId;
 
 @Service
-public final class StepCommandHandler implements CommandHandler<StepCommand> {
+public final class CreateStepCommandHandler implements CommandHandler<CreateStepCommand> {
     private final StepCreator creator;
 
-    public StepCommandHandler(StepCreator creator) {
+    public CreateStepCommandHandler(StepCreator creator) {
         this.creator = creator;
     }
 
     @Override
-    public void handle(StepCommand command) {
+    public void handle(CreateStepCommand command) {
         StepId          id          = new StepId(command.id());
         StepDescription description = new StepDescription(command.description());
         StepTypeId      stepTypeId  = new StepTypeId(command.stepTypeId());
