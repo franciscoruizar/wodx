@@ -1,4 +1,4 @@
-package ar.franciscoruiz.retentions.email.domain;
+package ar.franciscoruiz.retentions.mail.domain;
 
 import ar.franciscoruiz.shared.domain.vo.StringValueObject;
 

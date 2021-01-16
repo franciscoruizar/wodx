@@ -1,10 +1,8 @@
 package ar.franciscoruiz.workouts.workouts.application;
 
 import ar.franciscoruiz.shared.domain.bus.query.Response;
-import ar.franciscoruiz.workouts.steps.application.StepsResponse;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 public final class WorkoutResponse implements Response {
     private final String        id;
