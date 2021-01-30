@@ -1,0 +1,18 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="ar.franciscoruiz.accounts.user_memberships.domain.UserMembership" table="user_memberships">
+        <id name="id" column="id" access="field" length="36"/>
+
+        <property name="dateFrom" column="date_from" type="java.time.LocalDate" access="field"/>
+
+        <property name="dateTo" column="date_to" type="java.time.LocalDate" access="field"/>
+
+        <property name="membershipId" column="membership_id" type="java.lang.String" access="field"/>
+
+        <property name="userId" column="user_id" type="java.lang.String" access="field"/>
+    </class>
+</hibernate-mapping>
