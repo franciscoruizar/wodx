@@ -1,7 +1,5 @@
 package ar.franciscoruiz.apps.accounts.backend.controllers.purchases;
 
-import ar.franciscoruiz.accounts.purchases.application.create.CreatePurchaseCommand;
-import ar.franciscoruiz.accounts.purchases.domain.items.application.create.CreatePurchaseItemCommand;
 import ar.franciscoruiz.apps.accounts.backend.controllers.purchases.shared.dto.PurchaseRequest;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.command.CommandHandlerExecutionError;
@@ -9,9 +7,10 @@ import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
 import ar.franciscoruiz.shared.infrastructure.spring.ApiController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.stream.Collectors;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public final class PurchasePutController extends ApiController {
@@ -26,26 +25,12 @@ public final class PurchasePutController extends ApiController {
     public ResponseEntity<String> index(
         @RequestBody PurchaseRequest request,
         @RequestParam String id
-    ) throws CommandHandlerExecutionError {
-        dispatch(
-            new CreatePurchaseCommand(
-                id,
-                request.description(),
-                request.date(),
-                request.userId(),
-                request.items()
-                    .stream()
-                    .map(item ->
-                        new CreatePurchaseItemCommand(
-                            item.id(),
-                            item.purchaseId(),
-                            item.quantity(),
-                            item.membershipId()
-                        )
-                    )
-                    .collect(Collectors.toList())
-            )
-        );
+    ) throws CommandHandlerExecutionError, Exception {
+        if (!id.equals(request.id())) {
+            throw new Exception("request param id not equals to request body id");
+        }
+
+        dispatch(PurchaseRequest.parseRequest(request));
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

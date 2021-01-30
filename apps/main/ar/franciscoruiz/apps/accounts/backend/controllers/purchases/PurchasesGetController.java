@@ -2,6 +2,7 @@ package ar.franciscoruiz.apps.accounts.backend.controllers.purchases;
 
 import ar.franciscoruiz.accounts.purchases.application.PurchasesResponse;
 import ar.franciscoruiz.accounts.purchases.application.search_by_criteria.SearchPurchaseByCriteriaQuery;
+import ar.franciscoruiz.accounts.purchases.domain.items.application.PurchaseItemsResponse;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
 import ar.franciscoruiz.shared.domain.bus.query.QueryHandlerExecutionError;
@@ -42,13 +43,17 @@ public final class PurchasesGetController extends ApiController {
             put("date", purchase.date());
             put("userId", purchase.userId());
             put("totalPrice", purchase.totalPrice());
-            put("items", purchase.items().items().stream().map(item -> new HashMap<>() {{
-                put("id", item.id());
-                put("quantity", item.quantity());
-                put("price", item.price());
-                put("purchaseId", item.purchaseId());
-                put("membershipId", item.membershipId());
-            }}));
+            put("items", parseItemResponse(purchase.items()));
+        }}).collect(Collectors.toList());
+    }
+
+    private List<HashMap<String, Object>> parseItemResponse(PurchaseItemsResponse items) {
+        return items.items().stream().map(item -> new HashMap<String, Object>() {{
+            put("id", item.id());
+            put("purchaseId", item.purchaseId());
+            put("quantity", item.quantity());
+            put("price", item.price());
+            put("membershipId", item.membershipId());
         }}).collect(Collectors.toList());
     }
 }

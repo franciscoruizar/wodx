@@ -1,9 +1,7 @@
 package ar.franciscoruiz.apps.accounts.backend.controllers.purchases.shared.dto;
 
+import ar.franciscoruiz.accounts.purchases.application.create.CreatePurchaseCommand;
 import ar.franciscoruiz.accounts.purchases.domain.items.application.create.CreatePurchaseItemCommand;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 public final class PurchaseItemRequest {
     private String  id;
@@ -16,6 +14,15 @@ public final class PurchaseItemRequest {
         this.purchaseId   = purchaseId;
         this.quantity     = quantity;
         this.membershipId = membershipId;
+    }
+
+    public static CreatePurchaseItemCommand parseRequest(PurchaseItemRequest request) {
+        return new CreatePurchaseItemCommand(
+            request.id(),
+            request.purchaseId(),
+            request.quantity(),
+            request.membershipId()
+        );
     }
 
     public String id() {

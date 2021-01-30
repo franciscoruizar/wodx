@@ -28,25 +28,7 @@ public final class PurchasePostController extends ApiController {
     public ResponseEntity<String> index(
         @RequestBody PurchaseRequest request
     ) throws CommandHandlerExecutionError {
-        dispatch(
-            new CreatePurchaseCommand(
-                request.id(),
-                request.description(),
-                request.date(),
-                request.userId(),
-                request.items()
-                    .stream()
-                    .map(item ->
-                        new CreatePurchaseItemCommand(
-                            item.id(),
-                            item.purchaseId(),
-                            item.quantity(),
-                            item.membershipId()
-                        )
-                    )
-                    .collect(Collectors.toList())
-            )
-        );
+        dispatch(PurchaseRequest.parseRequest(request));
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

@@ -2,6 +2,7 @@ package ar.franciscoruiz.apps.accounts.backend.controllers.purchases;
 
 import ar.franciscoruiz.accounts.purchases.application.PurchaseResponse;
 import ar.franciscoruiz.accounts.purchases.application.finder.FindPurchaseQuery;
+import ar.franciscoruiz.accounts.purchases.domain.items.application.PurchaseItemsResponse;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
 import ar.franciscoruiz.shared.domain.bus.query.QueryHandlerExecutionError;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
@@ -33,14 +35,18 @@ public final class PurchaseGetController extends ApiController {
             put("date", response.date());
             put("userId", response.userId());
             put("totalPrice", response.totalPrice());
-            put("items", response.items().items().stream().map(item -> new HashMap<>() {{
-                put("id", item.id());
-                put("quantity", item.quantity());
-                put("price", item.price());
-                put("purchaseId", item.purchaseId());
-                put("membershipId", item.membershipId());
-            }}).collect(Collectors.toList()));
+            put("items", parseItemResponse(response.items()));
         }});
+    }
+
+    private List<HashMap<String, Object>> parseItemResponse(PurchaseItemsResponse items) {
+        return items.items().stream().map(item -> new HashMap<String, Object>() {{
+            put("id", item.id());
+            put("purchaseId", item.purchaseId());
+            put("quantity", item.quantity());
+            put("price", item.price());
+            put("membershipId", item.membershipId());
+        }}).collect(Collectors.toList());
     }
 }
 

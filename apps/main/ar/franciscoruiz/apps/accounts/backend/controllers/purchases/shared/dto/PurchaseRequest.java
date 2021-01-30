@@ -1,7 +1,10 @@
 package ar.franciscoruiz.apps.accounts.backend.controllers.purchases.shared.dto;
 
+import ar.franciscoruiz.accounts.purchases.application.create.CreatePurchaseCommand;
+
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public final class PurchaseRequest {
     private String                    id;
@@ -16,6 +19,16 @@ public final class PurchaseRequest {
         this.date        = date;
         this.userId      = userId;
         this.items       = items;
+    }
+
+    public static CreatePurchaseCommand parseRequest(PurchaseRequest request){
+        return new CreatePurchaseCommand(
+            request.id(),
+            request.description(),
+            request.date(),
+            request.userId(),
+            request.items.stream().map(PurchaseItemRequest::parseRequest).collect(Collectors.toList())
+        );
     }
 
     public String id() {
