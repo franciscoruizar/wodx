@@ -1,24 +1,27 @@
 package ar.franciscoruiz.apps.accounts.backend.configs;
 
-import ar.franciscoruiz.apps.shared.middleware.BasicHttpAuthMiddleware;
-import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
+import ar.franciscoruiz.apps.shared.middleware.JwtHttpAuthMiddleware;
+import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
+import ar.franciscoruiz.shared.infrastructure.spring.JWTUtil;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class AccountsBackendServerConfiguration {
-    private final CommandBus bus;
+    private final QueryBus bus;
+    private final JWTUtil  jwtUtil;
 
-    public AccountsBackendServerConfiguration(CommandBus bus) {
-        this.bus = bus;
+    public AccountsBackendServerConfiguration(QueryBus bus, JWTUtil jwtUtil) {
+        this.bus     = bus;
+        this.jwtUtil = jwtUtil;
     }
 
     @Bean
-    public FilterRegistrationBean<BasicHttpAuthMiddleware> basicHttpAuthMiddleware() {
-        FilterRegistrationBean<BasicHttpAuthMiddleware> registrationBean = new FilterRegistrationBean<>();
+    public FilterRegistrationBean<JwtHttpAuthMiddleware> basicHttpAuthMiddleware() {
+        FilterRegistrationBean<JwtHttpAuthMiddleware> registrationBean = new FilterRegistrationBean<>();
 
-        registrationBean.setFilter(new BasicHttpAuthMiddleware(bus));
+        registrationBean.setFilter(new JwtHttpAuthMiddleware(bus, jwtUtil));
         registrationBean.addUrlPatterns("/users", "/companies", "/roles");
 
         return registrationBean;

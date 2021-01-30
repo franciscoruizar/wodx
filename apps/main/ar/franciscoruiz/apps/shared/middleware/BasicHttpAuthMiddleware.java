@@ -25,7 +25,7 @@ public final class BasicHttpAuthMiddleware implements Filter {
         ServletResponse response,
         FilterChain chain
     ) throws IOException, ServletException {
-        String authorizationHeader = ((HttpServletRequest) request).getHeader("authorization");
+        String authorizationHeader = ((HttpServletRequest) request).getHeader("Authorization");
 
         if (hasIntroducedCredentials(authorizationHeader)) {
             authenticate(authorizationHeader, chain, request, response);

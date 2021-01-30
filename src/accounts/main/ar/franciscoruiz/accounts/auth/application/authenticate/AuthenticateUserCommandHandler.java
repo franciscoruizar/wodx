@@ -1,7 +1,7 @@
 package ar.franciscoruiz.accounts.auth.application.authenticate;
 
-import ar.franciscoruiz.accounts.auth.domain.AuthPassword;
-import ar.franciscoruiz.accounts.auth.domain.AuthUsername;
+import ar.franciscoruiz.shared.domain.auth.AuthPassword;
+import ar.franciscoruiz.shared.domain.auth.AuthEmail;
 import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.bus.command.CommandHandler;
 
@@ -15,9 +15,9 @@ public final class AuthenticateUserCommandHandler implements CommandHandler<Auth
 
     @Override
     public void handle(AuthenticateUserCommand command) {
-        AuthUsername username = new AuthUsername(command.username());
+        AuthEmail    email    = new AuthEmail(command.email());
         AuthPassword password = new AuthPassword(command.password());
 
-        authenticator.authenticate(username, password);
+        authenticator.authenticate(email, password);
     }
 }
