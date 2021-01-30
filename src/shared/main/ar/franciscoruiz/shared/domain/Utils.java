@@ -20,7 +20,7 @@ public final class Utils {
         return dateToString(timestamp.toLocalDateTime());
     }
 
-    public static String jsonEncode(HashMap<String, Serializable> map) {
+    public static String jsonEncode(HashMap<String, Object> map) {
         try {
             return new ObjectMapper().writeValueAsString(map);
         } catch (JsonProcessingException e) {

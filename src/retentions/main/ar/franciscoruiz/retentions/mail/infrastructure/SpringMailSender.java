@@ -2,11 +2,9 @@ package ar.franciscoruiz.retentions.mail.infrastructure;
 
 import ar.franciscoruiz.retentions.mail.domain.MailSender;
 import ar.franciscoruiz.retentions.mail.domain.Message;
-import ar.franciscoruiz.shared.domain.Service;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 
-@Service
 public final class SpringMailSender implements MailSender {
     private final JavaMailSender javaMailSender;
 

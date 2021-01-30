@@ -1,15 +1,12 @@
 package ar.franciscoruiz.apps.accounts.backend.controllers.roles;
 
-import ar.franciscoruiz.accounts.permissions.application.PermissionsResponse;
 import ar.franciscoruiz.accounts.roles.application.RolesResponse;
 import ar.franciscoruiz.accounts.roles.application.search_all.SearchAllRolesQuery;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
 import ar.franciscoruiz.shared.domain.bus.query.QueryHandlerExecutionError;
 import ar.franciscoruiz.shared.infrastructure.spring.ApiController;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -17,6 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET})
 public final class RolesGetController extends ApiController {
     public RolesGetController(
         QueryBus queryBus,
@@ -26,28 +24,12 @@ public final class RolesGetController extends ApiController {
     }
 
     @GetMapping(value = "/roles")
-    public ResponseEntity<List<HashMap<String, Object>>> index() throws QueryHandlerExecutionError {
+    public List<HashMap<String, Object>> index() throws QueryHandlerExecutionError {
         RolesResponse response = ask(new SearchAllRolesQuery());
 
-        return ResponseEntity.ok().body(
-            response.values().stream().map(role -> new HashMap<String, Object>() {{
-                put("id", role.id());
-                put("description", role.description());
-                put("permissions", parsePermissions(role.permissions()));
-            }}).collect(Collectors.toList())
-        );
-    }
-
-
-    private List<HashMap<String, Serializable>> parsePermissions(PermissionsResponse permissions) {
-        return permissions.values().stream().map(permission -> new HashMap<String, Serializable>() {{
-            put("id", permission.id());
-            put("entity", permission.entity());
-            put("create", permission.create());
-            put("update", permission.update());
-            put("delete", permission.delete());
-            put("read", permission.read());
-            put("readAll", permission.readAll());
+        return response.values().stream().map(role -> new HashMap<String, Object>() {{
+            put("id", role.id());
+            put("description", role.description());
         }}).collect(Collectors.toList());
     }
 }

@@ -31,7 +31,11 @@ allprojects {
         implementation 'org.springframework:spring-context-support:5.3.3'
         implementation 'org.reflections:reflections:0.9.12'
         implementation 'org.springframework.boot:spring-boot-starter-amqp:2.4.1'
+        implementation 'javax.mail:mail:1.4'
+        implementation 'com.sendgrid:sendgrid-java:4.7.1'
         runtime 'mysql:mysql-connector-java:8.0.22'
+
+
 
         testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
         testImplementation 'org.mockito:mockito-core:3.7.0'
@@ -128,6 +132,8 @@ bootJar {
 mainClassName = "${packagesName}.apps.Starter"
 
 dependencies {
+
+    implementation 'junit:junit:4.12'
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
     implementation project(":accounts")
