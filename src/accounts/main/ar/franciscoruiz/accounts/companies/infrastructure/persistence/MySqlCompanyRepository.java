@@ -31,6 +31,11 @@ public final class MySqlCompanyRepository extends HibernateRepository<Company> i
     }
 
     @Override
+    public List<Company> findAll() {
+        return super.all();
+    }
+
+    @Override
     public List<Company> matching(Criteria criteria) {
         return byCriteria(criteria);
     }

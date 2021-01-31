@@ -10,5 +10,7 @@ public interface CompanyRepository {
 
     Optional<Company> search(CompanyId id);
 
+    List<Company> findAll();
+
     List<Company> matching(Criteria criteria);
 }
