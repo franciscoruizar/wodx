@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @Service
 @Transactional("authentications-transaction_manager")
-public final class MySqlAuthRepository extends HibernateRepository<AuthUser> implements AuthRepository {
+public class MySqlAuthRepository extends HibernateRepository<AuthUser> implements AuthRepository {
     public MySqlAuthRepository(@Qualifier("authentications-session_factory") SessionFactory sessionFactory) {
         super(sessionFactory, AuthUser.class);
     }

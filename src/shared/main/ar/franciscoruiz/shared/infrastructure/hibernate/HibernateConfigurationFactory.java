@@ -1,9 +1,7 @@
 package ar.franciscoruiz.shared.infrastructure.hibernate;
 
+import ar.franciscoruiz.shared.domain.Logger;
 import ar.franciscoruiz.shared.domain.Service;
-import org.apache.juli.logging.Log;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 import org.hibernate.cfg.AvailableSettings;
 import org.springframework.core.io.FileSystemResource;
@@ -15,7 +13,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
 import java.io.File;
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -23,10 +20,11 @@ import java.util.stream.Collectors;
 @Service
 public final class HibernateConfigurationFactory {
     private final ResourcePatternResolver resourceResolver;
-    Logger logger = LogManager.getLogger(HibernateConfigurationFactory.class);
+    private final Logger                  logger;
 
-    public HibernateConfigurationFactory(ResourcePatternResolver resourceResolver) {
+    public HibernateConfigurationFactory(ResourcePatternResolver resourceResolver, Logger logger) {
         this.resourceResolver = resourceResolver;
+        this.logger           = logger;
     }
 
     public PlatformTransactionManager hibernateTransactionManager(LocalSessionFactoryBean sessionFactory) {
@@ -55,7 +53,7 @@ public final class HibernateConfigurationFactory {
         String databaseName,
         String username,
         String password
-    ) throws IOException {
+    ) {
         final String DRIVER = "com.mysql.cj.jdbc.Driver";
 
         final String URL = String.format(
@@ -65,22 +63,22 @@ public final class HibernateConfigurationFactory {
             databaseName
         );
 
-
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName(DRIVER);
         dataSource.setUrl(URL);
         dataSource.setUsername(username);
         dataSource.setPassword(password);
 
-        Resource mysqlResource = resourceResolver.getResource(String.format(
-            "classpath:database/%s.sql",
-            contextName
-        ));
-        try{
+        try {
+            Resource mysqlResource = resourceResolver.getResource(String.format(
+                "classpath:database/%s.sql",
+                contextName
+            ));
+
             String mysqlSentences = new Scanner(mysqlResource.getInputStream(), StandardCharsets.UTF_8).useDelimiter("\\A").next();
             dataSource.setConnectionInitSqls(new ArrayList<>(Arrays.asList(mysqlSentences.split(";"))));
-        }catch (Exception exception){
-            logger.warn(exception.getMessage());
+        } catch (Exception exception) {
+            logger.info(exception.getMessage());
         }
 
         return dataSource;

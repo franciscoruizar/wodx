@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @Service
 public final class UserAuthenticator {
-    private final AuthRepository repository;
+    private final AuthRepository  repository;
     private final PasswordEncoder encoder;
 
     public UserAuthenticator(AuthRepository repository, PasswordEncoder encoder) {

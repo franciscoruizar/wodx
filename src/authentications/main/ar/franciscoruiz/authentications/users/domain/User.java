@@ -3,6 +3,8 @@ package ar.franciscoruiz.authentications.users.domain;
 import ar.franciscoruiz.shared.domain.roles.RoleId;
 import ar.franciscoruiz.shared.domain.users.UserId;
 
+import java.util.Objects;
+
 public final class User {
     private final UserId       id;
     private final UserName     name;
@@ -33,7 +35,7 @@ public final class User {
         this.roleId   = roleId;
     }
 
-    public User() {
+    private User() {
         this.id       = null;
         this.name     = null;
         this.surname  = null;
@@ -74,5 +76,18 @@ public final class User {
 
     public RoleId roleId() {
         return roleId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(surname, user.surname) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(phone, user.phone) && Objects.equals(isActive, user.isActive) && Objects.equals(roleId, user.roleId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, surname, email, password, phone, isActive, roleId);
     }
 }

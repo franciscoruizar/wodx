@@ -13,8 +13,6 @@
 
         <property name="email" column="email" type="java.lang.String" access="field"/>
 
-        <property name="password" column="password" type="java.lang.String" access="field"/>
-
         <property name="phone" column="phone" type="java.lang.String" access="field"/>
 
         <property name="isActive" column="is_active" type="java.lang.Boolean" access="field"/>

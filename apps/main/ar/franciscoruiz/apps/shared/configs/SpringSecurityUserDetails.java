@@ -4,7 +4,6 @@ import ar.franciscoruiz.authentications.auth.application.find_by_username.FindUs
 import ar.franciscoruiz.authentications.auth.application.find_by_username.UserDetailsResponse;
 import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -17,8 +16,11 @@ import java.util.List;
 
 @Service
 public class SpringSecurityUserDetails implements UserDetailsService {
-    @Autowired
-    private QueryBus bus;
+    private final QueryBus bus;
+
+    public SpringSecurityUserDetails(QueryBus bus) {
+        this.bus = bus;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
