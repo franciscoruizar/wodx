@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Service
 @Transactional("authentications-transaction_manager")
-public final class MySqlUserRepository extends HibernateRepository<User> implements UserRepository {
+public class MySqlUserRepository extends HibernateRepository<User> implements UserRepository {
     public MySqlUserRepository(@Qualifier("authentications-session_factory") SessionFactory sessionFactory) {
         super(sessionFactory, User.class);
     }

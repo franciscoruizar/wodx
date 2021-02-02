@@ -43,7 +43,7 @@ CREATE TABLE  IF NOT EXISTS `users` (
   `role_id` char(36) NOT NULL,
   `name` varchar(45) DEFAULT NULL,
   `surname` varchar(45) DEFAULT NULL,
-  `phone` varchar(17) DEFAULT NULL,
+  `phone` varchar(25) DEFAULT NULL,
   `is_active` tinyint NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 )

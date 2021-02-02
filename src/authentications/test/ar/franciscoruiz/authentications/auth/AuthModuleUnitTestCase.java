@@ -29,11 +29,11 @@ public abstract class AuthModuleUnitTestCase extends UnitTestCase {
         Mockito.when(repository.search(entity.email())).thenReturn(Optional.of(entity));
     }
 
-    public void mockPasswordEncoderEncode(String rawPassword){
+    public void mockPasswordEncoderEncode(String rawPassword) {
         Mockito.when(encoder.encode(rawPassword)).thenReturn(rawPassword);
     }
 
-    public void mockPasswordEncoderMatch(String rawPassword, String encodedPassword){
+    public void mockPasswordEncoderMatch(String rawPassword, String encodedPassword) {
         Mockito.when(encoder.matches(rawPassword, encodedPassword)).thenReturn(rawPassword.equals(encodedPassword));
     }
 }

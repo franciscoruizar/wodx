@@ -2,17 +2,15 @@ package ar.franciscoruiz.shared.infrastructure.spring;
 
 import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.encoder.PasswordEncoder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Service
 public final class SpringBycriptPasswordEncoder implements PasswordEncoder {
 
-    @Autowired
     private final BCryptPasswordEncoder encoder;
 
-    public SpringBycriptPasswordEncoder(BCryptPasswordEncoder encoder) {
-        this.encoder = encoder;
+    public SpringBycriptPasswordEncoder() {
+        this.encoder = new BCryptPasswordEncoder();
     }
 
     @Override

@@ -20,15 +20,15 @@ public class AuthenticationsBackendSecurityConfig extends SpringWebSecurityConfi
     protected void configure(HttpSecurity http) throws Exception {
         http
             .csrf()
-                .disable()
+            .disable()
             .authorizeRequests()
-                .antMatchers("/auth")
-                .permitAll()
+            .antMatchers("/auth")
+            .permitAll()
             .anyRequest()
-                .authenticated()
-                .and()
+            .authenticated()
+            .and()
             .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.addFilterBefore(middleware, UsernamePasswordAuthenticationFilter.class);
     }

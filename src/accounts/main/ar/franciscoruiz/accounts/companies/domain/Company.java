@@ -1,5 +1,7 @@
 package ar.franciscoruiz.accounts.companies.domain;
 
+import java.util.Objects;
+
 public final class Company {
     private final CompanyId          id;
     private final CompanyDescription description;
@@ -24,7 +26,7 @@ public final class Company {
         this.isActive    = isActive;
     }
 
-    public Company() {
+    private Company() {
         this.id          = null;
         this.description = null;
         this.mediaUrl    = null;
@@ -55,5 +57,18 @@ public final class Company {
 
     public CompanyIsActive isActive() {
         return this.isActive;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Company company = (Company) o;
+        return Objects.equals(id, company.id) && Objects.equals(description, company.description) && Objects.equals(mediaUrl, company.mediaUrl) && Objects.equals(latitude, company.latitude) && Objects.equals(longitude, company.longitude) && Objects.equals(isActive, company.isActive);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, description, mediaUrl, latitude, longitude, isActive);
     }
 }

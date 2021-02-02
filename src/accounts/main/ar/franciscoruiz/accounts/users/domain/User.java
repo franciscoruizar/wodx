@@ -1,11 +1,12 @@
 package ar.franciscoruiz.accounts.users.domain;
 
+import java.util.Objects;
+
 public final class User {
     private final String  id;
     private final String  name;
     private final String  surname;
     private final String  email;
-    private final String  password;
     private final String  phone;
     private final Boolean isActive;
     private final String  roleId;
@@ -15,7 +16,6 @@ public final class User {
         String name,
         String surname,
         String email,
-        String password,
         String phone,
         Boolean isActive,
         String roleId
@@ -24,18 +24,16 @@ public final class User {
         this.name     = name;
         this.surname  = surname;
         this.email    = email;
-        this.password = password;
         this.phone    = phone;
         this.isActive = isActive;
         this.roleId   = roleId;
     }
 
-    public User() {
+    private User() {
         this.id       = null;
         this.name     = null;
         this.surname  = null;
         this.email    = null;
-        this.password = null;
         this.phone    = null;
         this.isActive = null;
         this.roleId   = null;
@@ -57,10 +55,6 @@ public final class User {
         return this.email;
     }
 
-    public String password() {
-        return this.password;
-    }
-
     public String phone() {
         return this.phone;
     }
@@ -71,5 +65,18 @@ public final class User {
 
     public String roleId() {
         return this.roleId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(surname, user.surname) && Objects.equals(email, user.email) && Objects.equals(phone, user.phone) && Objects.equals(isActive, user.isActive) && Objects.equals(roleId, user.roleId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, surname, email, phone, isActive, roleId);
     }
 }
