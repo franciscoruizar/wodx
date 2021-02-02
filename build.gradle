@@ -138,6 +138,7 @@ dependencies {
 
     implementation 'junit:junit:4.12'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
 
     implementation project(":accounts")
     implementation project(":analytics")

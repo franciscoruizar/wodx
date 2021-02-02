@@ -16,6 +16,7 @@ import java.util.HashMap;
         "ar.franciscoruiz.accounts",
         "ar.franciscoruiz.analytics",
         "ar.franciscoruiz.retentions",
+        "ar.franciscoruiz.apps.shared",
         "ar.franciscoruiz.apps.backoffice.frontend"
     }
 )

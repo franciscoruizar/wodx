@@ -11,7 +11,7 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 @Configuration
 @EnableWebMvc
-public class BackofficeFrontendWebConfig implements WebMvcConfigurer {
+public class BackofficeFrontendWebMvcConfig implements WebMvcConfigurer {
     @Bean
     public ClassLoaderTemplateResolver secondaryTemplateResolver() {
         ClassLoaderTemplateResolver secondaryTemplateResolver = new ClassLoaderTemplateResolver();
