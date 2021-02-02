@@ -6,7 +6,7 @@ public final class CompanyRequest {
     private String  mediaUrl;
     private Double  latitude;
     private Double  longitude;
-    private Boolean isActive;
+    private boolean isActive;
 
     public String id() {
         return this.id;
@@ -48,7 +48,7 @@ public final class CompanyRequest {
         this.longitude = longitude;
     }
 
-    public Boolean isActive() {
+    public boolean isActive() {
         return this.isActive;
     }
 

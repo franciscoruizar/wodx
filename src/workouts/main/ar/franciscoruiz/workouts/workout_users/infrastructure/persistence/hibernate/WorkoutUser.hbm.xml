@@ -5,10 +5,10 @@
 
 <hibernate-mapping>
     <class name="ar.franciscoruiz.workouts.workout_users.domain.WorkoutUser" table="workout_users">
-        <id column="id" name="value" length="36" access="field"/>
+        <id column="id" name="id" length="36" access="field"/>
 
         <property name="workoutId" column="workout_id" type="java.lang.String" access="field"/>
 
-        <property name="userId" column="user_id" type="java.lang.String" access="field"/>
+        <property name="athleteId" column="user_id" type="java.lang.String" access="field"/>
     </class>
 </hibernate-mapping>

@@ -27,3 +27,6 @@ start-retentions_backend:
 
 start-workouts_backend:
 	@./gradlew :run --args='workouts_backend server'
+
+start-backoffice_frontend:
+	@./gradlew :run --args='backoffice_frontend server'
