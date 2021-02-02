@@ -1,6 +1,7 @@
 package ar.franciscoruiz.accounts.roles.domain;
 
 import ar.franciscoruiz.shared.domain.DomainError;
+import ar.franciscoruiz.shared.domain.roles.RoleId;
 
 public final class RoleNotExist extends DomainError {
     public RoleNotExist(RoleId id) {

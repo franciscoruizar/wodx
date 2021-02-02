@@ -39,6 +39,7 @@ allprojects {
         runtime 'mysql:mysql-connector-java:8.0.22'
 
         implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.2.2.RELEASE'
+        implementation 'org.springframework.boot:spring-boot-starter-security'
 
         testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
         testImplementation 'org.mockito:mockito-core:3.7.0'
@@ -138,10 +139,10 @@ dependencies {
 
     implementation 'junit:junit:4.12'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
 
     implementation project(":accounts")
     implementation project(":analytics")
+    implementation project(":authentications")
     implementation project(":retentions")
     implementation project(":shared")
     implementation project(":workouts")

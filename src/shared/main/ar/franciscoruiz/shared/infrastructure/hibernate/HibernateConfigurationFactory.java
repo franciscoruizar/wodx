@@ -1,6 +1,9 @@
 package ar.franciscoruiz.shared.infrastructure.hibernate;
 
 import ar.franciscoruiz.shared.domain.Service;
+import org.apache.juli.logging.Log;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 import org.hibernate.cfg.AvailableSettings;
 import org.springframework.core.io.FileSystemResource;
@@ -20,6 +23,7 @@ import java.util.stream.Collectors;
 @Service
 public final class HibernateConfigurationFactory {
     private final ResourcePatternResolver resourceResolver;
+    Logger logger = LogManager.getLogger(HibernateConfigurationFactory.class);
 
     public HibernateConfigurationFactory(ResourcePatternResolver resourceResolver) {
         this.resourceResolver = resourceResolver;
@@ -45,6 +49,7 @@ public final class HibernateConfigurationFactory {
     }
 
     public DataSource dataSource(
+        String contextName,
         String host,
         Integer port,
         String databaseName,
@@ -69,11 +74,14 @@ public final class HibernateConfigurationFactory {
 
         Resource mysqlResource = resourceResolver.getResource(String.format(
             "classpath:database/%s.sql",
-            databaseName
+            contextName
         ));
-        String mysqlSentences = new Scanner(mysqlResource.getInputStream(), StandardCharsets.UTF_8).useDelimiter("\\A").next();
-
-        dataSource.setConnectionInitSqls(new ArrayList<>(Arrays.asList(mysqlSentences.split(";"))));
+        try{
+            String mysqlSentences = new Scanner(mysqlResource.getInputStream(), StandardCharsets.UTF_8).useDelimiter("\\A").next();
+            dataSource.setConnectionInitSqls(new ArrayList<>(Arrays.asList(mysqlSentences.split(";"))));
+        }catch (Exception exception){
+            logger.warn(exception.getMessage());
+        }
 
         return dataSource;
     }

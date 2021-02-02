@@ -27,7 +27,7 @@ public final class CreatePurchaseCommand implements Command {
         this.description = description;
         this.date        = date;
         this.userId      = userId;
-        this.items = Collections.emptyList();
+        this.items       = Collections.emptyList();
     }
 
     public String id() {

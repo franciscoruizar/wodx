@@ -1,65 +1,51 @@
 package ar.franciscoruiz.apps.shared.middleware;
 
-import ar.franciscoruiz.accounts.auth.application.find_by_username.FindUserByUsernameQuery;
-import ar.franciscoruiz.accounts.auth.application.find_by_username.UserDetailsResponse;
-import ar.franciscoruiz.shared.domain.auth.AuthEmail;
-import ar.franciscoruiz.shared.domain.auth.AuthPassword;
-import ar.franciscoruiz.shared.domain.auth.AuthUser;
-import ar.franciscoruiz.shared.domain.auth.Authorities;
-import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
-import ar.franciscoruiz.shared.infrastructure.spring.JWTUtil;
+import ar.franciscoruiz.apps.shared.configs.SpringSecurityUserDetails;
+import ar.franciscoruiz.shared.infrastructure.spring.SpringJwtUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
 
-import javax.servlet.*;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public final class JwtHttpAuthMiddleware implements Filter {
-    private final QueryBus bus;
-    private final JWTUtil  jwtUtil;
+@Component
+public final class JwtHttpAuthMiddleware extends OncePerRequestFilter {
 
-    public JwtHttpAuthMiddleware(QueryBus bus, JWTUtil jwtUtil) {
-        this.bus     = bus;
-        this.jwtUtil = jwtUtil;
-    }
+    @Autowired
+    private SpringSecurityUserDetails springSecurityUserDetails;
+
+    @Autowired
+    private SpringJwtUtil springJwtUtil;
 
     @Override
-    public void doFilter(
-        ServletRequest request,
-        ServletResponse response,
-        FilterChain chain
-    ) throws IOException, ServletException {
-        String authorizationHeader = ((HttpServletRequest) request).getHeader("Authorization");
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        String authorizationHeader = request.getHeader("Authorization");
 
-        if (hasIntroducedCredentials(authorizationHeader)){
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer")){
             String jwt = authorizationHeader.substring(7);
-            String username = jwtUtil.extractUsername(jwt);
+            String username = springJwtUtil.extractUsername(jwt);
 
-            if (username == null){
-                setInvalidCredentials(response);
-            }
+            if (username != null && SecurityContextHolder.getContext().getAuthentication() == null){
+                UserDetails userDetails = springSecurityUserDetails.loadUserByUsername(username);
 
-            UserDetailsResponse userDetailsResponse = this.bus.ask(new FindUserByUsernameQuery(username));
+                if (springJwtUtil.validateToken(jwt, userDetails)){
+                    UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                    authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-            var email = new AuthEmail(userDetailsResponse.username());
-            var password = new AuthPassword(userDetailsResponse.password());
-            var authorities = new Authorities(userDetailsResponse.authorities());
+                    SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 
-            if (!jwtUtil.validateToken(jwt, new AuthUser(email, password, authorities))){
-                setInvalidCredentials(response);
+                }
             }
         }
 
-        chain.doFilter(request, response);
-    }
-
-    private void setInvalidCredentials(ServletResponse response) {
-        HttpServletResponse httpServletResponse = (HttpServletResponse) response;
-        httpServletResponse.reset();
-        httpServletResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
-    }
-
-    private boolean hasIntroducedCredentials(String authorizationHeader) {
-        return null != authorizationHeader && authorizationHeader.startsWith("Bearer");
+        filterChain.doFilter(request, response);
     }
 }

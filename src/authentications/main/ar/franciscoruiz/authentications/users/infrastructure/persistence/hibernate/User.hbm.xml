@@ -1,0 +1,40 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="ar.franciscoruiz.authentications.users.domain.User" table="users">
+        <composite-id name="id" class="ar.franciscoruiz.shared.domain.users.UserId" access="field">
+            <key-property column="id" name="value" length="36" access="field"/>
+        </composite-id>
+
+        <component name="name" class="ar.franciscoruiz.authentications.users.domain.UserName" access="field">
+            <property name="value" column="name" type="java.lang.String" access="field"/>
+        </component>
+
+        <component name="surname" class="ar.franciscoruiz.authentications.users.domain.UserSurname" access="field">
+            <property name="value" column="surname" type="java.lang.String" access="field"/>
+        </component>
+
+        <component name="email" class="ar.franciscoruiz.authentications.users.domain.UserEmail" access="field">
+            <property name="value" column="email" type="java.lang.String" access="field"/>
+        </component>
+
+        <component name="password" class="ar.franciscoruiz.authentications.users.domain.UserPassword" access="field">
+            <property name="value" column="password" type="java.lang.String" access="field"/>
+        </component>
+
+        <component name="phone" class="ar.franciscoruiz.authentications.users.domain.UserPhone" access="field">
+            <property name="value" column="phone" type="java.lang.String" access="field"/>
+        </component>
+
+        <component name="isActive" class="ar.franciscoruiz.authentications.users.domain.UserIsActive" access="field">
+            <property name="value" column="is_active" type="java.lang.String" access="field"/>
+        </component>
+
+        <component name="roleId" class="ar.franciscoruiz.shared.domain.roles.RoleId" access="field">
+            <property name="value" column="role_id" type="java.lang.String" access="field"/>
+        </component>
+    </class>
+</hibernate-mapping>

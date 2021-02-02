@@ -37,6 +37,7 @@ public class AccountsHibernateConfiguration {
     @Bean("accounts-data_source")
     public DataSource dataSource() throws IOException, ParameterNotExist {
         return factory.dataSource(
+            CONTEXT_NAME,
             config.get("ACCOUNTS_DATABASE_HOST"),
             config.getInt("ACCOUNTS_DATABASE_PORT"),
             config.get("ACCOUNTS_DATABASE_NAME"),

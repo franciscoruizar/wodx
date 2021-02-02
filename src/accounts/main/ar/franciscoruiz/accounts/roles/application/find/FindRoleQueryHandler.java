@@ -1,9 +1,9 @@
 package ar.franciscoruiz.accounts.roles.application.find;
 
 import ar.franciscoruiz.accounts.roles.application.RoleResponse;
-import ar.franciscoruiz.accounts.roles.domain.RoleId;
 import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.bus.query.QueryHandler;
+import ar.franciscoruiz.shared.domain.roles.RoleId;
 
 @Service
 public final class FindRoleQueryHandler implements QueryHandler<FindRoleQuery, RoleResponse> {

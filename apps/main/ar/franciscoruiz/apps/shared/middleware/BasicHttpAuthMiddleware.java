@@ -1,8 +1,8 @@
 package ar.franciscoruiz.apps.shared.middleware;
 
-import ar.franciscoruiz.accounts.auth.application.authenticate.AuthenticateUserCommand;
-import ar.franciscoruiz.accounts.auth.domain.InvalidAuthCredentials;
-import ar.franciscoruiz.accounts.auth.domain.InvalidAuthUsername;
+import ar.franciscoruiz.authentications.auth.application.authenticate.AuthenticateUserCommand;
+import ar.franciscoruiz.authentications.auth.domain.InvalidAuthCredentials;
+import ar.franciscoruiz.authentications.auth.domain.InvalidAuthUsername;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.command.CommandHandlerExecutionError;
 

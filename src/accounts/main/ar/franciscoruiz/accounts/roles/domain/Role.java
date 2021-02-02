@@ -1,5 +1,7 @@
 package ar.franciscoruiz.accounts.roles.domain;
 
+import ar.franciscoruiz.shared.domain.roles.RoleId;
+
 public final class Role {
     private final RoleId          id;
     private final RoleDescription description;

@@ -22,6 +22,9 @@ start-accounts_backend:
 start-analytics_backend:
 	@./gradlew :run --args='analytics_backend server domain-events:rabbitmq:consume'
 
+start-authentications_backend:
+	@./gradlew :run --args='authentications_backend server'
+
 start-retentions_backend:
 	@./gradlew :run --args='retention_backend server domain-events:rabbitmq:consume'
 

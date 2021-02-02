@@ -20,6 +20,17 @@ public final class MembershipResponse implements Response {
         this.isActive          = isActive;
     }
 
+    public static MembershipResponse fromAggregate(Membership membership) {
+        return new MembershipResponse(
+            membership.id(),
+            membership.description(),
+            membership.numberDaysEnabled(),
+            membership.price(),
+            membership.companyId(),
+            membership.isActive()
+        );
+    }
+
     public String id() {
         return this.id;
     }
@@ -42,16 +53,5 @@ public final class MembershipResponse implements Response {
 
     public Boolean isActive() {
         return this.isActive;
-    }
-
-    public static MembershipResponse fromAggregate(Membership membership) {
-        return new MembershipResponse(
-            membership.id(),
-            membership.description(),
-            membership.numberDaysEnabled(),
-            membership.price(),
-            membership.companyId(),
-            membership.isActive()
-        );
     }
 }

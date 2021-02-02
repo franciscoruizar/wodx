@@ -1,9 +1,9 @@
 package ar.franciscoruiz.accounts.roles.infrastructure.persistence;
 
 import ar.franciscoruiz.accounts.roles.domain.Role;
-import ar.franciscoruiz.accounts.roles.domain.RoleId;
 import ar.franciscoruiz.accounts.roles.domain.RoleRepository;
 import ar.franciscoruiz.shared.domain.Service;
+import ar.franciscoruiz.shared.domain.roles.RoleId;
 import ar.franciscoruiz.shared.infrastructure.hibernate.HibernateRepository;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Qualifier;

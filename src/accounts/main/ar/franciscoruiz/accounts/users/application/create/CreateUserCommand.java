@@ -7,7 +7,7 @@ public final class CreateUserCommand implements Command {
     private final String  name;
     private final String  surname;
     private final String  email;
-    private final String password;
+    private final String  password;
     private final String  phone;
     private final Boolean isActive;
     private final String  roleId;

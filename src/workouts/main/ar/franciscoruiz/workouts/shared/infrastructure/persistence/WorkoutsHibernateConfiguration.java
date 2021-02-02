@@ -37,6 +37,7 @@ public class WorkoutsHibernateConfiguration {
     @Bean("workouts-data_source")
     public DataSource dataSource() throws IOException, ParameterNotExist {
         return factory.dataSource(
+            CONTEXT_NAME,
             config.get("WORKOUTS_DATABASE_HOST"),
             config.getInt("WORKOUTS_DATABASE_PORT"),
             config.get("WORKOUTS_DATABASE_NAME"),

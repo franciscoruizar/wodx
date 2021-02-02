@@ -20,6 +20,16 @@ public final class UserMembershipResponse implements Response {
         this.userId       = userId;
     }
 
+    public static UserMembershipResponse fromAggregate(UserMembership userMembership) {
+        return new UserMembershipResponse(
+            userMembership.id(),
+            userMembership.dateFrom(),
+            userMembership.dateFrom(),
+            userMembership.membershipId(),
+            userMembership.userId()
+        );
+    }
+
     public String id() {
         return this.id;
     }
@@ -38,15 +48,5 @@ public final class UserMembershipResponse implements Response {
 
     public String userId() {
         return this.userId;
-    }
-
-    public static UserMembershipResponse fromAggregate(UserMembership userMembership) {
-        return new UserMembershipResponse(
-            userMembership.id(),
-            userMembership.dateFrom(),
-            userMembership.dateFrom(),
-            userMembership.membershipId(),
-            userMembership.userId()
-        );
     }
 }

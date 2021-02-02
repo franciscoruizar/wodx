@@ -4,7 +4,6 @@ import ar.franciscoruiz.accounts.companies.application.CompaniesResponse;
 import ar.franciscoruiz.accounts.companies.application.CompanyResponse;
 import ar.franciscoruiz.accounts.companies.domain.CompanyRepository;
 import ar.franciscoruiz.shared.domain.Service;
-import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
 
 import java.util.stream.Collectors;
 

@@ -36,8 +36,8 @@ public abstract class ApplicationTestCase {
         String expectedResponse
     ) throws Exception {
         ResultMatcher response = expectedResponse.isEmpty()
-            ? content().string("")
-            : content().json(expectedResponse);
+                                 ? content().string("")
+                                 : content().json(expectedResponse);
 
         mockMvc
             .perform(get(endpoint))
@@ -52,8 +52,8 @@ public abstract class ApplicationTestCase {
         HttpHeaders headers
     ) throws Exception {
         ResultMatcher response = expectedResponse.isEmpty()
-            ? content().string("")
-            : content().json(expectedResponse);
+                                 ? content().string("")
+                                 : content().json(expectedResponse);
 
         mockMvc
             .perform(get(endpoint).headers(headers))

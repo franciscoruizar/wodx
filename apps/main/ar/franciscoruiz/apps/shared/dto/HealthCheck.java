@@ -6,12 +6,12 @@ public final class HealthCheck {
 
     public HealthCheck(String application, String status) {
         this.application = application;
-        this.status = status;
+        this.status      = status;
     }
 
     public HealthCheck() {
         this.application = null;
-        this.status = null;
+        this.status      = null;
     }
 
     public String getApplication() {

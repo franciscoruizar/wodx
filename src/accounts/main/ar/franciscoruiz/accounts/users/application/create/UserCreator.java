@@ -1,8 +1,8 @@
 package ar.franciscoruiz.accounts.users.application.create;
 
-import ar.franciscoruiz.accounts.roles.domain.RoleId;
 import ar.franciscoruiz.accounts.users.domain.*;
 import ar.franciscoruiz.shared.domain.Service;
+import ar.franciscoruiz.shared.domain.roles.RoleId;
 import ar.franciscoruiz.shared.domain.users.UserId;
 
 @Service

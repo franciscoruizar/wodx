@@ -1,5 +1,7 @@
 package ar.franciscoruiz.accounts.roles.domain;
 
+import ar.franciscoruiz.shared.domain.roles.RoleId;
+
 import java.util.List;
 import java.util.Optional;
 

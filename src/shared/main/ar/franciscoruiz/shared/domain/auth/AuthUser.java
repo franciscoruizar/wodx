@@ -3,7 +3,7 @@ package ar.franciscoruiz.shared.domain.auth;
 public final class AuthUser {
     private final AuthEmail    email;
     private final AuthPassword password;
-    private final Authorities authorities;
+    private final Authorities  authorities;
 
     public AuthUser(AuthEmail email, AuthPassword password, Authorities authorities) {
         this.email       = email;

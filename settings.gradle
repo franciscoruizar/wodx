@@ -6,6 +6,9 @@ project(':accounts').projectDir = new File('src/accounts')
 include ':analytics'
 project(':analytics').projectDir = new File('src/analytics')
 
+include ':authentications'
+project(':authentications').projectDir = new File('src/authentications')
+
 include ':companies'
 project(':companies').projectDir = new File('src/companies')
 
