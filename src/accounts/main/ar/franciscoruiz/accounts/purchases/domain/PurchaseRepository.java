@@ -1,6 +1,6 @@
 package ar.franciscoruiz.accounts.purchases.domain;
 
-import ar.franciscoruiz.shared.domain.criteria.Criteria;
+import ar.franciscoruiz.accounts.companies.domain.CompanyId;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,5 +10,5 @@ public interface PurchaseRepository {
 
     Optional<Purchase> search(PurchaseId id);
 
-    List<Purchase> matching(Criteria criteria);
+    List<Purchase> searchByCompany(CompanyId companyId);
 }

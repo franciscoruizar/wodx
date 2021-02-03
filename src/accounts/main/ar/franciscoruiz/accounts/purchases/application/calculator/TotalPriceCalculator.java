@@ -1,7 +1,7 @@
 package ar.franciscoruiz.accounts.purchases.application.calculator;
 
-import ar.franciscoruiz.accounts.purchases.domain.items.application.PurchaseItemResponse;
-import ar.franciscoruiz.accounts.purchases.domain.items.application.PurchaseItemsResponse;
+import ar.franciscoruiz.accounts.purchase_items.application.PurchaseItemResponse;
+import ar.franciscoruiz.accounts.purchase_items.application.PurchaseItemsResponse;
 
 public final class TotalPriceCalculator {
     private final PurchaseItemsResponse items;

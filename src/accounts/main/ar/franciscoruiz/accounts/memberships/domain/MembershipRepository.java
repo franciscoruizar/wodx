@@ -1,6 +1,6 @@
 package ar.franciscoruiz.accounts.memberships.domain;
 
-import ar.franciscoruiz.shared.domain.criteria.Criteria;
+import ar.franciscoruiz.accounts.companies.domain.CompanyId;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,5 +10,5 @@ public interface MembershipRepository {
 
     Optional<Membership> search(MembershipId id);
 
-    List<Membership> matching(Criteria criteria);
+    List<Membership> findByCompany(CompanyId companyId);
 }

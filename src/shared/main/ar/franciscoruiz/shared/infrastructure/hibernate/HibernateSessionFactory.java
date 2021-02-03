@@ -1,7 +1,6 @@
 package ar.franciscoruiz.shared.infrastructure.hibernate;
 
 import ar.franciscoruiz.shared.domain.Logger;
-import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.config.EnvironmentParameter;
 import org.hibernate.*;
 import org.hibernate.boot.spi.SessionFactoryOptions;
@@ -22,7 +21,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-@Service
 public final class HibernateSessionFactory implements SessionFactory {
     private final SessionFactory sessionFactory;
 

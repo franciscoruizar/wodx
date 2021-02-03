@@ -1,14 +1,25 @@
 package ar.franciscoruiz.accounts.memberships.domain;
 
-public final class Membership {
-    private final String  id;
-    private final String  description;
-    private final Integer numberDaysEnabled;
-    private final Double  price;
-    private final String  companyId;
-    private final Boolean isActive;
+import ar.franciscoruiz.accounts.companies.domain.CompanyId;
 
-    public Membership(String id, String description, Integer numberDaysEnabled, Double price, String companyId, Boolean isActive) {
+import java.util.Objects;
+
+public final class Membership {
+    private final MembershipId                id;
+    private final MembershipDescription       description;
+    private final MembershipNumberDaysEnabled numberDaysEnabled;
+    private final MembershipPrice             price;
+    private final CompanyId                   companyId;
+    private final MembershipIsActive          isActive;
+
+    public Membership(
+        MembershipId id,
+        MembershipDescription description,
+        MembershipNumberDaysEnabled numberDaysEnabled,
+        MembershipPrice price,
+        CompanyId companyId,
+        MembershipIsActive isActive
+    ) {
         this.id                = id;
         this.description       = description;
         this.numberDaysEnabled = numberDaysEnabled;
@@ -17,7 +28,7 @@ public final class Membership {
         this.isActive          = isActive;
     }
 
-    public Membership() {
+    private Membership() {
         this.id                = null;
         this.description       = null;
         this.numberDaysEnabled = null;
@@ -26,27 +37,40 @@ public final class Membership {
         this.isActive          = null;
     }
 
-    public String id() {
-        return this.id;
+    public MembershipId id() {
+        return id;
     }
 
-    public String description() {
-        return this.description;
+    public MembershipDescription description() {
+        return description;
     }
 
-    public Integer numberDaysEnabled() {
-        return this.numberDaysEnabled;
+    public MembershipNumberDaysEnabled numberDaysEnabled() {
+        return numberDaysEnabled;
     }
 
-    public Double price() {
-        return this.price;
+    public MembershipPrice price() {
+        return price;
     }
 
-    public String companyId() {
-        return this.companyId;
+    public CompanyId companyId() {
+        return companyId;
     }
 
-    public Boolean isActive() {
-        return this.isActive;
+    public MembershipIsActive isActive() {
+        return isActive;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Membership that = (Membership) o;
+        return Objects.equals(id, that.id) && Objects.equals(description, that.description) && Objects.equals(numberDaysEnabled, that.numberDaysEnabled) && Objects.equals(price, that.price) && Objects.equals(companyId, that.companyId) && Objects.equals(isActive, that.isActive);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, description, numberDaysEnabled, price, companyId, isActive);
     }
 }

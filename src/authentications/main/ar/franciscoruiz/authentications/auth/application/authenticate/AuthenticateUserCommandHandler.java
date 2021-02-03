@@ -7,9 +7,9 @@ import ar.franciscoruiz.shared.domain.bus.command.CommandHandler;
 
 @Service
 public final class AuthenticateUserCommandHandler implements CommandHandler<AuthenticateUserCommand> {
-    private final UserAuthenticator authenticator;
+    private final AuthUserAuthenticator authenticator;
 
-    public AuthenticateUserCommandHandler(UserAuthenticator authenticator) {
+    public AuthenticateUserCommandHandler(AuthUserAuthenticator authenticator) {
         this.authenticator = authenticator;
     }
 

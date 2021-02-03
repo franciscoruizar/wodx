@@ -1,33 +1,50 @@
 package ar.franciscoruiz.accounts.purchases.domain;
 
+import ar.franciscoruiz.accounts.companies.domain.CompanyId;
+import ar.franciscoruiz.shared.domain.users.UserId;
+
 import java.time.LocalDateTime;
 
 public final class Purchase {
-    private final String        id;
-    private final String        description;
-    private final LocalDateTime date;
-    private final String        userId;
+    private final PurchaseId          id;
+    private final PurchaseDescription description;
+    private final LocalDateTime       date;
+    private final UserId              userId;
+    private final CompanyId           companyId;
 
-    public Purchase(String id, String description, LocalDateTime date, String userId) {
+    public Purchase(PurchaseId id, PurchaseDescription description, LocalDateTime date, UserId userId, CompanyId companyId) {
         this.id          = id;
         this.description = description;
         this.date        = date;
         this.userId      = userId;
+        this.companyId   = companyId;
     }
 
-    public String id() {
-        return this.id;
+    private Purchase() {
+        this.id          = null;
+        this.description = null;
+        this.date        = null;
+        this.userId      = null;
+        this.companyId   = null;
     }
 
-    public String description() {
-        return this.description;
+    public PurchaseId id() {
+        return id;
+    }
+
+    public PurchaseDescription description() {
+        return description;
     }
 
     public LocalDateTime date() {
-        return this.date;
+        return date;
     }
 
-    public String userId() {
-        return this.userId;
+    public UserId userId() {
+        return userId;
+    }
+
+    public CompanyId companyId() {
+        return companyId;
     }
 }

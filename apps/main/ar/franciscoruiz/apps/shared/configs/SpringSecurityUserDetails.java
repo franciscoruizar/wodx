@@ -1,7 +1,7 @@
 package ar.franciscoruiz.apps.shared.configs;
 
-import ar.franciscoruiz.authentications.auth.application.find_by_username.FindUserByUsernameQuery;
-import ar.franciscoruiz.authentications.auth.application.find_by_username.UserDetailsResponse;
+import ar.franciscoruiz.authentications.auth.application.find_by_username.AuthUserDetailsResponse;
+import ar.franciscoruiz.authentications.auth.application.find_by_username.FindAuthUserByUsernameQuery;
 import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
 import org.springframework.security.core.GrantedAuthority;
@@ -24,7 +24,7 @@ public class SpringSecurityUserDetails implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserDetailsResponse user = this.bus.ask(new FindUserByUsernameQuery(username));
+        AuthUserDetailsResponse user = this.bus.ask(new FindAuthUserByUsernameQuery(username));
 
         if (user == null || user.authorities().isEmpty()) {
             throw new UsernameNotFoundException(String.format("the %s username not found", username));

@@ -22,12 +22,12 @@ public final class MembershipResponse implements Response {
 
     public static MembershipResponse fromAggregate(Membership membership) {
         return new MembershipResponse(
-            membership.id(),
-            membership.description(),
-            membership.numberDaysEnabled(),
-            membership.price(),
-            membership.companyId(),
-            membership.isActive()
+            membership.id().value(),
+            membership.description().value(),
+            membership.numberDaysEnabled().value(),
+            membership.price().value(),
+            membership.companyId().value(),
+            membership.isActive().value()
         );
     }
 

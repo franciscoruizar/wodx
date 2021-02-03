@@ -1,8 +1,8 @@
 package ar.franciscoruiz.apps.authentications.backend.controllers.auth;
 
 import ar.franciscoruiz.authentications.auth.application.authenticate.AuthenticateUserCommand;
-import ar.franciscoruiz.authentications.auth.application.find_by_username.FindUserByUsernameQuery;
-import ar.franciscoruiz.authentications.auth.application.find_by_username.UserDetailsResponse;
+import ar.franciscoruiz.authentications.auth.application.find_by_username.AuthUserDetailsResponse;
+import ar.franciscoruiz.authentications.auth.application.find_by_username.FindAuthUserByUsernameQuery;
 import ar.franciscoruiz.shared.domain.auth.AuthEmail;
 import ar.franciscoruiz.shared.domain.auth.AuthPassword;
 import ar.franciscoruiz.shared.domain.auth.AuthUser;
@@ -34,7 +34,7 @@ public final class AuthenticationPostController extends ApiController {
     ) throws CommandHandlerExecutionError {
         dispatch(new AuthenticateUserCommand(request.username(), request.password()));
 
-        UserDetailsResponse userDetailsResponse = ask(new FindUserByUsernameQuery(request.username()));
+        AuthUserDetailsResponse userDetailsResponse = ask(new FindAuthUserByUsernameQuery(request.username()));
 
         var email       = new AuthEmail(userDetailsResponse.username());
         var password    = new AuthPassword(userDetailsResponse.password());

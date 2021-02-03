@@ -6,10 +6,10 @@ import ar.franciscoruiz.shared.domain.Service;
 
 @Service
 public final class MembershipCreator {
-    private final MembershipRepository repository;
+    private final MembershipDomainCreator creator;
 
-    public MembershipCreator(MembershipRepository repository) {
-        this.repository = repository;
+    public MembershipCreator(MembershipDomainCreator creator) {
+        this.creator = creator;
     }
 
     public void create(
@@ -20,8 +20,6 @@ public final class MembershipCreator {
         CompanyId companyId,
         MembershipIsActive isActive
     ) {
-        Membership membership = new Membership(id.value(), description.value(), numberDaysEnabled.value(), price.value(), companyId.value(), isActive.value());
-
-        this.repository.save(membership);
+        this.creator.create(id, description, numberDaysEnabled, price, companyId, isActive);
     }
 }
