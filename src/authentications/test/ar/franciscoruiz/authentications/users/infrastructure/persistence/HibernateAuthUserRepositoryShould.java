@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @Transactional
-class HibernateUserRepositoryShould extends UsersModuleInfrastructureTestCase {
+class HibernateAuthUserRepositoryShould extends UsersModuleInfrastructureTestCase {
     @ParameterizedTest
     @MethodSource("getUsers")
     void create_a_valid_user(User user) {

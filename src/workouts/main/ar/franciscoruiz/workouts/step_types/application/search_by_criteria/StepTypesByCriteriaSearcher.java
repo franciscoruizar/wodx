@@ -1,4 +1,4 @@
-package ar.franciscoruiz.workouts.step_types.search_by_criteria;
+package ar.franciscoruiz.workouts.step_types.application.search_by_criteria;
 
 import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.criteria.Criteria;

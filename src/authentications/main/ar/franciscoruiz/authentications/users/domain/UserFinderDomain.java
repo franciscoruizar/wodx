@@ -5,9 +5,9 @@ import ar.franciscoruiz.shared.domain.users.UserId;
 
 @Service
 public final class UserFinderDomain {
-    private final UserRepository repository;
+    private final AuthUserRepository repository;
 
-    public UserFinderDomain(UserRepository repository) {
+    public UserFinderDomain(AuthUserRepository repository) {
         this.repository = repository;
     }
 

@@ -14,7 +14,7 @@ import java.util.List;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @Transactional
-class HibernateAuthUserRepositoryShould extends AuthModuleInfrastructureTestCase {
+class HibernateAuthAuthUserRepositoryShould extends AuthModuleInfrastructureTestCase {
     @ParameterizedTest
     @MethodSource("getAuthUsers")
     void search_a_non_valid_auth_user(AuthUser authUser) {

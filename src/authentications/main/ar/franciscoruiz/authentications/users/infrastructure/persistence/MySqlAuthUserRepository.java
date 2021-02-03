@@ -1,21 +1,19 @@
 package ar.franciscoruiz.authentications.users.infrastructure.persistence;
 
+import ar.franciscoruiz.authentications.users.domain.AuthUserRepository;
 import ar.franciscoruiz.authentications.users.domain.User;
-import ar.franciscoruiz.authentications.users.domain.UserRepository;
+import ar.franciscoruiz.shared.domain.Logger;
 import ar.franciscoruiz.shared.domain.Service;
+import ar.franciscoruiz.shared.domain.config.EnvironmentParameter;
 import ar.franciscoruiz.shared.domain.users.UserId;
 import ar.franciscoruiz.shared.infrastructure.hibernate.HibernateRepository;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @Service
-@Transactional("authentications-transaction_manager")
-public class MySqlUserRepository extends HibernateRepository<User> implements UserRepository {
-    public MySqlUserRepository(@Qualifier("authentications-session_factory") SessionFactory sessionFactory) {
-        super(sessionFactory, User.class);
+public final class MySqlAuthUserRepository extends HibernateRepository<User> implements AuthUserRepository {
+    public MySqlAuthUserRepository(Logger logger, EnvironmentParameter environmentParameter) {
+        super(logger, environmentParameter, User.class, "authentications");
     }
 
     @Override
