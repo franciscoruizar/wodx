@@ -5,7 +5,6 @@ import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.config.EnvironmentParameter;
 import ar.franciscoruiz.shared.domain.criteria.Criteria;
 import ar.franciscoruiz.shared.infrastructure.hibernate.HibernateRepository;
-import ar.franciscoruiz.workouts.step_types.domain.StepType;
 import ar.franciscoruiz.workouts.steps.domain.Step;
 import ar.franciscoruiz.workouts.steps.domain.StepId;
 import ar.franciscoruiz.workouts.steps.domain.StepRepository;

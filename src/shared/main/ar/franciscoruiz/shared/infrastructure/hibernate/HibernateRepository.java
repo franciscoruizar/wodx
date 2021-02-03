@@ -21,7 +21,7 @@ public abstract class HibernateRepository<T> {
     private         Session                       session;
 
     public HibernateRepository(Logger logger, EnvironmentParameter environmentParameter, Class<T> aggregateClass, String contextName) {
-        this.sessionFactory    = new HibernateConfigurationFactory(logger, environmentParameter, contextName).buildSessionFactory();
+        this.sessionFactory    = new HibernateSessionFactory(logger, environmentParameter, contextName);
         this.aggregateClass    = aggregateClass;
         this.criteriaConverter = new HibernateCriteriaConverter<>(sessionFactory.getCriteriaBuilder());
     }
