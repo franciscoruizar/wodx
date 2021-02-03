@@ -1,7 +1,10 @@
 package ar.franciscoruiz.workouts.workouts.infrastructure.persistence;
 
+import ar.franciscoruiz.shared.domain.Logger;
 import ar.franciscoruiz.shared.domain.Service;
+import ar.franciscoruiz.shared.domain.config.EnvironmentParameter;
 import ar.franciscoruiz.shared.infrastructure.hibernate.HibernateRepository;
+import ar.franciscoruiz.workouts.workout_users.domain.WorkoutUser;
 import ar.franciscoruiz.workouts.workouts.domain.Workout;
 import ar.franciscoruiz.workouts.workouts.domain.WorkoutId;
 import ar.franciscoruiz.workouts.workouts.domain.WorkoutRepository;
@@ -12,10 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Service
-@Transactional("workouts-transaction_manager")
 public final class MySqlWorkoutRepository extends HibernateRepository<Workout> implements WorkoutRepository {
-    public MySqlWorkoutRepository(@Qualifier("workouts-session_factory") SessionFactory sessionFactory) {
-        super(sessionFactory, Workout.class);
+    public MySqlWorkoutRepository(Logger logger, EnvironmentParameter environmentParameter) {
+        super(logger, environmentParameter, Workout.class, "workouts");
     }
 
     @Override

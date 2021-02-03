@@ -1,7 +1,7 @@
 package ar.franciscoruiz.authentications.users;
 
 import ar.franciscoruiz.authentications.users.domain.User;
-import ar.franciscoruiz.authentications.users.domain.UserRepository;
+import ar.franciscoruiz.authentications.users.domain.AuthUserRepository;
 import ar.franciscoruiz.shared.domain.encoder.PasswordEncoder;
 import ar.franciscoruiz.shared.infrastructure.UnitTestCase;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,15 +12,15 @@ import java.util.Optional;
 import static org.mockito.Mockito.*;
 
 public abstract class UsersModuleUnitTestCase extends UnitTestCase {
-    protected UserRepository  repository;
-    protected PasswordEncoder encoder;
+    protected AuthUserRepository repository;
+    protected PasswordEncoder    encoder;
 
     @Override
     @BeforeEach
     protected void setUp() {
         super.setUp();
 
-        repository = mock(UserRepository.class);
+        repository = mock(AuthUserRepository.class);
 
         encoder = mock(PasswordEncoder.class);
     }

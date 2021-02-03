@@ -1,87 +1,52 @@
 package ar.franciscoruiz.shared.infrastructure.hibernate;
 
 import ar.franciscoruiz.shared.domain.Logger;
-import ar.franciscoruiz.shared.domain.Service;
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
-import org.hibernate.cfg.AvailableSettings;
+import ar.franciscoruiz.shared.domain.config.EnvironmentParameter;
+import ar.franciscoruiz.shared.domain.config.ParameterNotExist;
+import org.hibernate.HibernateException;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.cfg.Environment;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.support.ResourcePatternResolver;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
-import org.springframework.transaction.PlatformTransactionManager;
 
-import javax.sql.DataSource;
 import java.io.File;
-import java.nio.charset.StandardCharsets;
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Service
-public final class HibernateConfigurationFactory {
-    private final ResourcePatternResolver resourceResolver;
-    private final Logger                  logger;
+public final class HibernateConfigurationFactory extends Configuration {
+    private final Logger               logger;
+    private final EnvironmentParameter environmentParameter;
+    private final String               contextName;
 
-    public HibernateConfigurationFactory(ResourcePatternResolver resourceResolver, Logger logger) {
-        this.resourceResolver = resourceResolver;
-        this.logger           = logger;
+    public HibernateConfigurationFactory(Logger logger, EnvironmentParameter environmentParameter, String contextName) {
+        this.logger               = logger;
+        this.environmentParameter = environmentParameter;
+        this.contextName          = contextName;
+
+        initConfiguration();
     }
 
-    public PlatformTransactionManager hibernateTransactionManager(LocalSessionFactoryBean sessionFactory) {
-        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
-        transactionManager.setSessionFactory(sessionFactory.getObject());
-
-        return transactionManager;
-    }
-
-    public LocalSessionFactoryBean sessionFactory(String contextName, DataSource dataSource) {
-        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-        sessionFactory.setDataSource(dataSource);
-        sessionFactory.setHibernateProperties(hibernateProperties());
-
-        List<Resource> mappingFiles = searchMappingFiles(contextName);
-
-        sessionFactory.setMappingLocations(mappingFiles.toArray(new Resource[mappingFiles.size()]));
-
-        return sessionFactory;
-    }
-
-    public DataSource dataSource(
-        String contextName,
-        String host,
-        Integer port,
-        String databaseName,
-        String username,
-        String password
-    ) {
-        final String DRIVER = "com.mysql.cj.jdbc.Driver";
-
-        final String URL = String.format(
-            "jdbc:mysql://%s:%s/%s?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
-            host,
-            port,
-            databaseName
-        );
-
-        BasicDataSource dataSource = new BasicDataSource();
-        dataSource.setDriverClassName(DRIVER);
-        dataSource.setUrl(URL);
-        dataSource.setUsername(username);
-        dataSource.setPassword(password);
-
+    private void initConfiguration() {
         try {
-            Resource mysqlResource = resourceResolver.getResource(String.format(
-                "classpath:database/%s.sql",
-                contextName
-            ));
+            List<Resource> mappingFiles = searchMappingFiles(contextName);
 
-            String mysqlSentences = new Scanner(mysqlResource.getInputStream(), StandardCharsets.UTF_8).useDelimiter("\\A").next();
-            dataSource.setConnectionInitSqls(new ArrayList<>(Arrays.asList(mysqlSentences.split(";"))));
-        } catch (Exception exception) {
-            logger.info(exception.getMessage());
+            this.setProperties(hibernateProperties());
+
+            for (Resource resource : mappingFiles) {
+                this.addFile(resource.getFile().getCanonicalFile());
+            }
+
+        } catch (IOException | ParameterNotExist e) {
+            logger.critical(e.getMessage());
+            e.printStackTrace();
         }
+    }
 
-        return dataSource;
+    @Override
+    public SessionFactory buildSessionFactory() throws HibernateException {
+        return super.buildSessionFactory();
     }
 
     private List<Resource> searchMappingFiles(String contextName) {
@@ -130,18 +95,38 @@ public final class HibernateConfigurationFactory {
         return files;
     }
 
-    private Properties hibernateProperties() {
-        Properties hibernateProperties = new Properties();
-
-        hibernateProperties.put(AvailableSettings.HBM2DDL_AUTO, "none");
-        hibernateProperties.put(AvailableSettings.SHOW_SQL, "true");
-        hibernateProperties.put(AvailableSettings.DIALECT, "org.hibernate.dialect.MySQL8Dialect");
-
-        return hibernateProperties;
-    }
-
     private String[] getSourcePackageName() {
         String[] packages = this.getClass().getPackageName().split("\\.");
         return new String[]{packages[0], packages[1], packages[2]};
     }
+
+    private Properties hibernateProperties() throws ParameterNotExist {
+        final String contextNameUpperCase = contextName.toUpperCase(Locale.ROOT);
+        final String HOST                 = environmentParameter.get(String.format("%s_DATABASE_HOST", contextNameUpperCase));
+        final String PORT                 = environmentParameter.get(String.format("%s_DATABASE_PORT", contextNameUpperCase));
+        final String DATABASE_NAME        = environmentParameter.get(String.format("%s_DATABASE_NAME", contextNameUpperCase));
+        final String USER                 = environmentParameter.get(String.format("%s_DATABASE_USER", contextNameUpperCase));
+        final String PASSWORD             = environmentParameter.get(String.format("%s_DATABASE_PASSWORD", contextNameUpperCase));
+
+        final String URL = String.format(
+            "jdbc:mysql://%s:%s/%s?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
+            HOST,
+            PORT,
+            DATABASE_NAME
+        );
+
+        Properties hibernateProperties = new Properties();
+
+        hibernateProperties.put(Environment.DIALECT, "org.hibernate.dialect.MySQL8Dialect");
+        hibernateProperties.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
+        hibernateProperties.put(Environment.URL, URL);
+        hibernateProperties.put(Environment.USER, USER);
+        hibernateProperties.put(Environment.PASS, PASSWORD);
+        hibernateProperties.put(Environment.HBM2DDL_AUTO, "none");
+        hibernateProperties.put(Environment.SHOW_SQL, "true");
+
+        return hibernateProperties;
+    }
+
+
 }

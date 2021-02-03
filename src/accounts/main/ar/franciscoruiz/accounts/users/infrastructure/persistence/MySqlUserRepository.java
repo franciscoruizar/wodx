@@ -1,8 +1,11 @@
 package ar.franciscoruiz.accounts.users.infrastructure.persistence;
 
+import ar.franciscoruiz.accounts.user_memberships.domain.UserMembership;
 import ar.franciscoruiz.accounts.users.domain.User;
 import ar.franciscoruiz.accounts.users.domain.UserRepository;
+import ar.franciscoruiz.shared.domain.Logger;
 import ar.franciscoruiz.shared.domain.Service;
+import ar.franciscoruiz.shared.domain.config.EnvironmentParameter;
 import ar.franciscoruiz.shared.domain.criteria.Criteria;
 import ar.franciscoruiz.shared.domain.users.UserId;
 import ar.franciscoruiz.shared.infrastructure.hibernate.HibernateRepository;
@@ -14,10 +17,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional("accounts-transaction_manager")
 public class MySqlUserRepository extends HibernateRepository<User> implements UserRepository {
-    public MySqlUserRepository(@Qualifier("accounts-session_factory") SessionFactory sessionFactory) {
-        super(sessionFactory, User.class);
+    public MySqlUserRepository(Logger logger, EnvironmentParameter environmentParameter) {
+        super(logger, environmentParameter, User.class, "accounts");
     }
 
     @Override

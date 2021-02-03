@@ -1,6 +1,8 @@
 package ar.franciscoruiz.workouts.exercises.infrastructure.persistence;
 
+import ar.franciscoruiz.shared.domain.Logger;
 import ar.franciscoruiz.shared.domain.Service;
+import ar.franciscoruiz.shared.domain.config.EnvironmentParameter;
 import ar.franciscoruiz.shared.domain.criteria.Criteria;
 import ar.franciscoruiz.shared.infrastructure.hibernate.HibernateRepository;
 import ar.franciscoruiz.workouts.exercises.domain.Exercise;
@@ -14,10 +16,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional("workouts-transaction_manager")
 public final class MySqlExerciseRepository extends HibernateRepository<Exercise> implements ExerciseRepository {
-    public MySqlExerciseRepository(@Qualifier("workouts-session_factory") SessionFactory sessionFactory) {
-        super(sessionFactory, Exercise.class);
+    public MySqlExerciseRepository(Logger logger, EnvironmentParameter environmentParameter) {
+        super(logger, environmentParameter, Exercise.class, "workouts");
     }
 
     @Override

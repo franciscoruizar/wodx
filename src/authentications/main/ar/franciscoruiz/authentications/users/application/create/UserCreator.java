@@ -7,10 +7,10 @@ import ar.franciscoruiz.shared.domain.users.UserId;
 
 @Service
 public final class UserCreator {
-    private final UserRepository   repository;
-    private final UserFinderDomain finder;
+    private final AuthUserRepository repository;
+    private final UserFinderDomain   finder;
 
-    public UserCreator(UserRepository repository, UserFinderDomain finder) {
+    public UserCreator(AuthUserRepository repository, UserFinderDomain finder) {
         this.repository = repository;
         this.finder     = finder;
     }
