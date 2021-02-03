@@ -1,5 +1,6 @@
 package ar.franciscoruiz.accounts.users.infrastructure.persistence;
 
+import ar.franciscoruiz.accounts.user_memberships.domain.UserMembership;
 import ar.franciscoruiz.accounts.users.domain.User;
 import ar.franciscoruiz.accounts.users.domain.UserRepository;
 import ar.franciscoruiz.shared.domain.Logger;

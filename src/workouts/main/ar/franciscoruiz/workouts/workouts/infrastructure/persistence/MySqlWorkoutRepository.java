@@ -4,6 +4,7 @@ import ar.franciscoruiz.shared.domain.Logger;
 import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.config.EnvironmentParameter;
 import ar.franciscoruiz.shared.infrastructure.hibernate.HibernateRepository;
+import ar.franciscoruiz.workouts.workout_users.domain.WorkoutUser;
 import ar.franciscoruiz.workouts.workouts.domain.Workout;
 import ar.franciscoruiz.workouts.workouts.domain.WorkoutId;
 import ar.franciscoruiz.workouts.workouts.domain.WorkoutRepository;
