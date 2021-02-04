@@ -2,12 +2,12 @@ package ar.franciscoruiz.authentications.users.application.password_update;
 
 import ar.franciscoruiz.shared.domain.bus.command.Command;
 
-public final class UpdatePasswordAuthUserCommand implements Command {
+public final class UpdatePasswordUserCommand implements Command {
     private final String id;
     private final String oldPassword;
     private final String newPassword;
 
-    public UpdatePasswordAuthUserCommand(String id, String oldPassword, String newPassword) {
+    public UpdatePasswordUserCommand(String id, String oldPassword, String newPassword) {
         this.id          = id;
         this.oldPassword = oldPassword;
         this.newPassword = newPassword;

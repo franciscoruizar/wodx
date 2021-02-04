@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public final class HibernateConfigurationFactory extends Configuration {
+public final class HibernateConfigurationFactory {
     private final Logger               logger;
     private final EnvironmentParameter environmentParameter;
     private final String               contextName;
@@ -24,29 +24,25 @@ public final class HibernateConfigurationFactory extends Configuration {
         this.logger               = logger;
         this.environmentParameter = environmentParameter;
         this.contextName          = contextName;
-
-        initConfiguration();
     }
 
-    private void initConfiguration() {
+    public SessionFactory buildSessionFactory() throws HibernateException {
+        Configuration configuration = new Configuration();
         try {
             List<Resource> mappingFiles = searchMappingFiles(contextName);
 
-            this.setProperties(hibernateProperties());
+            configuration.setProperties(hibernateProperties());
 
             for (Resource resource : mappingFiles) {
-                this.addFile(resource.getFile().getCanonicalFile());
+                configuration.addFile(resource.getFile().getCanonicalFile());
             }
 
         } catch (IOException | ParameterNotExist e) {
             logger.critical(e.getMessage());
             e.printStackTrace();
         }
-    }
 
-    @Override
-    public SessionFactory buildSessionFactory() throws HibernateException {
-        return super.buildSessionFactory();
+        return configuration.buildSessionFactory();
     }
 
     private List<Resource> searchMappingFiles(String contextName) {

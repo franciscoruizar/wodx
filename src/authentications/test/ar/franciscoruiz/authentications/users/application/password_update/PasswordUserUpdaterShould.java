@@ -4,10 +4,10 @@ import ar.franciscoruiz.authentications.users.UsersModuleUnitTestCase;
 import ar.franciscoruiz.authentications.users.domain.*;
 import org.junit.jupiter.api.Test;
 
-final class PasswordAuthUserUpdaterShould extends UsersModuleUnitTestCase {
+final class PasswordUserUpdaterShould extends UsersModuleUnitTestCase {
     @Test
     void update_password_a_valid_user() {
-        PasswordAuthUserUpdater updater = new PasswordAuthUserUpdater(repository, new UserFinderDomain(repository), encoder);
+        PasswordUserUpdater updater = new PasswordUserUpdater(repository, new UserFinderDomain(repository), encoder);
 
         User user = UserMother.random();
 

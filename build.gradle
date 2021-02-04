@@ -24,6 +24,8 @@ allprojects {
 
         implementation 'org.hibernate:hibernate-core:5.4.9.Final'
         implementation 'org.apache.tomcat:tomcat-dbcp:10.0.0'
+        implementation 'com.sun.xml.bind:jaxb-impl:3.0.0'
+        implementation 'javax.xml.bind:jaxb-api:2.4.0-b180830.0359'
 
         implementation 'com.google.guava:guava:30.1-jre'
         implementation 'org.springframework:spring-context-support:5.3.3'

@@ -1,19 +1,19 @@
 package ar.franciscoruiz.workouts.workouts.infrastructure.persistence;
 
-import ar.franciscoruiz.shared.domain.Logger;
 import ar.franciscoruiz.shared.domain.Service;
-import ar.franciscoruiz.shared.domain.config.EnvironmentParameter;
 import ar.franciscoruiz.shared.infrastructure.hibernate.HibernateRepository;
 import ar.franciscoruiz.workouts.workouts.domain.Workout;
 import ar.franciscoruiz.workouts.workouts.domain.WorkoutId;
 import ar.franciscoruiz.workouts.workouts.domain.WorkoutRepository;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.Optional;
 
 @Service
 public final class MySqlWorkoutRepository extends HibernateRepository<Workout> implements WorkoutRepository {
-    public MySqlWorkoutRepository(Logger logger, EnvironmentParameter environmentParameter) {
-        super(logger, environmentParameter, Workout.class, "workouts");
+    public MySqlWorkoutRepository(@Qualifier("workouts-session_factory") SessionFactory sessionFactory) {
+        super(sessionFactory, Workout.class);
     }
 
     @Override

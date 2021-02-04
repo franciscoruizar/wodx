@@ -6,15 +6,15 @@ import ar.franciscoruiz.shared.domain.bus.command.CommandHandler;
 import ar.franciscoruiz.shared.domain.users.UserId;
 
 @Service
-public final class UpdatePasswordAuthUserCommandHandler implements CommandHandler<UpdatePasswordAuthUserCommand> {
-    private final PasswordAuthUserUpdater creator;
+public final class UpdatePasswordUserCommandHandler implements CommandHandler<UpdatePasswordUserCommand> {
+    private final PasswordUserUpdater creator;
 
-    public UpdatePasswordAuthUserCommandHandler(PasswordAuthUserUpdater creator) {
+    public UpdatePasswordUserCommandHandler(PasswordUserUpdater creator) {
         this.creator = creator;
     }
 
     @Override
-    public void handle(UpdatePasswordAuthUserCommand command) {
+    public void handle(UpdatePasswordUserCommand command) {
         UserId       id          = new UserId(command.id());
         UserPassword oldPassword = new UserPassword(command.oldPassword());
         UserPassword newPassword = new UserPassword(command.newPassword());

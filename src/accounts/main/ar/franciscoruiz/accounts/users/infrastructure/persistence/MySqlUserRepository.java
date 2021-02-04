@@ -2,20 +2,20 @@ package ar.franciscoruiz.accounts.users.infrastructure.persistence;
 
 import ar.franciscoruiz.accounts.users.domain.User;
 import ar.franciscoruiz.accounts.users.domain.UserRepository;
-import ar.franciscoruiz.shared.domain.Logger;
 import ar.franciscoruiz.shared.domain.Service;
-import ar.franciscoruiz.shared.domain.config.EnvironmentParameter;
 import ar.franciscoruiz.shared.domain.criteria.Criteria;
 import ar.franciscoruiz.shared.domain.users.UserId;
 import ar.franciscoruiz.shared.infrastructure.hibernate.HibernateRepository;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class MySqlUserRepository extends HibernateRepository<User> implements UserRepository {
-    public MySqlUserRepository(Logger logger, EnvironmentParameter environmentParameter) {
-        super(logger, environmentParameter, User.class, "accounts");
+    public MySqlUserRepository(@Qualifier("accounts-session_factory") SessionFactory sessionFactory) {
+        super(sessionFactory, User.class);
     }
 
     @Override

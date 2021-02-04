@@ -6,12 +6,12 @@ import ar.franciscoruiz.shared.domain.encoder.PasswordEncoder;
 import ar.franciscoruiz.shared.domain.users.UserId;
 
 @Service
-public final class PasswordAuthUserUpdater {
+public final class PasswordUserUpdater {
     private final AuthUserRepository repository;
     private final UserFinderDomain   userFinder;
     private final PasswordEncoder    encoder;
 
-    public PasswordAuthUserUpdater(AuthUserRepository repository, UserFinderDomain userFinder, PasswordEncoder encoder) {
+    public PasswordUserUpdater(AuthUserRepository repository, UserFinderDomain userFinder, PasswordEncoder encoder) {
         this.repository = repository;
         this.userFinder = userFinder;
         this.encoder    = encoder;
