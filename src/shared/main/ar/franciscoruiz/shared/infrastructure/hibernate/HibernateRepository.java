@@ -2,9 +2,12 @@ package ar.franciscoruiz.shared.infrastructure.hibernate;
 
 import ar.franciscoruiz.shared.domain.Identifier;
 import ar.franciscoruiz.shared.domain.criteria.Criteria;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import javax.persistence.criteria.CriteriaQuery;
+import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,30 +23,54 @@ public abstract class HibernateRepository<T> {
     }
 
     protected void persist(T entity) {
-        sessionFactory.getCurrentSession().saveOrUpdate(entity);
-        sessionFactory.getCurrentSession().flush();
-        sessionFactory.getCurrentSession().clear();
+        Session session = sessionFactory.openSession();
+        session.saveOrUpdate(entity);
+        session.flush();
+        session.clear();
+        session.close();
     }
 
-    protected Optional<T> byId(Identifier id) {
-        return Optional.ofNullable(sessionFactory.getCurrentSession().byId(aggregateClass).load(id));
-    }
-
-    protected Optional<T> byId(String id) {
-        return Optional.ofNullable(sessionFactory.getCurrentSession().byId(aggregateClass).load(id));
+    protected Optional<T> byId(Serializable id) {
+        Session session = sessionFactory.openSession();
+        try {
+            return Optional.ofNullable(session.byId(aggregateClass).load(id));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            session.close();
+        }
+        return Optional.empty();
     }
 
     protected List<T> byCriteria(Criteria criteria) {
-        CriteriaQuery<T> hibernateCriteria = criteriaConverter.convert(criteria, aggregateClass);
+        Session session = sessionFactory.openSession();
+        try{
+            CriteriaQuery<T> hibernateCriteria = criteriaConverter.convert(criteria, aggregateClass);
 
-        return sessionFactory.getCurrentSession().createQuery(hibernateCriteria).getResultList();
+            return session.createQuery(hibernateCriteria).getResultList();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
+        return Collections.emptyList();
     }
 
     protected List<T> all() {
-        CriteriaQuery<T> criteria = sessionFactory.getCriteriaBuilder().createQuery(aggregateClass);
+        Session session = sessionFactory.openSession();
+        try{
+            CriteriaQuery<T> criteria = sessionFactory.getCriteriaBuilder().createQuery(aggregateClass);
 
-        criteria.from(aggregateClass);
+            criteria.from(aggregateClass);
 
-        return sessionFactory.getCurrentSession().createQuery(criteria).getResultList();
+            return session.createQuery(criteria).getResultList();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
+        return Collections.emptyList();
+
     }
 }

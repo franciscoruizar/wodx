@@ -5,10 +5,10 @@ import ar.franciscoruiz.shared.domain.auth.AuthUser;
 import ar.franciscoruiz.shared.domain.auth.AuthUserMother;
 import org.junit.jupiter.api.Test;
 
-final class AuthUserByUsernameFinderShould extends AuthModuleUnitTestCase {
+final class AuthUserByEmailFinderShould extends AuthModuleUnitTestCase {
     @Test
     void find_a_valid_user() {
-        AuthUserByUsernameFinder finder = new AuthUserByUsernameFinder(repository);
+        AuthUserByEmailFinder finder = new AuthUserByEmailFinder(repository);
 
         AuthUser user = AuthUserMother.random();
 

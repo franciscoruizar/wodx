@@ -5,18 +5,18 @@ import ar.franciscoruiz.shared.domain.bus.query.Response;
 import java.util.List;
 
 public final class AuthUserDetailsResponse implements Response {
-    private final String       username;
+    private final String       email;
     private final String       password;
     private final List<String> authorities;
 
-    public AuthUserDetailsResponse(String username, String password, List<String> authorities) {
-        this.username    = username;
+    public AuthUserDetailsResponse(String email, String password, List<String> authorities) {
+        this.email       = email;
         this.password    = password;
         this.authorities = authorities;
     }
 
-    public String username() {
-        return this.username;
+    public String email() {
+        return this.email;
     }
 
     public String password() {

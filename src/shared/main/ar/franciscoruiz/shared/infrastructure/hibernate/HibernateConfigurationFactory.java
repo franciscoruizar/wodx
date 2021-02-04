@@ -120,6 +120,7 @@ public final class HibernateConfigurationFactory {
         hibernateProperties.put(Environment.PASS, PASSWORD);
         hibernateProperties.put(Environment.HBM2DDL_AUTO, "none");
         hibernateProperties.put(Environment.SHOW_SQL, "true");
+        hibernateProperties.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
 
         return hibernateProperties;
     }

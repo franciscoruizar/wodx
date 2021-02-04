@@ -8,6 +8,7 @@ import ar.franciscoruiz.accounts.purchases.domain.PurchaseRepository;
 import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.users.UserId;
 import ar.franciscoruiz.shared.infrastructure.hibernate.HibernateRepository;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -35,10 +36,14 @@ public final class MySqlPurchaseRepository extends HibernateRepository<Purchase>
 
     @Override
     public List<Purchase> searchByCompany(CompanyId companyId) {
-        String sql   = String.format("SELECT id, description, date, user_id, company_id FROM purchases WHERE company_id = '%s'", companyId.value());
-        Query  query = sessionFactory.getCurrentSession().createNativeQuery(sql);
+        Session session = sessionFactory.openSession();
+
+        String  sql     = String.format("SELECT id, description, date, user_id, company_id FROM purchases WHERE company_id = '%s'", companyId.value());
+        Query  query = session.createNativeQuery(sql);
 
         List<Object[]> result = query.getResultList();
+
+        session.close();
 
         return result.stream().map(objects -> new Purchase(
             new PurchaseId((String) objects[0]),

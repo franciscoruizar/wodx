@@ -2,7 +2,7 @@ package ar.franciscoruiz.apps.authentications.backend.controllers.auth;
 
 import ar.franciscoruiz.authentications.auth.application.authenticate.AuthenticateUserCommand;
 import ar.franciscoruiz.authentications.auth.application.find_by_username.AuthUserDetailsResponse;
-import ar.franciscoruiz.authentications.auth.application.find_by_username.FindAuthUserByUsernameQuery;
+import ar.franciscoruiz.authentications.auth.application.find_by_username.FindAuthUserByEmailQuery;
 import ar.franciscoruiz.shared.domain.auth.AuthEmail;
 import ar.franciscoruiz.shared.domain.auth.AuthPassword;
 import ar.franciscoruiz.shared.domain.auth.AuthUser;
@@ -30,13 +30,13 @@ public final class AuthenticationPostController extends ApiController {
 
     @PostMapping(value = "/auth")
     public HashMap<String, Serializable> index(
-        @RequestBody AuthRequest request
+        @RequestBody Request request
     ) throws CommandHandlerExecutionError {
-        dispatch(new AuthenticateUserCommand(request.username(), request.password()));
+        dispatch(new AuthenticateUserCommand(request.email(), request.password()));
 
-        AuthUserDetailsResponse userDetailsResponse = ask(new FindAuthUserByUsernameQuery(request.username()));
+        AuthUserDetailsResponse userDetailsResponse = ask(new FindAuthUserByEmailQuery(request.email()));
 
-        var email       = new AuthEmail(userDetailsResponse.username());
+        var email       = new AuthEmail(userDetailsResponse.email());
         var password    = new AuthPassword(userDetailsResponse.password());
         var authorities = new Authorities(userDetailsResponse.authorities());
 
@@ -46,25 +46,27 @@ public final class AuthenticationPostController extends ApiController {
             put("jwt", jwt);
         }};
     }
+
+    static class Request {
+        private String email;
+        private String password;
+
+        public String email() {
+            return this.email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        public String password() {
+            return this.password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+    }
 }
 
-class AuthRequest {
-    private String username;
-    private String password;
 
-    public String username() {
-        return this.username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String password() {
-        return this.password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-}

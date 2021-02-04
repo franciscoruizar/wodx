@@ -8,10 +8,10 @@ import ar.franciscoruiz.shared.domain.auth.AuthEmail;
 import ar.franciscoruiz.shared.domain.auth.AuthUser;
 
 @Service
-public final class AuthUserByUsernameFinder {
+public final class AuthUserByEmailFinder {
     private final AuthRepository repository;
 
-    public AuthUserByUsernameFinder(AuthRepository repository) {
+    public AuthUserByEmailFinder(AuthRepository repository) {
         this.repository = repository;
     }
 

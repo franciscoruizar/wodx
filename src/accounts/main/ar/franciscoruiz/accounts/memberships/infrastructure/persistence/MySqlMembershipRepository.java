@@ -4,6 +4,7 @@ import ar.franciscoruiz.accounts.companies.domain.CompanyId;
 import ar.franciscoruiz.accounts.memberships.domain.*;
 import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.infrastructure.hibernate.HibernateRepository;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -30,10 +31,14 @@ public final class MySqlMembershipRepository extends HibernateRepository<Members
 
     @Override
     public List<Membership> findByCompany(CompanyId companyId) {
-        String sql   = String.format("SELECT id, description, number_days_enabled, price, company_id, is_active FROM memberships WHERE company_id = '%s'", companyId.value());
-        Query  query = sessionFactory.getCurrentSession().createNativeQuery(sql);
+        Session session = sessionFactory.openSession();
+
+        String  sql     = String.format("SELECT id, description, number_days_enabled, price, company_id, is_active FROM memberships WHERE company_id = '%s'", companyId.value());
+        Query  query = session.createNativeQuery(sql);
 
         List<Object[]> result = query.getResultList();
+
+        session.close();
 
         return result.stream().map(objects -> new Membership(
             new MembershipId((String) objects[0]),

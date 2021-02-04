@@ -7,6 +7,7 @@ import ar.franciscoruiz.shared.domain.auth.AuthPassword;
 import ar.franciscoruiz.shared.domain.auth.AuthUser;
 import ar.franciscoruiz.shared.domain.auth.Authorities;
 import ar.franciscoruiz.shared.infrastructure.hibernate.HibernateRepository;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -22,15 +23,18 @@ public final class MySqlAuthRepository extends HibernateRepository<AuthUser> imp
 
     @Override
     public Optional<AuthUser> search(AuthEmail email) {
-        String sql   = String.format("SELECT email, password, role_id FROM users WHERE email='%s'", email.value());
-        Query  query = sessionFactory.getCurrentSession().createNativeQuery(sql);
+        Session session = sessionFactory.openSession();
+        String  sql     = String.format("SELECT email, password, role_id FROM users WHERE email='%s'", email.value());
+        Query  query = session.createNativeQuery(sql);
 
         List<Object[]> result = query.getResultList();
 
         String sqlRole   = String.format("SELECT description FROM roles WHERE id='%s'", result.get(0)[2]);
-        Query  queryRole = sessionFactory.getCurrentSession().createNativeQuery(sqlRole);
+        Query  queryRole = session.createNativeQuery(sqlRole);
 
         List<String> resultRoles = queryRole.getResultList();
+
+        session.close();
 
         return Optional.of(new AuthUser(
             new AuthEmail((String) result.get(0)[0]),
