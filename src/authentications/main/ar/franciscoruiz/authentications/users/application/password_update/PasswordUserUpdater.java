@@ -34,6 +34,10 @@ public final class PasswordUserUpdater {
     private void ensureOldPassword(User user, UserPassword oldPassword) {
         boolean match = this.encoder.matches(oldPassword.value(), user.password().value());
 
+        if (oldPassword.value().equals("") && user.password().value().equals("")){
+            match = true;
+        }
+
         if (!match) {
             throw new InvalidOldCredential(oldPassword);
         }

@@ -1,6 +1,6 @@
 package ar.franciscoruiz.apps.authentications.backend.controllers.users;
 
-import ar.franciscoruiz.authentications.users.application.register.RegistryUserCommand;
+import ar.franciscoruiz.authentications.users.application.register.RegisterUserCommand;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.command.CommandHandlerExecutionError;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.UUID;
 
 @RestController
 public final class UserPostController extends ApiController {
@@ -21,13 +23,13 @@ public final class UserPostController extends ApiController {
     public ResponseEntity<String> index(
         @RequestBody Request request
     ) throws CommandHandlerExecutionError {
-        dispatch(new RegistryUserCommand(
+        dispatch(new RegisterUserCommand(
             request.id(),
             request.name(),
             request.surname(),
             request.email(),
             request.phone(),
-            request.phone()
+            request.roleId()
         ));
 
         return new ResponseEntity<>(HttpStatus.CREATED);

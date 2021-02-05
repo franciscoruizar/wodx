@@ -2,7 +2,7 @@ package ar.franciscoruiz.authentications.users.application.register;
 
 import ar.franciscoruiz.shared.domain.bus.command.Command;
 
-public final class RegistryUserCommand implements Command {
+public final class RegisterUserCommand implements Command {
     private final String id;
     private final String name;
     private final String surname;
@@ -10,7 +10,7 @@ public final class RegistryUserCommand implements Command {
     private final String phone;
     private final String roleId;
 
-    public RegistryUserCommand(
+    public RegisterUserCommand(
         String id,
         String name,
         String surname,

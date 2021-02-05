@@ -10,15 +10,15 @@ import ar.franciscoruiz.shared.domain.roles.RoleId;
 import ar.franciscoruiz.shared.domain.users.UserId;
 
 @Service
-public final class RegistryUserCommandHandler implements CommandHandler<RegistryUserCommand> {
+public final class RegisterUserCommandHandler implements CommandHandler<RegisterUserCommand> {
     private final UserRegister creator;
 
-    public RegistryUserCommandHandler(UserRegister creator) {
+    public RegisterUserCommandHandler(UserRegister creator) {
         this.creator = creator;
     }
 
     @Override
-    public void handle(RegistryUserCommand command) {
+    public void handle(RegisterUserCommand command) {
         UserId      id      = new UserId(command.id());
         UserName    name    = new UserName(command.name());
         UserSurname surname = new UserSurname(command.surname());

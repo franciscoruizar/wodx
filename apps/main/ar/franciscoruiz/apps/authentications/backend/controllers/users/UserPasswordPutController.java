@@ -22,7 +22,7 @@ public final class UserPasswordPutController extends ApiController {
         @RequestBody Request request
     ) throws CommandHandlerExecutionError {
         dispatch(new UpdatePasswordUserCommand(
-            request.id(),
+            request.userId(),
             request.oldPassword(),
             request.newPassword()
         ));
@@ -31,16 +31,16 @@ public final class UserPasswordPutController extends ApiController {
     }
 
     static class Request {
-        private String id;
+        private String userId;
         private String oldPassword;
         private String newPassword;
 
-        public String id() {
-            return id;
+        public String userId() {
+            return userId;
         }
 
-        public void setId(String id) {
-            this.id = id;
+        public void setUserId(String userId) {
+            this.userId = userId;
         }
 
         public String oldPassword() {

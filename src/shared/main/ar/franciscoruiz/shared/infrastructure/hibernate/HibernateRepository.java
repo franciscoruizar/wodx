@@ -4,6 +4,7 @@ import ar.franciscoruiz.shared.domain.Identifier;
 import ar.franciscoruiz.shared.domain.criteria.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import javax.persistence.criteria.CriteriaQuery;
 import java.io.Serializable;
@@ -24,10 +25,16 @@ public abstract class HibernateRepository<T> {
 
     protected void persist(T entity) {
         Session session = sessionFactory.openSession();
-        session.saveOrUpdate(entity);
-        session.flush();
-        session.clear();
-        session.close();
+        Transaction transaction = session.beginTransaction();
+        try{
+            session.saveOrUpdate(entity);
+            transaction.commit();
+        }catch (Exception e){
+            transaction.rollback();
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
     }
 
     protected Optional<T> byId(Serializable id) {

@@ -15,10 +15,10 @@ public final class UpdatePasswordUserCommandHandler implements CommandHandler<Up
 
     @Override
     public void handle(UpdatePasswordUserCommand command) {
-        UserId       id          = new UserId(command.id());
+        UserId       userId      = new UserId(command.userId());
         UserPassword oldPassword = new UserPassword(command.oldPassword());
         UserPassword newPassword = new UserPassword(command.newPassword());
 
-        this.creator.update(id, oldPassword, newPassword);
+        this.creator.update(userId, oldPassword, newPassword);
     }
 }

@@ -30,7 +30,7 @@
         </component>
 
         <component name="isActive" class="ar.franciscoruiz.authentications.users.domain.UserIsActive" access="field">
-            <property name="value" column="is_active" type="java.lang.String" access="field"/>
+            <property name="value" column="is_active" type="java.lang.Boolean" access="field"/>
         </component>
 
         <component name="roleId" class="ar.franciscoruiz.shared.domain.roles.RoleId" access="field">

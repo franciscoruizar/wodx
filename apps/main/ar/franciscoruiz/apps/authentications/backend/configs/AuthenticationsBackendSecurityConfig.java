@@ -22,7 +22,7 @@ public class AuthenticationsBackendSecurityConfig extends SpringWebSecurityConfi
             .csrf()
             .disable()
             .authorizeRequests()
-            .antMatchers("/auth")
+            .antMatchers("/auth", "/users", "/users/password")
             .permitAll()
             .anyRequest()
             .authenticated()
