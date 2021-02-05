@@ -22,9 +22,9 @@ public final class PurchasesGetController extends ApiController {
         super(queryBus, commandBus);
     }
 
-    @GetMapping(value = "/purchases/company/{id}")
-    public List<HashMap<String, Object>> index(@PathVariable String id) throws QueryHandlerExecutionError {
-        PurchasesResponse response = ask(new SearchPurchaseByCompanyQuery(id));
+    @GetMapping(value = "/purchases", params = "companyId")
+    public List<HashMap<String, Object>> index(@RequestParam String companyId) throws QueryHandlerExecutionError {
+        PurchasesResponse response = ask(new SearchPurchaseByCompanyQuery(companyId));
 
         return response.values().stream().map(purchase -> new HashMap<String, Object>() {{
             put("id", purchase.id());

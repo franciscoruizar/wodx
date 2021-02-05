@@ -31,7 +31,7 @@ public final class UserMembershipCreator {
 
         LocalDate dateTo = dateFrom.plusDays(membership.numberDaysEnabled());
 
-        UserMembership userMembership = new UserMembership(id.value(), dateFrom, dateTo, membershipId.value(), userId.value());
+        UserMembership userMembership = new UserMembership(id, dateFrom, dateTo, membershipId, userId);
 
         this.repository.save(userMembership);
     }

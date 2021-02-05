@@ -22,11 +22,11 @@ public final class UserMembershipResponse implements Response {
 
     public static UserMembershipResponse fromAggregate(UserMembership userMembership) {
         return new UserMembershipResponse(
-            userMembership.id(),
+            userMembership.id().value(),
             userMembership.dateFrom(),
             userMembership.dateFrom(),
-            userMembership.membershipId(),
-            userMembership.userId()
+            userMembership.membershipId().value(),
+            userMembership.userId().value()
         );
     }
 

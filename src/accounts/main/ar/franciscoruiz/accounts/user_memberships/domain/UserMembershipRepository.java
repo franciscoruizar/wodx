@@ -1,6 +1,7 @@
 package ar.franciscoruiz.accounts.user_memberships.domain;
 
-import ar.franciscoruiz.shared.domain.criteria.Criteria;
+import ar.franciscoruiz.accounts.memberships.domain.MembershipId;
+import ar.franciscoruiz.shared.domain.users.UserId;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,5 +11,7 @@ public interface UserMembershipRepository {
 
     Optional<UserMembership> search(UserMembershipId id);
 
-    List<UserMembership> matching(Criteria criteria);
+    List<UserMembership> searchByUser(UserId userId);
+
+    List<UserMembership> searchByMembership(MembershipId membershipId);
 }

@@ -1,7 +1,6 @@
 package ar.franciscoruiz.apps.accounts.backend.controllers.companies;
 
 import ar.franciscoruiz.accounts.companies.application.create.CreateCompanyCommand;
-import ar.franciscoruiz.apps.accounts.backend.controllers.companies.shared.dto.CompanyRequest;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.command.CommandHandlerExecutionError;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
@@ -25,7 +24,7 @@ public final class CompanyPutController extends ApiController {
     @PutMapping(value = "/companies/{id}")
     public ResponseEntity<String> index(
         @PathVariable String id,
-        @RequestBody CompanyRequest request
+        @RequestBody Request request
     ) throws CommandHandlerExecutionError {
         dispatch(
             new CreateCompanyCommand(
@@ -39,5 +38,53 @@ public final class CompanyPutController extends ApiController {
         );
 
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    static class Request {
+        private String  description;
+        private String  mediaUrl;
+        private Double  latitude;
+        private Double  longitude;
+        private boolean isActive;
+
+        public String description() {
+            return this.description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public String mediaUrl() {
+            return this.mediaUrl;
+        }
+
+        public void setMediaUrl(String mediaUrl) {
+            this.mediaUrl = mediaUrl;
+        }
+
+        public Double latitude() {
+            return this.latitude;
+        }
+
+        public void setLatitude(Double latitude) {
+            this.latitude = latitude;
+        }
+
+        public Double longitude() {
+            return this.longitude;
+        }
+
+        public void setLongitude(Double longitude) {
+            this.longitude = longitude;
+        }
+
+        public Boolean isActive() {
+            return this.isActive;
+        }
+
+        public void setActive(Boolean active) {
+            isActive = active;
+        }
     }
 }

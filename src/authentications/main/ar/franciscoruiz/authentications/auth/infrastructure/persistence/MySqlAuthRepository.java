@@ -25,7 +25,7 @@ public final class MySqlAuthRepository extends HibernateRepository<AuthUser> imp
     public Optional<AuthUser> search(AuthEmail email) {
         Session session = sessionFactory.openSession();
         String  sql     = String.format("SELECT email, password, role_id FROM users WHERE email='%s'", email.value());
-        Query  query = session.createNativeQuery(sql);
+        Query   query   = session.createNativeQuery(sql);
 
         List<Object[]> result = query.getResultList();
 

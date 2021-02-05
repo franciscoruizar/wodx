@@ -20,7 +20,7 @@ public class MySqlUserRepository extends HibernateRepository<User> implements Us
 
     @Override
     public Optional<User> search(UserId id) {
-        return Optional.ofNullable(sessionFactory.getCurrentSession().byId(aggregateClass).load(id.value()));
+        return byId(id.value());
     }
 
     @Override

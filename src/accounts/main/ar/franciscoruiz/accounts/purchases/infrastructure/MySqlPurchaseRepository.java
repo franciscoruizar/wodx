@@ -38,7 +38,7 @@ public final class MySqlPurchaseRepository extends HibernateRepository<Purchase>
     public List<Purchase> searchByCompany(CompanyId companyId) {
         Session session = sessionFactory.openSession();
 
-        String  sql     = String.format("SELECT id, description, date, user_id, company_id FROM purchases WHERE company_id = '%s'", companyId.value());
+        String sql   = String.format("SELECT id, description, date, user_id, company_id FROM purchases WHERE company_id = '%s'", companyId.value());
         Query  query = session.createNativeQuery(sql);
 
         List<Object[]> result = query.getResultList();

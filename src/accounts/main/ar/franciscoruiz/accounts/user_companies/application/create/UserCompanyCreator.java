@@ -16,7 +16,7 @@ public final class UserCompanyCreator {
     }
 
     public void crate(UserCompanyId id, UserId userId, CompanyId companyId) {
-        UserCompany userCompany = new UserCompany(id.value(), userId.value(), companyId.value());
+        UserCompany userCompany = new UserCompany(id, userId, companyId);
 
         this.repository.save(userCompany);
     }

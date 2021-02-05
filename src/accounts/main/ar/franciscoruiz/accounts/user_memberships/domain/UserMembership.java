@@ -1,21 +1,19 @@
 package ar.franciscoruiz.accounts.user_memberships.domain;
 
+import ar.franciscoruiz.accounts.memberships.domain.MembershipId;
+import ar.franciscoruiz.shared.domain.users.UserId;
+
 import java.time.LocalDate;
+import java.util.Objects;
 
 public final class UserMembership {
-    private final String    id;
-    private final LocalDate dateFrom;
-    private final LocalDate dateTo;
-    private final String    membershipId;
-    private final String    userId;
+    private final UserMembershipId id;
+    private final LocalDate        dateFrom;
+    private final LocalDate        dateTo;
+    private final MembershipId     membershipId;
+    private final UserId           userId;
 
-    public UserMembership(
-        String id,
-        LocalDate dateFrom,
-        LocalDate dateTo,
-        String membershipId,
-        String userId
-    ) {
+    public UserMembership(UserMembershipId id, LocalDate dateFrom, LocalDate dateTo, MembershipId membershipId, UserId userId) {
         this.id           = id;
         this.dateFrom     = dateFrom;
         this.dateTo       = dateTo;
@@ -23,31 +21,36 @@ public final class UserMembership {
         this.userId       = userId;
     }
 
-    public UserMembership() {
-        this.id           = null;
-        this.dateFrom     = null;
-        this.dateTo       = null;
-        this.membershipId = null;
-        this.userId       = null;
-    }
-
-    public String id() {
-        return this.id;
+    public UserMembershipId id() {
+        return id;
     }
 
     public LocalDate dateFrom() {
-        return this.dateFrom;
+        return dateFrom;
     }
 
     public LocalDate dateTo() {
-        return this.dateTo;
+        return dateTo;
     }
 
-    public String membershipId() {
-        return this.membershipId;
+    public MembershipId membershipId() {
+        return membershipId;
     }
 
-    public String userId() {
-        return this.userId;
+    public UserId userId() {
+        return userId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserMembership that = (UserMembership) o;
+        return Objects.equals(id, that.id) && Objects.equals(dateFrom, that.dateFrom) && Objects.equals(dateTo, that.dateTo) && Objects.equals(membershipId, that.membershipId) && Objects.equals(userId, that.userId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, dateFrom, dateTo, membershipId, userId);
     }
 }

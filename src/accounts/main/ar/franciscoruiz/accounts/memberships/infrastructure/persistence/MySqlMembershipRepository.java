@@ -26,14 +26,14 @@ public final class MySqlMembershipRepository extends HibernateRepository<Members
 
     @Override
     public Optional<Membership> search(MembershipId id) {
-        return byId(id.value());
+        return byId(id);
     }
 
     @Override
     public List<Membership> findByCompany(CompanyId companyId) {
         Session session = sessionFactory.openSession();
 
-        String  sql     = String.format("SELECT id, description, number_days_enabled, price, company_id, is_active FROM memberships WHERE company_id = '%s'", companyId.value());
+        String sql   = String.format("SELECT id, description, number_days_enabled, price, company_id, is_active FROM memberships WHERE company_id = '%s'", companyId.value());
         Query  query = session.createNativeQuery(sql);
 
         List<Object[]> result = query.getResultList();
@@ -44,7 +44,7 @@ public final class MySqlMembershipRepository extends HibernateRepository<Members
             new MembershipId((String) objects[0]),
             new MembershipDescription((String) objects[1]),
             new MembershipNumberDaysEnabled((Integer) objects[2]),
-            new MembershipPrice((Double) objects[3]),
+            new MembershipPrice(Double.valueOf(String.valueOf(objects[3]))),
             new CompanyId((String) objects[4]),
             new MembershipIsActive((Boolean) objects[5])
         )).collect(Collectors.toList());

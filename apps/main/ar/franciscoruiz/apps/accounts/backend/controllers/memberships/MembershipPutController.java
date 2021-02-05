@@ -1,7 +1,6 @@
 package ar.franciscoruiz.apps.accounts.backend.controllers.memberships;
 
 import ar.franciscoruiz.accounts.memberships.application.create.CreateMembershipCommand;
-import ar.franciscoruiz.apps.accounts.backend.controllers.memberships.dto.MembershipRequest;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.command.CommandHandlerExecutionError;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
@@ -25,7 +24,7 @@ public final class MembershipPutController extends ApiController {
     @PutMapping(value = "/memberships/{id}")
     public ResponseEntity<String> index(
         @PathVariable String id,
-        @RequestBody MembershipRequest request
+        @RequestBody Request request
     ) throws CommandHandlerExecutionError {
         dispatch(
             new CreateMembershipCommand(
@@ -39,5 +38,53 @@ public final class MembershipPutController extends ApiController {
         );
 
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    static class Request {
+        private String  description;
+        private Integer numberDaysEnabled;
+        private Double  price;
+        private String  companyId;
+        private boolean isActive;
+
+        public String description() {
+            return this.description;
+        }
+
+        public Integer numberDaysEnabled() {
+            return this.numberDaysEnabled;
+        }
+
+        public Double price() {
+            return this.price;
+        }
+
+        public String companyId() {
+            return this.companyId;
+        }
+
+        public boolean isActive() {
+            return this.isActive;
+        }
+
+        public void setActive(boolean active) {
+            isActive = active;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public void setNumberDaysEnabled(Integer numberDaysEnabled) {
+            this.numberDaysEnabled = numberDaysEnabled;
+        }
+
+        public void setPrice(Double price) {
+            this.price = price;
+        }
+
+        public void setCompanyId(String companyId) {
+            this.companyId = companyId;
+        }
     }
 }

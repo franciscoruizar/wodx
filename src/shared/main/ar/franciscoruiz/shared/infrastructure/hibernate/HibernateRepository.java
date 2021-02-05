@@ -7,7 +7,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import javax.persistence.criteria.CriteriaQuery;
-import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -24,27 +23,38 @@ public abstract class HibernateRepository<T> {
     }
 
     protected void persist(T entity) {
-        Session session = sessionFactory.openSession();
+        Session     session     = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        try{
+        try {
             session.saveOrUpdate(entity);
             transaction.commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             transaction.rollback();
             e.printStackTrace();
-        }finally {
+        } finally {
             session.close();
         }
     }
 
-    protected Optional<T> byId(Serializable id) {
+    protected Optional<T> byId(String id) {
         Session session = sessionFactory.openSession();
         try {
             return Optional.ofNullable(session.byId(aggregateClass).load(id));
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            session.close();
         }
-        finally {
+        return Optional.empty();
+    }
+
+    protected Optional<T> byId(Identifier id) {
+        Session session = sessionFactory.openSession();
+        try {
+            return Optional.ofNullable(session.byId(aggregateClass).load(id));
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
             session.close();
         }
         return Optional.empty();
@@ -52,13 +62,13 @@ public abstract class HibernateRepository<T> {
 
     protected List<T> byCriteria(Criteria criteria) {
         Session session = sessionFactory.openSession();
-        try{
+        try {
             CriteriaQuery<T> hibernateCriteria = criteriaConverter.convert(criteria, aggregateClass);
 
             return session.createQuery(hibernateCriteria).getResultList();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             session.close();
         }
         return Collections.emptyList();
@@ -66,18 +76,17 @@ public abstract class HibernateRepository<T> {
 
     protected List<T> all() {
         Session session = sessionFactory.openSession();
-        try{
+        try {
             CriteriaQuery<T> criteria = sessionFactory.getCriteriaBuilder().createQuery(aggregateClass);
 
             criteria.from(aggregateClass);
 
             return session.createQuery(criteria).getResultList();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             session.close();
         }
         return Collections.emptyList();
-
     }
 }

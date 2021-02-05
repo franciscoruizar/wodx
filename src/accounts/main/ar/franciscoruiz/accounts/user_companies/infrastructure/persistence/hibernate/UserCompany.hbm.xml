@@ -5,10 +5,16 @@
 
 <hibernate-mapping>
     <class name="ar.franciscoruiz.accounts.user_companies.domain.UserCompany" table="user_companies">
-        <id name="id" column="id" access="field" length="36"/>
+        <composite-id name="id" class="ar.franciscoruiz.accounts.user_companies.domain.UserCompanyId" access="field">
+            <key-property column="id" name="value" length="36" access="field"/>
+        </composite-id>
 
-        <property name="userId" column="user_id" type="java.lang.String" access="field" length="36"/>
+        <component name="userId" class="ar.franciscoruiz.shared.domain.users.UserId" access="field">
+            <property column="user_id" name="value" length="36" access="field"/>
+        </component>
 
-        <property name="companyId" column="company_id" type="java.lang.String" access="field" length="36"/>
+        <component name="companyId" class="ar.franciscoruiz.accounts.companies.domain.CompanyId" access="field">
+            <property column="company_id" name="value" length="36" access="field"/>
+        </component>
     </class>
 </hibernate-mapping>
