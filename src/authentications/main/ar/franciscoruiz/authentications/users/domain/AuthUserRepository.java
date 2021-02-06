@@ -7,5 +7,7 @@ import java.util.Optional;
 public interface AuthUserRepository {
     void save(User user);
 
+    Optional<User> search(UserEmail email);
+
     Optional<User> search(UserId id);
 }
