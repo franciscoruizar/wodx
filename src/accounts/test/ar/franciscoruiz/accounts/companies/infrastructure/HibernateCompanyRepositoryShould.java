@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Optional;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@Transactional
 class HibernateCompanyRepositoryShould extends CompaniesModuleInfrastructureTestCase {
     @ParameterizedTest
     @MethodSource("getCompanies")

@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.List;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@Transactional
 class HibernateAuthUserRepositoryShould extends AuthModuleInfrastructureTestCase {
     @ParameterizedTest
     @MethodSource("getAuthUsers")

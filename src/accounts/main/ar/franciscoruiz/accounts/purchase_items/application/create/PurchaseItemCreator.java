@@ -2,6 +2,7 @@ package ar.franciscoruiz.accounts.purchase_items.application.create;
 
 import ar.franciscoruiz.accounts.memberships.domain.MembershipDomainFinder;
 import ar.franciscoruiz.accounts.memberships.domain.MembershipId;
+import ar.franciscoruiz.accounts.memberships.domain.MembershipRepository;
 import ar.franciscoruiz.accounts.purchase_items.domain.PurchaseItem;
 import ar.franciscoruiz.accounts.purchase_items.domain.PurchaseItemId;
 import ar.franciscoruiz.accounts.purchase_items.domain.PurchaseItemQuantity;
@@ -14,9 +15,9 @@ public final class PurchaseItemCreator {
     private final PurchaseItemRepository repository;
     private final MembershipDomainFinder finder;
 
-    public PurchaseItemCreator(PurchaseItemRepository repository, MembershipDomainFinder finder) {
+    public PurchaseItemCreator(PurchaseItemRepository repository, MembershipRepository membershipRepository) {
         this.repository = repository;
-        this.finder     = finder;
+        this.finder     = new MembershipDomainFinder(membershipRepository);
     }
 
     public void create(
