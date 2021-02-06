@@ -6,16 +6,16 @@ import ar.franciscoruiz.shared.domain.bus.query.QueryHandler;
 
 @Service
 public final class FindAuthUserByEmailQueryHandler implements QueryHandler<FindAuthUserByEmailQuery, AuthUserDetailsResponse> {
-    private final AuthUserByEmailFinder authenticator;
+    private final AuthUserByEmailFinder finder;
 
-    public FindAuthUserByEmailQueryHandler(AuthUserByEmailFinder authenticator) {
-        this.authenticator = authenticator;
+    public FindAuthUserByEmailQueryHandler(AuthUserByEmailFinder finder) {
+        this.finder = finder;
     }
 
     @Override
     public AuthUserDetailsResponse handle(FindAuthUserByEmailQuery command) {
         AuthEmail email = new AuthEmail(command.email());
 
-        return authenticator.find(email);
+        return finder.find(email);
     }
 }

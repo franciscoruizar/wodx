@@ -1,21 +1,21 @@
 package ar.franciscoruiz.authentications.users.application.find_by_username;
 
+import ar.franciscoruiz.authentications.users.domain.UserEmail;
 import ar.franciscoruiz.shared.domain.Service;
-import ar.franciscoruiz.shared.domain.auth.AuthEmail;
 import ar.franciscoruiz.shared.domain.bus.query.QueryHandler;
 
 @Service
 public final class FindUserByEmailQueryHandler implements QueryHandler<FindUserByEmailQuery, UserResponse> {
-    private final UserByEmailFinder authenticator;
+    private final UserByEmailFinder finder;
 
-    public FindUserByEmailQueryHandler(UserByEmailFinder authenticator) {
-        this.authenticator = authenticator;
+    public FindUserByEmailQueryHandler(UserByEmailFinder finder) {
+        this.finder = finder;
     }
 
     @Override
     public UserResponse handle(FindUserByEmailQuery command) {
-        AuthEmail email = new AuthEmail(command.email());
+        UserEmail email = new UserEmail(command.email());
 
-        return authenticator.find(email);
+        return finder.find(email);
     }
 }
