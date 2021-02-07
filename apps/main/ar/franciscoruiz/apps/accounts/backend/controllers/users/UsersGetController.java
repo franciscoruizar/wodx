@@ -12,7 +12,6 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET})
@@ -25,7 +24,7 @@ public final class UsersGetController extends ApiController {
     }
 
     @GetMapping(value = "/users")
-    public List<HashMap<String, Object>> index(
+    public List<HashMap<String, Serializable>> index(
         @RequestParam HashMap<String, Serializable> params
     ) throws QueryHandlerExecutionError {
         UsersResponse response = ask(new SearchUserByCriteriaQuery(
@@ -36,14 +35,6 @@ public final class UsersGetController extends ApiController {
             Optional.ofNullable((Integer) params.get("offset"))
         ));
 
-        return response.values().stream().map(user -> new HashMap<String, Object>() {{
-            put("id", user.id());
-            put("name", user.name());
-            put("surname", user.surname());
-            put("email", user.email());
-            put("phone", user.phone());
-            put("isActive", user.isActive());
-            put("roleId", user.roleId());
-        }}).collect(Collectors.toList());
+        return response.toPrimitives();
     }
 }

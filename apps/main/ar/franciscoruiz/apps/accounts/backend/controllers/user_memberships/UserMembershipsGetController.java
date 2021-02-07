@@ -25,12 +25,6 @@ public final class UserMembershipsGetController extends ApiController {
     public List<HashMap<String, Serializable>> index(@PathVariable String id) throws QueryHandlerExecutionError {
         UserMembershipsResponse response = ask(new FindUserMembershipQuery(id));
 
-        return response.values().stream().map(userMembership -> new HashMap<String, Serializable>() {{
-            put("id", userMembership.id());
-            put("dateFrom", userMembership.dateFrom());
-            put("dateTo", userMembership.dateTo());
-            put("membershipId", userMembership.membershipId());
-            put("userId", userMembership.userId());
-        }}).collect(Collectors.toList());
+        return response.toPrimitives();
     }
 }

@@ -1,8 +1,8 @@
 package ar.franciscoruiz.accounts.purchases.application.search_by_company;
 
 import ar.franciscoruiz.accounts.companies.domain.CompanyId;
-import ar.franciscoruiz.accounts.purchase_items.application.PurchaseItemsResponse;
-import ar.franciscoruiz.accounts.purchase_items.application.find_by_purchase.PurchaseItemByPurchaseFinder;
+import ar.franciscoruiz.accounts.items.application.ItemsResponse;
+import ar.franciscoruiz.accounts.items.application.find_by_purchase.ItemByPurchaseFinder;
 import ar.franciscoruiz.accounts.purchases.application.PurchaseResponse;
 import ar.franciscoruiz.accounts.purchases.application.PurchasesResponse;
 import ar.franciscoruiz.accounts.purchases.domain.PurchaseId;
@@ -13,10 +13,10 @@ import java.util.stream.Collectors;
 
 @Service
 public final class PurchaseByCompanySearcher {
-    private final PurchaseRepository           repository;
-    private final PurchaseItemByPurchaseFinder itemFinder;
+    private final PurchaseRepository   repository;
+    private final ItemByPurchaseFinder itemFinder;
 
-    public PurchaseByCompanySearcher(PurchaseRepository repository, PurchaseItemByPurchaseFinder itemFinder) {
+    public PurchaseByCompanySearcher(PurchaseRepository repository, ItemByPurchaseFinder itemFinder) {
         this.repository = repository;
         this.itemFinder = itemFinder;
     }
@@ -30,7 +30,7 @@ public final class PurchaseByCompanySearcher {
         );
     }
 
-    private PurchaseItemsResponse findItems(PurchaseId id) {
+    private ItemsResponse findItems(PurchaseId id) {
         return this.itemFinder.find(id);
     }
 }

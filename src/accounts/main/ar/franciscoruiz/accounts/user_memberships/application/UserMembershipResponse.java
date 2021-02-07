@@ -3,7 +3,9 @@ package ar.franciscoruiz.accounts.user_memberships.application;
 import ar.franciscoruiz.accounts.user_memberships.domain.UserMembership;
 import ar.franciscoruiz.shared.domain.bus.query.Response;
 
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashMap;
 
 public final class UserMembershipResponse implements Response {
     private final String    id;
@@ -28,6 +30,18 @@ public final class UserMembershipResponse implements Response {
             userMembership.membershipId().value(),
             userMembership.userId().value()
         );
+    }
+
+    public HashMap<String, Serializable> toPrimitives() {
+        HashMap<String, Serializable> response = new HashMap<>();
+
+        response.put("id", this.id);
+        response.put("date_from", this.dateFrom.toString());
+        response.put("date_to", this.dateTo.toString());
+        response.put("membership_id", this.membershipId);
+        response.put("user_id", this.userId);
+
+        return response;
     }
 
     public String id() {

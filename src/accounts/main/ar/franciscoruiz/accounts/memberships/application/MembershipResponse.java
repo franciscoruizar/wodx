@@ -3,6 +3,9 @@ package ar.franciscoruiz.accounts.memberships.application;
 import ar.franciscoruiz.accounts.memberships.domain.Membership;
 import ar.franciscoruiz.shared.domain.bus.query.Response;
 
+import java.io.Serializable;
+import java.util.HashMap;
+
 public final class MembershipResponse implements Response {
     private final String  id;
     private final String  description;
@@ -29,6 +32,19 @@ public final class MembershipResponse implements Response {
             membership.companyId().value(),
             membership.isActive().value()
         );
+    }
+
+    public HashMap<String, Serializable> toPrimitives() {
+        HashMap<String, Serializable> response = new HashMap<>();
+
+        response.put("id", this.id);
+        response.put("description", this.description);
+        response.put("number_days_enabled", this.numberDaysEnabled);
+        response.put("price", this.price);
+        response.put("company_id", this.companyId);
+        response.put("is_active", this.isActive);
+
+        return response;
     }
 
     public String id() {

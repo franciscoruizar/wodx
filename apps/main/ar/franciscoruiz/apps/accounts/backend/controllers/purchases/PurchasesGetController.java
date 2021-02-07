@@ -8,9 +8,9 @@ import ar.franciscoruiz.shared.domain.bus.query.QueryHandlerExecutionError;
 import ar.franciscoruiz.shared.infrastructure.spring.ApiController;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET})
@@ -26,12 +26,6 @@ public final class PurchasesGetController extends ApiController {
     public List<HashMap<String, Object>> index(@RequestParam String companyId) throws QueryHandlerExecutionError {
         PurchasesResponse response = ask(new SearchPurchaseByCompanyQuery(companyId));
 
-        return response.values().stream().map(purchase -> new HashMap<String, Object>() {{
-            put("id", purchase.id());
-            put("description", purchase.description());
-            put("date", purchase.date());
-            put("userId", purchase.userId());
-            put("totalPrice", purchase.totalPrice());
-        }}).collect(Collectors.toList());
+        return response.toPrimitives();
     }
 }

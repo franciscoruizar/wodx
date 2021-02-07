@@ -27,13 +27,6 @@ public final class CompanyGetController extends ApiController {
     public ResponseEntity<HashMap<String, Serializable>> index(@PathVariable String id) throws QueryHandlerExecutionError {
         CompanyResponse response = ask(new FindCompanyQuery(id));
 
-        return ResponseEntity.ok().body(new HashMap<>() {{
-            put("id", response.id());
-            put("description", response.description());
-            put("mediaUrl", response.mediaUrl());
-            put("latitude", response.latitude());
-            put("longitude", response.longitude());
-            put("isActive", response.isActive());
-        }});
+        return ResponseEntity.ok().body(response.toPrimitives());
     }
 }

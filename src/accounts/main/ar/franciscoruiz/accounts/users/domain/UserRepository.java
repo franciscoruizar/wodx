@@ -11,5 +11,7 @@ public interface UserRepository {
 
     Optional<User> search(UserId id);
 
+    Optional<User> search(UserEmail email);
+
     List<User> matching(Criteria criteria);
 }

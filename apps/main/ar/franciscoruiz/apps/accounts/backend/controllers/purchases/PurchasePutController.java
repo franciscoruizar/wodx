@@ -1,6 +1,6 @@
 package ar.franciscoruiz.apps.accounts.backend.controllers.purchases;
 
-import ar.franciscoruiz.accounts.purchase_items.application.create.CreatePurchaseItemCommand;
+import ar.franciscoruiz.accounts.items.application.create.CreateItemCommand;
 import ar.franciscoruiz.accounts.purchases.application.create.CreatePurchaseCommand;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.command.CommandHandlerExecutionError;
@@ -40,7 +40,7 @@ public final class PurchasePutController extends ApiController {
             )
         );
 
-        request.items().forEach(item -> dispatch(new CreatePurchaseItemCommand(item.id(), id, item.quantity(), item.membershipId())));
+        request.items().forEach(item -> dispatch(new CreateItemCommand(item.id(), id, item.quantity(), item.membershipId())));
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

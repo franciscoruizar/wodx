@@ -7,11 +7,11 @@ import ar.franciscoruiz.shared.domain.users.UserId;
 
 @Service
 public final class PasswordUserUpdater {
-    private final AuthUserRepository repository;
-    private final UserFinderDomain   userFinder;
-    private final PasswordEncoder    encoder;
+    private final AuthenticationsUserRepository   repository;
+    private final AuthenticationsUserFinderDomain userFinder;
+    private final PasswordEncoder                 encoder;
 
-    public PasswordUserUpdater(AuthUserRepository repository, UserFinderDomain userFinder, PasswordEncoder encoder) {
+    public PasswordUserUpdater(AuthenticationsUserRepository repository, AuthenticationsUserFinderDomain userFinder, PasswordEncoder encoder) {
         this.repository = repository;
         this.userFinder = userFinder;
         this.encoder    = encoder;
@@ -19,19 +19,19 @@ public final class PasswordUserUpdater {
 
     public void update(
         UserId id,
-        UserPassword oldPassword,
-        UserPassword newPassword
+        AuthenticationsUserPassword oldPassword,
+        AuthenticationsUserPassword newPassword
     ) {
-        User user = getUser(id);
+        AuthenticationsUser user = getUser(id);
 
         ensureOldPassword(user, oldPassword);
 
-        UserPassword passwordEncode = new UserPassword(encoder.encode(newPassword.value()));
+        AuthenticationsUserPassword passwordEncode = new AuthenticationsUserPassword(encoder.encode(newPassword.value()));
 
-        this.repository.save(new User(id, user.name(), user.surname(), user.email(), passwordEncode, user.phone(), user.isActive(), user.roleId()));
+        this.repository.save(new AuthenticationsUser(id, user.name(), user.surname(), user.email(), passwordEncode, user.phone(), user.isActive(), user.roleId()));
     }
 
-    private void ensureOldPassword(User user, UserPassword oldPassword) {
+    private void ensureOldPassword(AuthenticationsUser user, AuthenticationsUserPassword oldPassword) {
         boolean match = this.encoder.matches(oldPassword.value(), user.password().value());
 
         if (oldPassword.value().equals("") && user.password().value().equals("")) {
@@ -43,7 +43,7 @@ public final class PasswordUserUpdater {
         }
     }
 
-    private User getUser(UserId id) {
+    private AuthenticationsUser getUser(UserId id) {
         return this.userFinder.find(id);
     }
 }

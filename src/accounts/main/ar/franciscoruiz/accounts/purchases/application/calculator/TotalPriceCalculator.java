@@ -1,16 +1,16 @@
 package ar.franciscoruiz.accounts.purchases.application.calculator;
 
-import ar.franciscoruiz.accounts.purchase_items.application.PurchaseItemResponse;
-import ar.franciscoruiz.accounts.purchase_items.application.PurchaseItemsResponse;
+import ar.franciscoruiz.accounts.items.application.ItemResponse;
+import ar.franciscoruiz.accounts.items.application.ItemsResponse;
 
 public final class TotalPriceCalculator {
-    private final PurchaseItemsResponse items;
+    private final ItemsResponse items;
 
-    public TotalPriceCalculator(PurchaseItemsResponse items) {
+    public TotalPriceCalculator(ItemsResponse items) {
         this.items = items;
     }
 
     public double calculate() {
-        return items.items().stream().mapToDouble(PurchaseItemResponse::price).sum();
+        return items.values().stream().mapToDouble(ItemResponse::price).sum();
     }
 }

@@ -27,13 +27,6 @@ public final class MembershipGetController extends ApiController {
     public ResponseEntity<HashMap<String, Serializable>> index(@PathVariable String id) throws QueryHandlerExecutionError {
         MembershipResponse response = ask(new FindMembershipQuery(id));
 
-        return ResponseEntity.ok().body(new HashMap<>() {{
-            put("id", response.id());
-            put("description", response.description());
-            put("numberDaysEnabled", response.numberDaysEnabled());
-            put("price", response.price());
-            put("companyId", response.companyId());
-            put("isActive", response.isActive());
-        }});
+        return ResponseEntity.ok().body(response.toPrimitives());
     }
 }

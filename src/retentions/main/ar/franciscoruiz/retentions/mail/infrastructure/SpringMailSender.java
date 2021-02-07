@@ -2,24 +2,37 @@ package ar.franciscoruiz.retentions.mail.infrastructure;
 
 import ar.franciscoruiz.retentions.mail.domain.MailSender;
 import ar.franciscoruiz.retentions.mail.domain.Message;
+import ar.franciscoruiz.shared.domain.Logger;
+import ar.franciscoruiz.shared.domain.Service;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
+@Service
 public final class SpringMailSender implements MailSender {
-    private final JavaMailSender javaMailSender;
+    private final JavaMailSender sender;
+    private final Logger logger;
 
-    public SpringMailSender(JavaMailSender javaMailSender) {
-        this.javaMailSender = javaMailSender;
+    public SpringMailSender(JavaMailSender sender, Logger logger) {
+        this.sender = sender;
+        this.logger = logger;
     }
 
     @Override
     public void send(Message message) {
-        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        MimeMessage       mimeMessage = sender.createMimeMessage();
+        MimeMessageHelper helper      = new MimeMessageHelper(mimeMessage);
 
-        simpleMailMessage.setTo(message.to().value());
-        simpleMailMessage.setSubject(message.subject().value());
-        simpleMailMessage.setText(message.body().value());
-
-        javaMailSender.send(simpleMailMessage);
+        try{
+            helper.setTo(message.to().value());
+            helper.setText(message.body().value());
+            helper.setSubject(message.subject().value());
+            sender.send(mimeMessage);
+        }catch (MessagingException e){
+            logger.critical(e.getMessage());
+        }
     }
 }

@@ -7,25 +7,25 @@ import ar.franciscoruiz.shared.domain.users.UserId;
 
 @Service
 public final class UserRegister {
-    private final AuthUserRepository repository;
-    private final UserFinderDomain   finder;
+    private final AuthenticationsUserRepository   repository;
+    private final AuthenticationsUserFinderDomain finder;
 
-    public UserRegister(AuthUserRepository repository, UserFinderDomain finder) {
+    public UserRegister(AuthenticationsUserRepository repository, AuthenticationsUserFinderDomain finder) {
         this.repository = repository;
         this.finder     = finder;
     }
 
     public void create(
         UserId id,
-        UserName name,
-        UserSurname surname,
-        UserEmail email,
-        UserPhone phone,
+        AuthenticationsUserName name,
+        AuthenticationsUserSurname surname,
+        AuthenticationsUserEmail email,
+        AuthenticationsUserPhone phone,
         RoleId roleId
     ) {
         ensureNonExistsUser(id);
 
-        var user = new User(id, name, surname, email, new UserPassword(""), phone, new UserIsActive(true), roleId);
+        var user = new AuthenticationsUser(id, name, surname, email, new AuthenticationsUserPassword(""), phone, new AuthenticationsUserIsActive(true), roleId);
 
         this.repository.save(user);
     }
@@ -34,8 +34,8 @@ public final class UserRegister {
         try {
             this.finder.find(id);
 
-            throw new UserExists();
-        } catch (UserNotExist ignored) {
+            throw new AuthenticationsUserExists();
+        } catch (AuthenticationsUserNotExist ignored) {
         }
     }
 }

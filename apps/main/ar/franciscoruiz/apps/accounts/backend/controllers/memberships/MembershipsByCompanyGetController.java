@@ -8,9 +8,9 @@ import ar.franciscoruiz.shared.domain.bus.query.QueryHandlerExecutionError;
 import ar.franciscoruiz.shared.infrastructure.spring.ApiController;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET})
@@ -23,16 +23,9 @@ public final class MembershipsByCompanyGetController extends ApiController {
     }
 
     @GetMapping(value = "/memberships/company/{id}")
-    public List<HashMap<String, Object>> index(@PathVariable String id) throws QueryHandlerExecutionError {
+    public List<HashMap<String, Serializable>> index(@PathVariable String id) throws QueryHandlerExecutionError {
         MembershipsResponse response = ask(new SearchMembershipByCompany(id));
 
-        return response.values().stream().map(membership -> new HashMap<String, Object>() {{
-            put("id", membership.id());
-            put("description", membership.description());
-            put("numberDaysEnabled", membership.numberDaysEnabled());
-            put("price", membership.price());
-            put("companyId", membership.companyId());
-            put("isActive", membership.isActive());
-        }}).collect(Collectors.toList());
+        return response.toPrimitives();
     }
 }

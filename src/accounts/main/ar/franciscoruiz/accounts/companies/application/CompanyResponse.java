@@ -3,6 +3,9 @@ package ar.franciscoruiz.accounts.companies.application;
 import ar.franciscoruiz.accounts.companies.domain.Company;
 import ar.franciscoruiz.shared.domain.bus.query.Response;
 
+import java.io.Serializable;
+import java.util.HashMap;
+
 public final class CompanyResponse implements Response {
     private final String  id;
     private final String  description;
@@ -38,6 +41,19 @@ public final class CompanyResponse implements Response {
         );
     }
 
+    public HashMap<String, Serializable> toPrimitives() {
+        HashMap<String, Serializable> response = new HashMap<>();
+
+        response.put("id", this.id);
+        response.put("description", this.description);
+        response.put("media_url", this.mediaUrl);
+        response.put("latitude", this.latitude);
+        response.put("longitude", this.longitude);
+        response.put("is_active", this.isActive);
+
+        return response;
+    }
+
     public String id() {
         return this.id;
     }
@@ -61,4 +77,6 @@ public final class CompanyResponse implements Response {
     public Boolean isActive() {
         return this.isActive;
     }
+
+
 }

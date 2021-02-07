@@ -1,6 +1,6 @@
 package ar.franciscoruiz.authentications.users.application.password_update;
 
-import ar.franciscoruiz.authentications.users.domain.UserPassword;
+import ar.franciscoruiz.authentications.users.domain.AuthenticationsUserPassword;
 import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.bus.command.CommandHandler;
 import ar.franciscoruiz.shared.domain.users.UserId;
@@ -15,9 +15,9 @@ public final class UpdatePasswordUserCommandHandler implements CommandHandler<Up
 
     @Override
     public void handle(UpdatePasswordUserCommand command) {
-        UserId       userId      = new UserId(command.userId());
-        UserPassword oldPassword = new UserPassword(command.oldPassword());
-        UserPassword newPassword = new UserPassword(command.newPassword());
+        UserId                      userId      = new UserId(command.userId());
+        AuthenticationsUserPassword oldPassword = new AuthenticationsUserPassword(command.oldPassword());
+        AuthenticationsUserPassword newPassword = new AuthenticationsUserPassword(command.newPassword());
 
         this.creator.update(userId, oldPassword, newPassword);
     }
