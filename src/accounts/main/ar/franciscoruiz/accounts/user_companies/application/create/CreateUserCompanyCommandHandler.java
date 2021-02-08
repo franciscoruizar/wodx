@@ -20,6 +20,6 @@ public final class CreateUserCompanyCommandHandler implements CommandHandler<Cre
         UserId        userId    = new UserId(command.userId());
         CompanyId     companyId = new CompanyId(command.companyId());
 
-        this.creator.crate(id, userId, companyId);
+        this.creator.create(id, userId, companyId);
     }
 }

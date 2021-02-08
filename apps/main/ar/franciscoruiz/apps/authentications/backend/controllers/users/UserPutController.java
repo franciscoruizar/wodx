@@ -7,22 +7,21 @@ import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
 import ar.franciscoruiz.shared.infrastructure.spring.ApiController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-public final class UserPostController extends ApiController {
-    public UserPostController(QueryBus queryBus, CommandBus commandBus) {
+public final class UserPutController extends ApiController {
+    public UserPutController(QueryBus queryBus, CommandBus commandBus) {
         super(queryBus, commandBus);
     }
 
-    @PostMapping(value = "/users")
+    @PutMapping(value = "/users/{id}")
     public ResponseEntity<String> index(
+        @PathVariable String id,
         @RequestBody Request request
     ) throws CommandHandlerExecutionError {
         dispatch(new RegisterUserCommand(
-            request.id(),
+            id,
             request.name(),
             request.surname(),
             request.email(),
@@ -34,20 +33,11 @@ public final class UserPostController extends ApiController {
     }
 
     static class Request {
-        private String id;
         private String name;
         private String surname;
         private String email;
         private String phone;
         private String roleId;
-
-        String id() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
 
         String name() {
             return name;

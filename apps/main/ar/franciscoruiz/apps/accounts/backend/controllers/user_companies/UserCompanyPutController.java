@@ -5,6 +5,8 @@ import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.command.CommandHandlerExecutionError;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
 import ar.franciscoruiz.shared.infrastructure.spring.ApiController;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,6 +39,7 @@ public final class UserCompanyPutController extends ApiController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     static class Request {
         private String userId;
         private String companyId;
