@@ -3,6 +3,7 @@ package ar.franciscoruiz.accounts.companies.application.create;
 import ar.franciscoruiz.accounts.companies.domain.*;
 import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.bus.command.CommandHandler;
+import ar.franciscoruiz.shared.domain.companies.CompanyId;
 
 @Service
 public final class CreateCompanyCommandHandler implements CommandHandler<CreateCompanyCommand> {

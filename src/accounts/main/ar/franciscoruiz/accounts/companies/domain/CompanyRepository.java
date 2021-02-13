@@ -1,5 +1,6 @@
 package ar.franciscoruiz.accounts.companies.domain;
 
+import ar.franciscoruiz.shared.domain.companies.CompanyId;
 import ar.franciscoruiz.shared.domain.criteria.Criteria;
 
 import java.util.List;

@@ -1,15 +1,11 @@
 package ar.franciscoruiz.accounts.user_companies.application.search_by_company;
 
-import ar.franciscoruiz.accounts.companies.domain.CompanyId;
+import ar.franciscoruiz.shared.domain.companies.CompanyId;
 import ar.franciscoruiz.accounts.user_companies.domain.UserCompanyRepository;
 import ar.franciscoruiz.accounts.users.application.UserResponse;
-import ar.franciscoruiz.accounts.users.domain.User;
 import ar.franciscoruiz.accounts.users.domain.UserDomainFinder;
 import ar.franciscoruiz.shared.domain.Service;
-import ar.franciscoruiz.shared.domain.users.UserId;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Service

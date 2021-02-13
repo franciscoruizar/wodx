@@ -5,7 +5,7 @@
 
 <hibernate-mapping>
     <class name="ar.franciscoruiz.accounts.companies.domain.Company" table="companies">
-        <composite-id name="id" class="ar.franciscoruiz.accounts.companies.domain.CompanyId" access="field">
+        <composite-id name="id" class="ar.franciscoruiz.shared.domain.companies.CompanyId" access="field">
             <key-property column="id" name="value" length="36" access="field"/>
         </composite-id>
 

@@ -141,6 +141,7 @@ dependencies {
     implementation project(":analytics")
     implementation project(":authentications")
     implementation project(":retentions")
+    implementation project(":sales")
     implementation project(":shared")
     implementation project(":workouts")
 

@@ -1,6 +1,6 @@
 package ar.franciscoruiz.accounts.user_companies.application.create;
 
-import ar.franciscoruiz.accounts.companies.domain.CompanyId;
+import ar.franciscoruiz.shared.domain.companies.CompanyId;
 import ar.franciscoruiz.accounts.user_companies.domain.UserCompanyId;
 import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.bus.command.CommandHandler;

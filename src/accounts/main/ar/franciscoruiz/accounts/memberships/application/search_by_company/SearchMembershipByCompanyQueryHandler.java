@@ -1,6 +1,6 @@
 package ar.franciscoruiz.accounts.memberships.application.search_by_company;
 
-import ar.franciscoruiz.accounts.companies.domain.CompanyId;
+import ar.franciscoruiz.shared.domain.companies.CompanyId;
 import ar.franciscoruiz.accounts.memberships.application.MembershipsResponse;
 import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.bus.query.QueryHandler;

@@ -1,7 +1,7 @@
 package ar.franciscoruiz.accounts.companies.application.find;
 
 import ar.franciscoruiz.accounts.companies.application.CompanyResponse;
-import ar.franciscoruiz.accounts.companies.domain.CompanyId;
+import ar.franciscoruiz.shared.domain.companies.CompanyId;
 import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.bus.query.QueryHandler;
 

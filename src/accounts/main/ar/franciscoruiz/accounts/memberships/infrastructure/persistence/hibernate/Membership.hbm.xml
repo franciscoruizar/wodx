@@ -14,7 +14,7 @@
             <property name="value" column="description" type="java.lang.String" access="field"/>
         </component>
 
-        <component name="companyId" class="ar.franciscoruiz.accounts.companies.domain.CompanyId"
+        <component name="companyId" class="ar.franciscoruiz.shared.domain.companies.CompanyId"
                    access="field">
             <property name="value" column="company_id" type="java.lang.String" access="field" length="36"/>
         </component>

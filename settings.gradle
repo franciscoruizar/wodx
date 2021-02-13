@@ -9,11 +9,11 @@ project(':analytics').projectDir = new File('src/analytics')
 include ':authentications'
 project(':authentications').projectDir = new File('src/authentications')
 
-include ':companies'
-project(':companies').projectDir = new File('src/companies')
-
 include ':retentions'
 project(':retentions').projectDir = new File('src/retentions')
+
+include ':sales'
+project(':sales').projectDir = new File('src/sales')
 
 include ':shared'
 project(':shared').projectDir = new File('src/shared')

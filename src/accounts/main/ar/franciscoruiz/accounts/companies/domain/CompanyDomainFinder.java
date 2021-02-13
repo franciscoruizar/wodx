@@ -1,6 +1,7 @@
 package ar.franciscoruiz.accounts.companies.domain;
 
 import ar.franciscoruiz.shared.domain.Service;
+import ar.franciscoruiz.shared.domain.companies.CompanyId;
 
 @Service
 public final class CompanyDomainFinder {

@@ -1,7 +1,7 @@
 package ar.franciscoruiz.accounts.companies.infrastructure.persistence;
 
 import ar.franciscoruiz.accounts.companies.domain.Company;
-import ar.franciscoruiz.accounts.companies.domain.CompanyId;
+import ar.franciscoruiz.shared.domain.companies.CompanyId;
 import ar.franciscoruiz.accounts.companies.domain.CompanyRepository;
 import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.criteria.Criteria;

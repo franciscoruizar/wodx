@@ -1,6 +1,6 @@
 package ar.franciscoruiz.accounts.user_companies.domain;
 
-import ar.franciscoruiz.accounts.companies.domain.CompanyId;
+import ar.franciscoruiz.shared.domain.companies.CompanyId;
 import ar.franciscoruiz.shared.domain.users.UserId;
 
 import java.util.List;

@@ -13,7 +13,7 @@
             <property column="user_id" name="value" length="36" access="field"/>
         </component>
 
-        <component name="companyId" class="ar.franciscoruiz.accounts.companies.domain.CompanyId" access="field">
+        <component name="companyId" class="ar.franciscoruiz.shared.domain.companies.CompanyId" access="field">
             <property column="company_id" name="value" length="36" access="field"/>
         </component>
     </class>

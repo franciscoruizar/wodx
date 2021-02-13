@@ -1,5 +1,7 @@
 package ar.franciscoruiz.accounts.companies.domain;
 
+import ar.franciscoruiz.shared.domain.companies.CompanyId;
+
 import java.util.Objects;
 
 public final class Company {
