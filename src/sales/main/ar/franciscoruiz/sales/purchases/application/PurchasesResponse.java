@@ -2,7 +2,6 @@ package ar.franciscoruiz.sales.purchases.application;
 
 import ar.franciscoruiz.shared.domain.bus.query.Response;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;

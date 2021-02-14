@@ -1,7 +1,6 @@
 package ar.franciscoruiz.accounts.users.application.find_by_username;
 
 import ar.franciscoruiz.accounts.users.application.UserResponse;
-import ar.franciscoruiz.accounts.users.domain.UserEmail;
 import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.bus.query.QueryHandler;
 

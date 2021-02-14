@@ -6,10 +6,10 @@ import ar.franciscoruiz.shared.domain.users.UserId;
 import java.util.Objects;
 
 public final class AuthenticationsUser {
-    private final UserId                  id;
-    private final AuthenticationsUserName    name;
-    private final AuthenticationsUserSurname surname;
-    private final AuthenticationsUserEmail   email;
+    private final UserId                      id;
+    private final AuthenticationsUserName     name;
+    private final AuthenticationsUserSurname  surname;
+    private final AuthenticationsUserEmail    email;
     private final AuthenticationsUserPassword password;
     private final AuthenticationsUserPhone    phone;
     private final AuthenticationsUserIsActive isActive;

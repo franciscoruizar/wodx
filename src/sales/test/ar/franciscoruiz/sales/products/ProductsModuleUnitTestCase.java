@@ -2,13 +2,10 @@ package ar.franciscoruiz.sales.products;
 
 import ar.franciscoruiz.sales.products.domain.Product;
 import ar.franciscoruiz.sales.products.domain.ProductRepository;
-import ar.franciscoruiz.sales.products.domain.membership.Membership;
-import ar.franciscoruiz.shared.domain.companies.CompanyId;
 import ar.franciscoruiz.shared.infrastructure.UnitTestCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mockito;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.*;

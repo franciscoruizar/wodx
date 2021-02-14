@@ -1,4 +1,5 @@
 package ar.franciscoruiz.sales.products.application.product.find;
+
 import ar.franciscoruiz.sales.products.application.ProductResponse;
 import ar.franciscoruiz.sales.products.domain.ProductId;
 import ar.franciscoruiz.shared.domain.Service;

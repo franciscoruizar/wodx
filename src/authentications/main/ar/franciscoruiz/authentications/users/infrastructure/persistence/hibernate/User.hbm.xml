@@ -9,27 +9,33 @@
             <key-property column="id" name="value" length="36" access="field"/>
         </composite-id>
 
-        <component name="name" class="ar.franciscoruiz.authentications.users.domain.AuthenticationsUserName" access="field">
+        <component name="name" class="ar.franciscoruiz.authentications.users.domain.AuthenticationsUserName"
+                   access="field">
             <property name="value" column="name" type="java.lang.String" access="field"/>
         </component>
 
-        <component name="surname" class="ar.franciscoruiz.authentications.users.domain.AuthenticationsUserSurname" access="field">
+        <component name="surname" class="ar.franciscoruiz.authentications.users.domain.AuthenticationsUserSurname"
+                   access="field">
             <property name="value" column="surname" type="java.lang.String" access="field"/>
         </component>
 
-        <component name="email" class="ar.franciscoruiz.authentications.users.domain.AuthenticationsUserEmail" access="field">
+        <component name="email" class="ar.franciscoruiz.authentications.users.domain.AuthenticationsUserEmail"
+                   access="field">
             <property name="value" column="email" type="java.lang.String" access="field"/>
         </component>
 
-        <component name="password" class="ar.franciscoruiz.authentications.users.domain.AuthenticationsUserPassword" access="field">
+        <component name="password" class="ar.franciscoruiz.authentications.users.domain.AuthenticationsUserPassword"
+                   access="field">
             <property name="value" column="password" type="java.lang.String" access="field"/>
         </component>
 
-        <component name="phone" class="ar.franciscoruiz.authentications.users.domain.AuthenticationsUserPhone" access="field">
+        <component name="phone" class="ar.franciscoruiz.authentications.users.domain.AuthenticationsUserPhone"
+                   access="field">
             <property name="value" column="phone" type="java.lang.String" access="field"/>
         </component>
 
-        <component name="isActive" class="ar.franciscoruiz.authentications.users.domain.AuthenticationsUserIsActive" access="field">
+        <component name="isActive" class="ar.franciscoruiz.authentications.users.domain.AuthenticationsUserIsActive"
+                   access="field">
             <property name="value" column="is_active" type="java.lang.Boolean" access="field"/>
         </component>
 

@@ -19,12 +19,12 @@ public final class RegisterUserCommandHandler implements CommandHandler<Register
 
     @Override
     public void handle(RegisterUserCommand command) {
-        UserId                  id      = new UserId(command.id());
+        UserId                     id      = new UserId(command.id());
         AuthenticationsUserName    name    = new AuthenticationsUserName(command.name());
         AuthenticationsUserSurname surname = new AuthenticationsUserSurname(command.surname());
         AuthenticationsUserEmail   email   = new AuthenticationsUserEmail(command.email());
-        AuthenticationsUserPhone phone  = new AuthenticationsUserPhone(command.phone());
-        RoleId                   roleId = new RoleId(command.roleId());
+        AuthenticationsUserPhone   phone   = new AuthenticationsUserPhone(command.phone());
+        RoleId                     roleId  = new RoleId(command.roleId());
 
         this.creator.create(id, name, surname, email, phone, roleId);
     }

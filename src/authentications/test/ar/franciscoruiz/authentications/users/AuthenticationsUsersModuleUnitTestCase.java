@@ -1,7 +1,7 @@
 package ar.franciscoruiz.authentications.users;
 
-import ar.franciscoruiz.authentications.users.domain.AuthenticationsUserRepository;
 import ar.franciscoruiz.authentications.users.domain.AuthenticationsUser;
+import ar.franciscoruiz.authentications.users.domain.AuthenticationsUserRepository;
 import ar.franciscoruiz.shared.domain.encoder.PasswordEncoder;
 import ar.franciscoruiz.shared.infrastructure.UnitTestCase;
 import org.junit.jupiter.api.BeforeEach;

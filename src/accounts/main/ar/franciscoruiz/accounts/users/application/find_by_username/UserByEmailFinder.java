@@ -3,7 +3,6 @@ package ar.franciscoruiz.accounts.users.application.find_by_username;
 
 import ar.franciscoruiz.accounts.users.application.UserResponse;
 import ar.franciscoruiz.accounts.users.domain.User;
-import ar.franciscoruiz.accounts.users.domain.UserEmail;
 import ar.franciscoruiz.accounts.users.domain.UserNotExist;
 import ar.franciscoruiz.accounts.users.domain.UserRepository;
 import ar.franciscoruiz.shared.domain.Service;
@@ -16,7 +15,7 @@ public final class UserByEmailFinder {
         this.repository = repository;
     }
 
-    public UserResponse find(UserEmail email) {
+    public UserResponse find(String email) {
         User user = repository.search(email).orElseThrow(() -> new UserNotExist(email));
 
         return UserResponse.fromAggregate(user);

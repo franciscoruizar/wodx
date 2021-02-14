@@ -1,7 +1,6 @@
 package ar.franciscoruiz.accounts.users.domain;
 
 import ar.franciscoruiz.shared.domain.Service;
-import ar.franciscoruiz.shared.domain.users.UserId;
 
 @Service
 public final class UserDomainFinder {
@@ -11,7 +10,7 @@ public final class UserDomainFinder {
         this.repository = repository;
     }
 
-    public User find(UserId id) {
+    public User find(String id) {
         return this.repository.search(id)
             .orElseThrow(() -> new UserNotExist(id));
     }
