@@ -1,5 +1,7 @@
 package ar.franciscoruiz.sales.purchases;
 
+import ar.franciscoruiz.sales.products.domain.Product;
+import ar.franciscoruiz.sales.products.domain.ProductRepository;
 import ar.franciscoruiz.sales.purchases.domain.Purchase;
 import ar.franciscoruiz.sales.purchases.domain.PurchaseRepository;
 import ar.franciscoruiz.shared.domain.companies.CompanyId;
@@ -14,12 +16,14 @@ import static org.mockito.Mockito.*;
 
 public abstract class PurchasesModuleUnitTestCase extends UnitTestCase {
     protected PurchaseRepository repository;
+    protected ProductRepository  productRepository;
 
     @Override
     @BeforeEach
     protected void setUp() {
         super.setUp();
-        repository = mock(PurchaseRepository.class);
+        repository        = mock(PurchaseRepository.class);
+        productRepository = mock(ProductRepository.class);
     }
 
     public void shouldSave(Purchase entity) {
@@ -36,5 +40,17 @@ public abstract class PurchasesModuleUnitTestCase extends UnitTestCase {
 
     public void mockRepositoryFindAll(CompanyId companyId, List<Purchase> entities) {
         Mockito.when(repository.searchByCompany(companyId)).thenReturn(entities);
+    }
+
+    public void shouldProductSave(Product entity) {
+        this.productRepository.save(entity);
+    }
+
+    public void shouldProductHaveSaved(Product entity) {
+        verify(productRepository, atLeastOnce()).save(entity);
+    }
+
+    public void mockProductRepositorySearch(Product entity) {
+        Mockito.when(productRepository.search(entity.id())).thenReturn(Optional.of(entity));
     }
 }

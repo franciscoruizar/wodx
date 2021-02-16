@@ -15,6 +15,6 @@ public final class UserFinder {
     }
 
     public UserResponse find(UserId id) {
-        return UserResponse.fromAggregate(this.finder.find(id));
+        return UserResponse.fromAggregate(this.finder.find(id.value()));
     }
 }

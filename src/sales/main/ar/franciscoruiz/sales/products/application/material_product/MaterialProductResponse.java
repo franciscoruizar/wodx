@@ -3,7 +3,6 @@ package ar.franciscoruiz.sales.products.application.material_product;
 import ar.franciscoruiz.sales.products.application.ProductResponse;
 import ar.franciscoruiz.sales.products.domain.material_product.MaterialProduct;
 
-import java.io.Serializable;
 import java.util.HashMap;
 
 public final class MaterialProductResponse extends ProductResponse {
@@ -27,7 +26,7 @@ public final class MaterialProductResponse extends ProductResponse {
     }
 
     @Override
-    protected HashMap<String, Serializable> toPrimitives() {
+    public HashMap<String, Object> toPrimitives() {
         var primitives = super.toPrimitives();
 
         primitives.put("weight", this.weight);

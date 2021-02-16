@@ -2,7 +2,6 @@ package ar.franciscoruiz.sales.products.application;
 
 import ar.franciscoruiz.shared.domain.bus.query.Response;
 
-import java.io.Serializable;
 import java.util.HashMap;
 
 public class ProductResponse implements Response {
@@ -22,8 +21,8 @@ public class ProductResponse implements Response {
         this.companyId   = companyId;
     }
 
-    protected HashMap<String, Serializable> toPrimitives() {
-        HashMap<String, Serializable> response = new HashMap<>();
+    protected HashMap<String, Object> toPrimitives() {
+        HashMap<String, Object> response = new HashMap<>();
 
         response.put("id", this.id);
         response.put("title", this.title);

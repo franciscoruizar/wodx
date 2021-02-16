@@ -1,0 +1,34 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="ar.franciscoruiz.sales.purchases.domain.items.Item" table="purchase_items">
+        <composite-id name="id" class="ar.franciscoruiz.sales.purchases.domain.items.ItemId"
+                      access="field">
+            <key-property column="id" name="value" length="36" access="field"/>
+        </composite-id>
+
+        <component name="unitPrice" class="ar.franciscoruiz.sales.purchases.domain.items.ItemUnitPrice"
+                   access="field">
+            <property name="value" column="unit_price" type="java.lang.Double" access="field"/>
+        </component>
+
+        <component name="quantity" class="ar.franciscoruiz.sales.purchases.domain.items.ItemQuantity"
+                   access="field">
+            <property name="value" column="quantity" type="java.lang.Integer" access="field"/>
+        </component>
+
+        <component name="productId" class="ar.franciscoruiz.sales.products.domain.ProductId"
+                   access="field">
+            <property name="value" column="product_id" type="java.lang.String" access="field"/>
+        </component>
+
+        <component name="purchaseId" class="ar.franciscoruiz.sales.purchases.domain.PurchaseId"
+                   access="field">
+            <property name="value" column="purchase_id" type="java.lang.String" access="field"/>
+        </component>
+
+    </class>
+</hibernate-mapping>

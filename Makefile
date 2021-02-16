@@ -19,17 +19,11 @@ build-jar:
 start-accounts_backend:
 	@./gradlew :run --args='accounts_backend server'
 
-start-analytics_backend:
-	@./gradlew :run --args='analytics_backend server domain-events:rabbitmq:consume'
+start-sales_backend:
+	@./gradlew :run --args='sales_backend server'
 
 start-authentications_backend:
 	@./gradlew :run --args='authentications_backend server'
 
-start-retentions_backend:
-	@./gradlew :run --args='retention_backend server domain-events:rabbitmq:consume'
-
 start-workouts_backend:
 	@./gradlew :run --args='workouts_backend server'
-
-start-backoffice_frontend:
-	@./gradlew :run --args='backoffice_frontend server'

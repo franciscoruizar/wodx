@@ -3,7 +3,6 @@ package ar.franciscoruiz.sales.products.application.membership;
 import ar.franciscoruiz.sales.products.application.ProductResponse;
 import ar.franciscoruiz.sales.products.domain.membership.Membership;
 
-import java.io.Serializable;
 import java.util.HashMap;
 
 public final class MembershipResponse extends ProductResponse {
@@ -27,7 +26,7 @@ public final class MembershipResponse extends ProductResponse {
     }
 
     @Override
-    public HashMap<String, Serializable> toPrimitives() {
+    public HashMap<String, Object> toPrimitives() {
         var primitives = super.toPrimitives();
 
         primitives.put("number_days_enabled", this.numberDaysEnabled);

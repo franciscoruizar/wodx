@@ -33,3 +33,14 @@ create table if not exists purchases
 	constraint fk_purchases__companies foreign key (company_id) references companies (id),
 	constraint fk_purchases__users foreign key (user_id) references users (id)
 );
+
+create table if not exists items
+(
+	id char(36) not null primary key,
+	quantity int not null,
+	unit_price double not null,
+	product_id char(36) not null,
+	purchase_id char(36) null,
+	constraint fk_items__products foreign key (product_id) references products (id),
+	constraint fk_items__purchases foreign key (purchase_id) references purchases (id)
+);

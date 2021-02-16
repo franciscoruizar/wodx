@@ -26,17 +26,11 @@ create table if not exists users
 	name varchar(45) null,
 	surname varchar(45) null,
 	phone varchar(25) null,
-	is_active tinyint default 1 not null
+	is_active tinyint default 1 not null,
+	constraint fk_users__roles foreign key (role_id) references roles (id)
 );
 
-
-create table if not exists user_companies
-(
-	id char(36) not null
-		primary key,
-	user_id char(36) not null,
-	company_id char(36) not null,
-	constraint fk_user_companies__companies foreign key (company_id) references companies (id),
-	constraint fk_user_companies__users foreign key (user_id) references users (id)
-);
-
+insert into roles (id, description) values('f7030ab4-d20f-469b-8ee4-a1c5e27bee36', 'ADMIN');
+insert into roles (id, description) values('870c1fe5-af03-43f1-a0b3-1988058ed405', 'COMPANY');
+insert into roles (id, description) values('ccdc5863-1061-4b9c-9061-4af9a6c60357', 'EMPLOYEE');
+insert into roles (id, description) values('3f321312-4efd-4e8d-a4fe-ba2d9fe9ed84', 'USER');

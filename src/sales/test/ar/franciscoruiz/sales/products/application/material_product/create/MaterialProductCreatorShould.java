@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 class MaterialProductCreatorShould extends ProductsModuleUnitTestCase {
     @Test
     void create_a_valid_product() {
-        MaterialProductCreator creator = new MaterialProductCreator(repository);
+        MaterialProductCreator creator = new MaterialProductCreator(materialProductRepository);
 
         MaterialProduct product = MaterialProductMother.random();
 

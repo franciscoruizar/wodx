@@ -1,6 +1,5 @@
 package ar.franciscoruiz.shared.infrastructure.bus.event.rabbitmq;
 
-import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.bus.event.DomainEvent;
 import ar.franciscoruiz.shared.infrastructure.bus.event.DomainEventJsonSerializer;
 import org.springframework.amqp.AmqpException;
@@ -8,7 +7,6 @@ import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessagePropertiesBuilder;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
-@Service
 public final class RabbitMqPublisher {
     private final RabbitTemplate rabbitTemplate;
 

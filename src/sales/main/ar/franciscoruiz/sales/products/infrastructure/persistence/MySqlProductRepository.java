@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @Service
 public final class MySqlProductRepository extends HibernateRepository<Product> implements ProductRepository {
-    public MySqlProductRepository(@Qualifier("purchases-session_factory") SessionFactory sessionFactory) {
+    public MySqlProductRepository(@Qualifier("sales-session_factory") SessionFactory sessionFactory) {
         super(sessionFactory, Product.class);
     }
 
@@ -32,9 +32,8 @@ public final class MySqlProductRepository extends HibernateRepository<Product> i
 
     @Override
     public List<Product> searchByCompany(CompanyId companyId) {
-        Filter  filter  = new Filter(new FilterField("company_id"), FilterOperator.EQUAL, new FilterValue(companyId.value()));
-        Filters filters = new Filters(Collections.singletonList(filter));
-
+        Filter   filter   = new Filter(new FilterField("companyId"), FilterOperator.EQUAL, new FilterValue(companyId.value()));
+        Filters  filters  = new Filters(Collections.singletonList(filter));
         Criteria criteria = new Criteria(filters, Order.none());
 
         return byCriteria(criteria);

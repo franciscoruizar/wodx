@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 final class MembershipFinderShould extends ProductsModuleUnitTestCase {
     @Test
     void find_a_valid_membership() {
-        MembershipFinder finder = new MembershipFinder(repository);
+        MembershipFinder finder = new MembershipFinder(membershipRepository);
 
         Membership membership = MembershipMother.random();
 

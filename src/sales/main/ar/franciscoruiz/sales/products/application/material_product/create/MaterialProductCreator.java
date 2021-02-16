@@ -2,15 +2,16 @@ package ar.franciscoruiz.sales.products.application.material_product.create;
 
 import ar.franciscoruiz.sales.products.domain.*;
 import ar.franciscoruiz.sales.products.domain.material_product.MaterialProduct;
+import ar.franciscoruiz.sales.products.domain.material_product.MaterialProductRepository;
 import ar.franciscoruiz.sales.products.domain.material_product.MaterialProductWeight;
 import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.companies.CompanyId;
 
 @Service
 public final class MaterialProductCreator {
-    private final ProductRepository repository;
+    private final MaterialProductRepository repository;
 
-    public MaterialProductCreator(ProductRepository repository) {
+    public MaterialProductCreator(MaterialProductRepository repository) {
         this.repository = repository;
     }
 

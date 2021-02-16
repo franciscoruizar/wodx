@@ -7,7 +7,6 @@ import ar.franciscoruiz.shared.infrastructure.bus.event.DomainEventsInformation;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,7 +14,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Configuration
 public class RabbitMqEventBusConfiguration {
     private final DomainEventSubscribersInformation domainEventSubscribersInformation;
     private final DomainEventsInformation           domainEventsInformation;
@@ -125,7 +123,7 @@ public class RabbitMqEventBusConfiguration {
     }
 
     private HashMap<String, Object> retryQueueArguments(TopicExchange exchange, String routingKey) {
-        return new HashMap<String, Object>() {{
+        return new HashMap<>() {{
             put("x-dead-letter-exchange", exchange.getName());
             put("x-dead-letter-routing-key", routingKey);
             put("x-message-ttl", 1000);

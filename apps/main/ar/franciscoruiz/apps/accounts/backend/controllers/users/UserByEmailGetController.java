@@ -1,7 +1,7 @@
 package ar.franciscoruiz.apps.accounts.backend.controllers.users;
 
 import ar.franciscoruiz.accounts.users.application.UserResponse;
-import ar.franciscoruiz.accounts.users.application.find_by_username.FindUserByEmailQuery;
+import ar.franciscoruiz.accounts.users.application.find_by_email.FindUserByEmailQuery;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
 import ar.franciscoruiz.shared.domain.bus.query.QueryHandlerExecutionError;

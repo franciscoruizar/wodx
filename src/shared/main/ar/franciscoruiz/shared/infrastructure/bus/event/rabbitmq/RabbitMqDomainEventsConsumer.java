@@ -1,6 +1,5 @@
 package ar.franciscoruiz.shared.infrastructure.bus.event.rabbitmq;
 
-import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.Utils;
 import ar.franciscoruiz.shared.domain.bus.event.DomainEvent;
 import ar.franciscoruiz.shared.infrastructure.bus.event.DomainEventJsonDeserializer;
@@ -18,7 +17,6 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-@Service
 public final class RabbitMqDomainEventsConsumer {
     private final String                      CONSUMER_NAME          = "domain_events_consumer";
     private final int                         MAX_RETRIES            = 2;

@@ -3,14 +3,15 @@ package ar.franciscoruiz.sales.products.application.membership.create;
 import ar.franciscoruiz.sales.products.domain.*;
 import ar.franciscoruiz.sales.products.domain.membership.Membership;
 import ar.franciscoruiz.sales.products.domain.membership.MembershipNumberDaysEnabled;
+import ar.franciscoruiz.sales.products.domain.membership.MembershipRepository;
 import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.companies.CompanyId;
 
 @Service
 public final class MembershipCreator {
-    private final ProductRepository repository;
+    private final MembershipRepository repository;
 
-    public MembershipCreator(ProductRepository repository) {
+    public MembershipCreator(MembershipRepository repository) {
         this.repository = repository;
     }
 

@@ -18,6 +18,11 @@ public final class PurchaseFinder {
     public PurchaseResponse find(PurchaseId id) {
         Purchase purchase = this.repository.search(id).orElseThrow(() -> new PurchaseNotExits(id));
 
-        return PurchaseResponse.fromAggregate(purchase);
+        double totalPrice = 0.0;
+
+        for (var item : purchase.items())
+            totalPrice += item.unitPrice().value();
+
+        return PurchaseResponse.fromAggregate(purchase, totalPrice);
     }
 }

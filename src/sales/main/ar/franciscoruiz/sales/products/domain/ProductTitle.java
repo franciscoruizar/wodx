@@ -6,4 +6,8 @@ public final class ProductTitle extends StringValueObject {
     public ProductTitle(String value) {
         super(value);
     }
+
+    public ProductTitle() {
+        super(null);
+    }
 }

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 final class MembershipCreatorShould extends ProductsModuleUnitTestCase {
     @Test
     void create_a_valid_membership() {
-        MembershipCreator creator = new MembershipCreator(repository);
+        MembershipCreator creator = new MembershipCreator(membershipRepository);
 
         Membership membership = MembershipMother.random();
 

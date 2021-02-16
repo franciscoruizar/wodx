@@ -1,9 +1,8 @@
 package ar.franciscoruiz.apps;
 
 import ar.franciscoruiz.apps.accounts.backend.AccountsBackendApplication;
-import ar.franciscoruiz.apps.analytics.backend.AnalyticsBackendApplication;
 import ar.franciscoruiz.apps.authentications.backend.AuthenticationsBackendApplication;
-import ar.franciscoruiz.apps.retentions.backend.RetentionsBackendApplication;
+import ar.franciscoruiz.apps.sales.backend.SalesBackendApplication;
 import ar.franciscoruiz.apps.workouts.backend.WorkoutsBackendApplication;
 import ar.franciscoruiz.shared.infrastructure.cli.ConsoleCommand;
 import org.springframework.boot.SpringApplication;
@@ -70,9 +69,8 @@ public class Starter {
         HashMap<String, Class<?>> applications = new HashMap<>();
 
         applications.put("accounts_backend", AccountsBackendApplication.class);
-        applications.put("analytics_backend", AnalyticsBackendApplication.class);
         applications.put("authentications_backend", AuthenticationsBackendApplication.class);
-        applications.put("retentions_backend", RetentionsBackendApplication.class);
+        applications.put("sales_backend", SalesBackendApplication.class);
         applications.put("workouts_backend", WorkoutsBackendApplication.class);
 
         return applications;
@@ -82,9 +80,8 @@ public class Starter {
         HashMap<String, HashMap<String, Class<?>>> commands = new HashMap<>();
 
         commands.put("accounts_backend", AccountsBackendApplication.commands());
-        commands.put("analytics_backend", AnalyticsBackendApplication.commands());
         commands.put("authentications_backend", AuthenticationsBackendApplication.commands());
-        commands.put("retentions_backend", RetentionsBackendApplication.commands());
+        commands.put("sales_backend", SalesBackendApplication.commands());
         commands.put("workouts_backend", WorkoutsBackendApplication.commands());
 
         return commands;

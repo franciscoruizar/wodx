@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 final class MaterialProductFinderShould extends ProductsModuleUnitTestCase {
     @Test
     void find_a_valid_product() {
-        MaterialProductFinder finder = new MaterialProductFinder(repository);
+        MaterialProductFinder finder = new MaterialProductFinder(materialProductRepository);
 
         MaterialProduct product = MaterialProductMother.random();
 
