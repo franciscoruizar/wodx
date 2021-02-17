@@ -121,7 +121,8 @@ public final class HibernateConfigurationFactory {
         hibernateProperties.put(Environment.HBM2DDL_AUTO, "none");
         hibernateProperties.put(Environment.SHOW_SQL, "true");
         hibernateProperties.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
-
+        hibernateProperties.put(Environment.ENABLE_LAZY_LOAD_NO_TRANS, "true");
+        hibernateProperties.put(Environment.POOL_SIZE, "1");
         return hibernateProperties;
     }
 

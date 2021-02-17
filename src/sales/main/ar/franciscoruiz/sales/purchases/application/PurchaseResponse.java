@@ -1,11 +1,13 @@
 package ar.franciscoruiz.sales.purchases.application;
 
 import ar.franciscoruiz.sales.purchases.domain.Purchase;
+import ar.franciscoruiz.sales.purchases.domain.items.Item;
 import ar.franciscoruiz.shared.domain.bus.query.Response;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public final class PurchaseResponse implements Response {
     private final String        id;
@@ -16,14 +18,21 @@ public final class PurchaseResponse implements Response {
     private final Double        totalPrice;
     private final ItemsResponse items;
 
-    public PurchaseResponse(String id, String description, LocalDateTime date, String userId, String companyId, Double totalPrice) {
+    public PurchaseResponse(String id, String description, LocalDateTime date, String userId, String companyId, Double totalPrice, List<Item> items) {
         this.id          = id;
         this.description = description;
         this.date        = date;
         this.userId      = userId;
         this.companyId   = companyId;
         this.totalPrice  = totalPrice;
-        this.items       = new ItemsResponse(Collections.emptyList());
+        this.items       = new ItemsResponse(
+            items.stream().map(item -> new ItemResponse(
+                item.id().value(),
+                item.quantity().value(),
+                item.unitPrice().value(),
+                item.productId().value()
+            )).collect(Collectors.toList())
+        );
     }
 
     public PurchaseResponse(String id, String description, LocalDateTime date, String userId, String companyId, Double totalPrice, ItemsResponse items) {
@@ -36,14 +45,15 @@ public final class PurchaseResponse implements Response {
         this.items       = items;
     }
 
-    public static PurchaseResponse fromAggregate(Purchase purchase, Double totalPrice) {
+    public static PurchaseResponse fromAggregate(Purchase purchase, Double totalPrice, List<Item> items) {
         return new PurchaseResponse(
             purchase.id().value(),
             purchase.description().value(),
             purchase.date(),
             purchase.userId().value(),
             purchase.companyId().value(),
-            totalPrice
+            totalPrice,
+            items
         );
     }
 
@@ -52,7 +62,7 @@ public final class PurchaseResponse implements Response {
 
         response.put("id", this.id);
         response.put("description", this.description);
-        response.put("date", this.date);
+        response.put("date", this.date.toString());
         response.put("user_id", this.userId);
         response.put("company_id", this.companyId);
         response.put("total_price", this.totalPrice);

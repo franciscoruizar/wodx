@@ -1,0 +1,32 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="ar.franciscoruiz.sales.payments.domain.Payment" table="payments">
+        <composite-id name="id" class="ar.franciscoruiz.sales.payments.domain.PaymentId" access="field">
+            <key-property column="id" name="value" length="36" access="field"/>
+        </composite-id>
+
+        <component name="mount" class="ar.franciscoruiz.sales.payments.domain.PaymentMount" access="field">
+            <property name="value" column="mount" type="java.lang.Double" access="field"/>
+        </component>
+
+        <property name="paymentMethod" column="payment_method_id" access="field">
+            <type name="org.hibernate.type.EnumType">
+                <param name="PaymentMethod">ar.franciscoruiz.sales.payments.domain.PaymentMethod</param>
+            </type>
+        </property>
+
+        <property name="date" column="date" type="java.time.LocalDateTime" access="field"/>
+
+        <component name="purchaseId" class="ar.franciscoruiz.sales.purchases.domain.PurchaseId" access="field">
+            <property name="value" column="purchase_id" type="java.lang.String" access="field" length="36"/>
+        </component>
+
+        <component name="state" class="ar.franciscoruiz.sales.payments.domain.PaymentStatus" access="field">
+            <property name="value" column="state" type="java.lang.Boolean" access="field" length="36"/>
+        </component>
+    </class>
+</hibernate-mapping>

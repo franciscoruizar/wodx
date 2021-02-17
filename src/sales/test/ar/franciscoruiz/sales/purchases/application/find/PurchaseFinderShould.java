@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 final class PurchaseFinderShould extends PurchasesModuleUnitTestCase {
     @Test
     void find_a_valid_purchase() {
-        PurchaseFinder finder = new PurchaseFinder(repository);
+        PurchaseFinder finder = new PurchaseFinder(repository, itemRepository);
 
         Purchase purchase = PurchaseMother.random();
 

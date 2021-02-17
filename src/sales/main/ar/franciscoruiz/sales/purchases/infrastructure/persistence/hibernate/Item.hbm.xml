@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="ar.franciscoruiz.sales.purchases.domain.items.Item" table="purchase_items">
+    <class name="ar.franciscoruiz.sales.purchases.domain.items.Item" table="items">
         <composite-id name="id" class="ar.franciscoruiz.sales.purchases.domain.items.ItemId"
                       access="field">
             <key-property column="id" name="value" length="36" access="field"/>
@@ -25,10 +25,8 @@
             <property name="value" column="product_id" type="java.lang.String" access="field"/>
         </component>
 
-        <component name="purchaseId" class="ar.franciscoruiz.sales.purchases.domain.PurchaseId"
-                   access="field">
+        <component name="purchaseId" class="ar.franciscoruiz.sales.purchases.domain.PurchaseId" access="field">
             <property name="value" column="purchase_id" type="java.lang.String" access="field"/>
         </component>
-
     </class>
 </hibernate-mapping>

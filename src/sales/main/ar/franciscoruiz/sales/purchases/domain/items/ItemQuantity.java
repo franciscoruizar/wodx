@@ -7,7 +7,7 @@ public final class ItemQuantity extends IntValueObject {
         super(value);
     }
 
-    public ItemQuantity() {
+    private ItemQuantity() {
         super(null);
     }
 }

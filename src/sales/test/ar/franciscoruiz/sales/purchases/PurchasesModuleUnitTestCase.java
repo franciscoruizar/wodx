@@ -4,6 +4,8 @@ import ar.franciscoruiz.sales.products.domain.Product;
 import ar.franciscoruiz.sales.products.domain.ProductRepository;
 import ar.franciscoruiz.sales.purchases.domain.Purchase;
 import ar.franciscoruiz.sales.purchases.domain.PurchaseRepository;
+import ar.franciscoruiz.sales.purchases.domain.items.Item;
+import ar.franciscoruiz.sales.purchases.domain.items.ItemRepository;
 import ar.franciscoruiz.shared.domain.companies.CompanyId;
 import ar.franciscoruiz.shared.infrastructure.UnitTestCase;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,6 +19,7 @@ import static org.mockito.Mockito.*;
 public abstract class PurchasesModuleUnitTestCase extends UnitTestCase {
     protected PurchaseRepository repository;
     protected ProductRepository  productRepository;
+    protected ItemRepository     itemRepository;
 
     @Override
     @BeforeEach
@@ -24,6 +27,7 @@ public abstract class PurchasesModuleUnitTestCase extends UnitTestCase {
         super.setUp();
         repository        = mock(PurchaseRepository.class);
         productRepository = mock(ProductRepository.class);
+        itemRepository    = mock(ItemRepository.class);
     }
 
     public void shouldSave(Purchase entity) {
@@ -52,5 +56,13 @@ public abstract class PurchasesModuleUnitTestCase extends UnitTestCase {
 
     public void mockProductRepositorySearch(Product entity) {
         Mockito.when(productRepository.search(entity.id())).thenReturn(Optional.of(entity));
+    }
+
+    public void shouldItemSave(Item entity) {
+        this.itemRepository.save(entity);
+    }
+
+    public void shouldItemHaveSaved(Item entity) {
+        verify(itemRepository, atLeastOnce()).save(entity);
     }
 }

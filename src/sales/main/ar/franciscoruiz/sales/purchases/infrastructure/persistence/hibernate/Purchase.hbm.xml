@@ -23,11 +23,5 @@
         <component name="companyId" class="ar.franciscoruiz.shared.domain.companies.CompanyId" access="field">
             <property name="value" column="company_id" type="java.lang.String" access="field"/>
         </component>
-
-        <list name="items" table="items" cascade="all" access="field">
-            <key column="id"/>
-            <index column="type"/>
-            <one-to-many class="ar.franciscoruiz.sales.purchases.domain.items.Item"/>
-        </list>
     </class>
 </hibernate-mapping>

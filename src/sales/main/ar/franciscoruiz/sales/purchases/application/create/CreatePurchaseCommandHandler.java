@@ -36,7 +36,7 @@ public final class CreatePurchaseCommandHandler implements CommandHandler<Create
             new ItemQuantity(item.quantity()),
             new ItemUnitPrice(0.0),
             new ProductId(item.productId()),
-            new PurchaseId(item.purchaseId())
+            id
         )).collect(Collectors.toList());
 
         this.creator.create(id, description, date, userId, companyId, items);

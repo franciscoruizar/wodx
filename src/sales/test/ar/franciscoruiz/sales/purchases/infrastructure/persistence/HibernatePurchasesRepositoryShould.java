@@ -1,4 +1,4 @@
-package ar.franciscoruiz.sales.purchases.infrastructure.pesistence;
+package ar.franciscoruiz.sales.purchases.infrastructure.persistence;
 
 import ar.franciscoruiz.sales.purchases.PurchasesModuleInfrastructureTestCase;
 import ar.franciscoruiz.sales.purchases.domain.Purchase;

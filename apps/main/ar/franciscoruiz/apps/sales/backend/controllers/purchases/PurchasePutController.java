@@ -6,9 +6,11 @@ import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.command.CommandHandlerExecutionError;
 import ar.franciscoruiz.shared.domain.bus.query.QueryBus;
 import ar.franciscoruiz.shared.infrastructure.spring.ApiController;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -28,7 +30,7 @@ public final class PurchasePutController extends ApiController {
         super(queryBus, commandBus);
     }
 
-    @PutMapping(value = "/purchases/{id}")
+    @PutMapping(value = "/purchases/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> index(
         @RequestBody Request request,
         @PathVariable String id
@@ -40,11 +42,10 @@ public final class PurchasePutController extends ApiController {
                 request.date(),
                 request.userId(),
                 request.companyId(),
-                request.items.stream().map(itemRequest -> new CreateItemCommand(
+                request.items().stream().map(itemRequest -> new CreateItemCommand(
                     itemRequest.id(),
                     itemRequest.quantity(),
-                    itemRequest.productId(),
-                    id
+                    itemRequest.productId()
                 )).collect(Collectors.toList())
             )
         );
@@ -53,20 +54,12 @@ public final class PurchasePutController extends ApiController {
 
     @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     static class Request {
-        private String            id;
         private String            description;
+        @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         private LocalDateTime     date;
         private String            userId;
         private String            companyId;
         private List<ItemRequest> items;
-
-        public String id() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
 
         public String description() {
             return description;
@@ -111,9 +104,9 @@ public final class PurchasePutController extends ApiController {
 
     @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     static class ItemRequest {
-        private String  id;
-        private Integer quantity;
-        private String  productId;
+        private String id;
+        private int    quantity;
+        private String productId;
 
         public String id() {
             return id;

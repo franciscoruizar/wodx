@@ -1,4 +1,4 @@
-package ar.franciscoruiz.sales.purchases.infrastructure.pesistence;
+package ar.franciscoruiz.sales.purchases.infrastructure.persistence;
 
 import ar.franciscoruiz.sales.purchases.domain.Purchase;
 import ar.franciscoruiz.sales.purchases.domain.PurchaseId;
@@ -34,7 +34,7 @@ public final class MySqlPurchaseRepository extends HibernateRepository<Purchase>
 
     @Override
     public List<Purchase> searchByUser(UserId userId) {
-        Filter  filter  = new Filter(new FilterField("user_id"), FilterOperator.EQUAL, new FilterValue(userId.value()));
+        Filter  filter  = new Filter(new FilterField("userId"), FilterOperator.EQUAL, new FilterValue(userId.value()));
         Filters filters = new Filters(Collections.singletonList(filter));
 
         Criteria criteria = new Criteria(filters, Order.asc("date"));
@@ -44,7 +44,7 @@ public final class MySqlPurchaseRepository extends HibernateRepository<Purchase>
 
     @Override
     public List<Purchase> searchByCompany(CompanyId companyId) {
-        Filter  filter  = new Filter(new FilterField("company_id"), FilterOperator.EQUAL, new FilterValue(companyId.value()));
+        Filter  filter  = new Filter(new FilterField("companyId"), FilterOperator.EQUAL, new FilterValue(companyId.value()));
         Filters filters = new Filters(Collections.singletonList(filter));
 
         Criteria criteria = new Criteria(filters, Order.asc("date"));
@@ -54,8 +54,8 @@ public final class MySqlPurchaseRepository extends HibernateRepository<Purchase>
 
     @Override
     public List<Purchase> searchByUserCompany(UserId userId, CompanyId companyId) {
-        Filter filterUser    = new Filter(new FilterField("user_id"), FilterOperator.EQUAL, new FilterValue(userId.value()));
-        Filter filterCompany = new Filter(new FilterField("company_id"), FilterOperator.EQUAL, new FilterValue(companyId.value()));
+        Filter filterUser    = new Filter(new FilterField("userId"), FilterOperator.EQUAL, new FilterValue(userId.value()));
+        Filter filterCompany = new Filter(new FilterField("companyId"), FilterOperator.EQUAL, new FilterValue(companyId.value()));
 
         List<Filter> filterList = new ArrayList<>() {{
             add(filterUser);
