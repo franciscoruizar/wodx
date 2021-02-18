@@ -1,5 +1,6 @@
 package ar.franciscoruiz.sales.purchases.application.create;
 
+import ar.franciscoruiz.sales.items.application.create.CreateItemCommand;
 import ar.franciscoruiz.shared.domain.bus.command.Command;
 
 import java.time.LocalDateTime;

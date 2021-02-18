@@ -11,13 +11,15 @@ public final class PaymentResponse implements Response {
     private final String        method;
     private final Double        mount;
     private final String        purchaseId;
+    private final Boolean       state;
     private final LocalDateTime dateTime;
 
-    public PaymentResponse(String id, String method, Double mount, String purchaseId, LocalDateTime dateTime) {
+    public PaymentResponse(String id, String method, Double mount, String purchaseId, Boolean state, LocalDateTime dateTime) {
         this.id         = id;
         this.method     = method;
         this.mount      = mount;
         this.purchaseId = purchaseId;
+        this.state      = state;
         this.dateTime   = dateTime;
     }
 
@@ -27,7 +29,8 @@ public final class PaymentResponse implements Response {
             payment.method().name(),
             payment.mount().value(),
             payment.purchaseId().value(),
-            payment.dateTime()
+            payment.state().value(),
+            payment.date()
         );
     }
 
@@ -38,7 +41,8 @@ public final class PaymentResponse implements Response {
         response.put("method", this.method);
         response.put("mount", this.mount);
         response.put("purchase_id", this.purchaseId);
-        response.put("date", this.dateTime);
+        response.put("state", this.state());
+        response.put("date", this.dateTime.toString());
 
         return response;
     }
@@ -61,5 +65,9 @@ public final class PaymentResponse implements Response {
 
     public LocalDateTime dateTime() {
         return dateTime;
+    }
+
+    public String state() {
+        return this.state ? "SUCCESS" : "DENIED";
     }
 }

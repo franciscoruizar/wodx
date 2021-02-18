@@ -1,6 +1,6 @@
 package ar.franciscoruiz.apps.sales.backend.controllers.purchases;
 
-import ar.franciscoruiz.sales.purchases.application.create.CreateItemCommand;
+import ar.franciscoruiz.sales.items.application.create.CreateItemCommand;
 import ar.franciscoruiz.sales.purchases.application.create.CreatePurchaseCommand;
 import ar.franciscoruiz.shared.domain.bus.command.CommandBus;
 import ar.franciscoruiz.shared.domain.bus.command.CommandHandlerExecutionError;
@@ -45,7 +45,8 @@ public final class PurchasePutController extends ApiController {
                 request.items().stream().map(itemRequest -> new CreateItemCommand(
                     itemRequest.id(),
                     itemRequest.quantity(),
-                    itemRequest.productId()
+                    itemRequest.productId(),
+                    id
                 )).collect(Collectors.toList())
             )
         );

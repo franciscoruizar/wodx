@@ -1,5 +1,6 @@
 package ar.franciscoruiz.sales.payments.application;
 
+import ar.franciscoruiz.sales.payments.domain.Payment;
 import ar.franciscoruiz.shared.domain.bus.query.Response;
 
 import java.util.HashMap;
@@ -11,6 +12,15 @@ public final class PaymentsResponse implements Response {
 
     public PaymentsResponse(List<PaymentResponse> values) {
         this.values = values;
+    }
+
+    public static PaymentsResponse fromAggregate(List<Payment> payments) {
+        return new PaymentsResponse(
+            payments
+                .stream()
+                .map(PaymentResponse::fromAggregate)
+                .collect(Collectors.toList())
+        );
     }
 
     public List<HashMap<String, Object>> toPrimitives() {

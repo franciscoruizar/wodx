@@ -1,6 +1,5 @@
 package ar.franciscoruiz.sales.payments.domain;
 
-import ar.franciscoruiz.sales.payments.application.create.GatewayPaymentError;
 import ar.franciscoruiz.sales.purchases.domain.PurchaseId;
 
 import java.time.LocalDateTime;

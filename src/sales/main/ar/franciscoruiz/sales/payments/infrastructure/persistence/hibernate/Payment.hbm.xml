@@ -13,11 +13,9 @@
             <property name="value" column="mount" type="java.lang.Double" access="field"/>
         </component>
 
-        <property name="paymentMethod" column="payment_method_id" access="field">
-            <type name="org.hibernate.type.EnumType">
-                <param name="PaymentMethod">ar.franciscoruiz.sales.payments.domain.PaymentMethod</param>
-            </type>
-        </property>
+        <component name="method" class="ar.franciscoruiz.sales.payments.domain.PaymentMethodId" access="field">
+            <property name="value" column="payment_method_id" type="java.lang.String" access="field" length="36"/>
+        </component>
 
         <property name="date" column="date" type="java.time.LocalDateTime" access="field"/>
 

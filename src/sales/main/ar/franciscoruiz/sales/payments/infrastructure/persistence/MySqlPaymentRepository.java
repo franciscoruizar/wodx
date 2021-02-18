@@ -4,16 +4,19 @@ import ar.franciscoruiz.sales.payments.domain.Payment;
 import ar.franciscoruiz.sales.payments.domain.PaymentId;
 import ar.franciscoruiz.sales.payments.domain.PaymentRepository;
 import ar.franciscoruiz.sales.purchases.domain.PurchaseId;
+import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.criteria.*;
 import ar.franciscoruiz.shared.infrastructure.hibernate.HibernateRepository;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public final class MySqlPaymentRepository extends HibernateRepository<Payment> implements PaymentRepository {
-    public MySqlPaymentRepository(SessionFactory sessionFactory) {
+    public MySqlPaymentRepository(@Qualifier("sales-session_factory") SessionFactory sessionFactory) {
         super(sessionFactory, Payment.class);
     }
 

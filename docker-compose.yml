@@ -10,7 +10,7 @@ services:
       - MYSQL_ROOT_PASSWORD=lechuga
     entrypoint:
       sh -c "
-      echo 'CREATE DATABASE IF NOT EXISTS accounts;CREATE DATABASE IF NOT EXISTS analytics;CREATE DATABASE IF NOT EXISTS workouts;CREATE DATABASE IF NOT EXISTS events;' > /docker-entrypoint-initdb.d/init.sql;
+      echo 'CREATE DATABASE IF NOT EXISTS wodx;' > /docker-entrypoint-initdb.d/init.sql;
       /usr/local/bin/docker-entrypoint.sh --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
       "
     command: [ "--default-authentication-plugin=mysql_native_password" ]

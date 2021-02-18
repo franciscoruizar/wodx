@@ -1,12 +1,12 @@
 package ar.franciscoruiz.sales.purchases.application.create;
 
+import ar.franciscoruiz.sales.items.domain.Item;
+import ar.franciscoruiz.sales.items.domain.ItemId;
+import ar.franciscoruiz.sales.items.domain.ItemQuantity;
+import ar.franciscoruiz.sales.items.domain.ItemUnitPrice;
 import ar.franciscoruiz.sales.products.domain.ProductId;
 import ar.franciscoruiz.sales.purchases.domain.PurchaseDescription;
 import ar.franciscoruiz.sales.purchases.domain.PurchaseId;
-import ar.franciscoruiz.sales.purchases.domain.items.Item;
-import ar.franciscoruiz.sales.purchases.domain.items.ItemId;
-import ar.franciscoruiz.sales.purchases.domain.items.ItemQuantity;
-import ar.franciscoruiz.sales.purchases.domain.items.ItemUnitPrice;
 import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.bus.command.CommandHandler;
 import ar.franciscoruiz.shared.domain.companies.CompanyId;

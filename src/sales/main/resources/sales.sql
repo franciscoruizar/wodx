@@ -65,6 +65,7 @@ create table if not exists payments
 	payment_method_id char(36) not null,
 	purchase_id char(36) not null,
 	date datetime not null,
+	state tinyint(1) default 0 not null,
 	constraint fk_payments__payment_methods foreign key (payment_method_id) references payment_methods (id),
   	constraint fk_payments__purchases foreign key (purchase_id) references purchases (id)
 );

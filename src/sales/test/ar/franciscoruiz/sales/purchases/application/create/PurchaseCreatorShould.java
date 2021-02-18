@@ -1,13 +1,13 @@
 package ar.franciscoruiz.sales.purchases.application.create;
 
+import ar.franciscoruiz.sales.items.domain.Item;
+import ar.franciscoruiz.sales.items.domain.ItemMother;
 import ar.franciscoruiz.sales.products.domain.*;
 import ar.franciscoruiz.sales.products.domain.membership.MembershipMother;
 import ar.franciscoruiz.sales.products.domain.membership.MembershipNumberDaysEnabledMother;
 import ar.franciscoruiz.sales.purchases.PurchasesModuleUnitTestCase;
 import ar.franciscoruiz.sales.purchases.domain.Purchase;
 import ar.franciscoruiz.sales.purchases.domain.PurchaseMother;
-import ar.franciscoruiz.sales.purchases.domain.items.Item;
-import ar.franciscoruiz.sales.purchases.domain.items.ItemMother;
 import ar.franciscoruiz.shared.domain.companies.CompanyIdMother;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -18,8 +18,7 @@ import java.util.List;
 final class PurchaseCreatorShould extends PurchasesModuleUnitTestCase {
     @Test
     void create_a_valid_purchase() {
-        ProductFinder   productFinder = new ProductFinder(productRepository);
-        PurchaseCreator creator       = new PurchaseCreator(repository, itemRepository, productFinder);
+        PurchaseCreator creator = new PurchaseCreator(repository, itemRepository, productRepository);
 
         Purchase purchase = PurchaseMother.random();
 
@@ -42,10 +41,10 @@ final class PurchaseCreatorShould extends PurchasesModuleUnitTestCase {
 
             Assertions.assertEquals(item.unitPrice().value(), product.price().value());
 
-            super.mockProductRepositorySearch(product);
+            mockRepositorySearch(product);
         }
 
-        super.mockRepositorySearch(purchase);
+        mockRepositorySearch(purchase);
 
         creator.create(purchase.id(), purchase.description(), purchase.date(), purchase.userId(), purchase.companyId(), items);
 

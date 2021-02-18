@@ -1,6 +1,6 @@
 package ar.franciscoruiz.sales.purchases.domain;
 
-import ar.franciscoruiz.sales.purchases.domain.items.Item;
+import ar.franciscoruiz.sales.items.domain.Item;
 import ar.franciscoruiz.shared.domain.companies.CompanyId;
 import ar.franciscoruiz.shared.domain.users.UserId;
 
