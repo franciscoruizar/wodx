@@ -1,4 +1,4 @@
-package ar.franciscoruiz.apps.accounts.backend;
+package ar.franciscoruiz.apps.wodx.backend;
 
 import ar.franciscoruiz.shared.domain.Service;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,9 +11,16 @@ import java.util.HashMap;
 @SpringBootApplication(exclude = HibernateJpaAutoConfiguration.class)
 @ComponentScan(
     includeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = Service.class),
-    value = {"ar.franciscoruiz.shared", "ar.franciscoruiz.accounts", "ar.franciscoruiz.apps.shared", "ar.franciscoruiz.apps.accounts.backend", "ar.franciscoruiz.authentications"}
+    value = {
+        "ar.franciscoruiz.accounts",
+        "ar.franciscoruiz.authentications",
+        "ar.franciscoruiz.sales",
+        "ar.franciscoruiz.shared",
+        "ar.franciscoruiz.apps.shared",
+        "ar.franciscoruiz.apps.wodx.backend"
+    }
 )
-public class AccountsBackendApplication {
+public class WodXBackendApplication {
     public static HashMap<String, Class<?>> commands() {
         return new HashMap<>() {
         };

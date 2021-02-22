@@ -15,8 +15,8 @@ public class Starter {
             throw new RuntimeException("There are not enough arguments");
         }
 
-        String applicationName = args[0];
-        String commandName = args[1];
+        String  applicationName = args[0];
+        String  commandName     = args[1];
         boolean isServerCommand = commandName.equals("server");
 
         ensureApplicationExist(applicationName);
