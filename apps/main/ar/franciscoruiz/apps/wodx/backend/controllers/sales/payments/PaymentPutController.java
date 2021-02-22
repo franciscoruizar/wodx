@@ -11,10 +11,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 
@@ -30,7 +27,7 @@ public final class PaymentPutController extends ApiController {
     @PutMapping(value = "/payments/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> index(
         @RequestBody Request request,
-        @PathVariable String id
+        @RequestParam String id
     ) throws CommandHandlerExecutionError {
         dispatch(
             new CreatePaymentCommand(
