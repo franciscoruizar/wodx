@@ -19,7 +19,7 @@ public final class AuthenticationsBackendServerPortCustomizer implements WebServ
         try {
             factory.setPort(param.getInt("AUTHENTICATIONS_BACKEND_SERVER_PORT"));
         } catch (ParameterNotExist parameterNotExist) {
-            parameterNotExist.printStackTrace();
+            factory.setPort(8080);
         }
     }
 }
