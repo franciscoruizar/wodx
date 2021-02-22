@@ -126,8 +126,8 @@ apply plugin: 'application'
 apply plugin: "org.springframework.boot"
 
 bootJar {
-    baseName 'wod-x'
-    version '0.0.1'
+    baseName 'wodx'
+    version '1.0'
 }
 
 mainClassName = "${packagesName}.apps.Starter"
