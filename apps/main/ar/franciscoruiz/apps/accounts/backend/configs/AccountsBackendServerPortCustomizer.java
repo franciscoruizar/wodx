@@ -19,8 +19,7 @@ public final class AccountsBackendServerPortCustomizer implements WebServerFacto
         try {
             int port = param.getInt("ACCOUNTS_BACKEND_SERVER_PORT");
             factory.setPort(port);
-        } catch (ParameterNotExist parameterNotExist) {
-            parameterNotExist.printStackTrace();
+        } catch (ParameterNotExist ignored) {
         }
     }
 }

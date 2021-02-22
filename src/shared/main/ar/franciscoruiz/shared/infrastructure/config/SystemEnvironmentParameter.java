@@ -1,12 +1,9 @@
 package ar.franciscoruiz.shared.infrastructure.config;
 
-import ar.franciscoruiz.shared.domain.Service;
 import ar.franciscoruiz.shared.domain.config.EnvironmentParameter;
 import ar.franciscoruiz.shared.domain.config.ParameterNotExist;
-import org.springframework.context.annotation.Configuration;
 
-@Service
-public class SystemEnvironmentParameter implements EnvironmentParameter {
+public final class SystemEnvironmentParameter implements EnvironmentParameter {
     @Override
     public String get(String parameter) throws ParameterNotExist {
         String value = System.getenv(parameter);
