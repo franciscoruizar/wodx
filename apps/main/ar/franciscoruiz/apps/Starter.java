@@ -1,9 +1,6 @@
 package ar.franciscoruiz.apps;
 
-import ar.franciscoruiz.apps.accounts.backend.AccountsBackendApplication;
-import ar.franciscoruiz.apps.authentications.backend.AuthenticationsBackendApplication;
-import ar.franciscoruiz.apps.sales.backend.SalesBackendApplication;
-import ar.franciscoruiz.apps.workouts.backend.WorkoutsBackendApplication;
+import ar.franciscoruiz.apps.wodx.backend.WodXBackendApplication;
 import ar.franciscoruiz.shared.infrastructure.cli.ConsoleCommand;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
@@ -18,8 +15,8 @@ public class Starter {
             throw new RuntimeException("There are not enough arguments");
         }
 
-        String  applicationName = args[0];
-        String  commandName     = args[1];
+        String applicationName = args[0];
+        String commandName = args[1];
         boolean isServerCommand = commandName.equals("server");
 
         ensureApplicationExist(applicationName);
@@ -68,10 +65,7 @@ public class Starter {
     private static HashMap<String, Class<?>> applications() {
         HashMap<String, Class<?>> applications = new HashMap<>();
 
-        applications.put("accounts_backend", AccountsBackendApplication.class);
-        applications.put("authentications_backend", AuthenticationsBackendApplication.class);
-        applications.put("sales_backend", SalesBackendApplication.class);
-        applications.put("workouts_backend", WorkoutsBackendApplication.class);
+        applications.put("wodx_backend", WodXBackendApplication.class);
 
         return applications;
     }
@@ -79,10 +73,7 @@ public class Starter {
     private static HashMap<String, HashMap<String, Class<?>>> commands() {
         HashMap<String, HashMap<String, Class<?>>> commands = new HashMap<>();
 
-        commands.put("accounts_backend", AccountsBackendApplication.commands());
-        commands.put("authentications_backend", AuthenticationsBackendApplication.commands());
-        commands.put("sales_backend", SalesBackendApplication.commands());
-        commands.put("workouts_backend", WorkoutsBackendApplication.commands());
+        commands.put("wodx_backend", WodXBackendApplication.commands());
 
         return commands;
     }
