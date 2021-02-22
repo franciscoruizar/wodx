@@ -18,8 +18,7 @@ public final class RetentionsBackendServerPortCustomizer implements WebServerFac
     public void customize(ConfigurableWebServerFactory factory) {
         try {
             factory.setPort(param.getInt("RETENTIONS_BACKEND_SERVER_PORT"));
-        } catch (ParameterNotExist parameterNotExist) {
-            parameterNotExist.printStackTrace();
+        } catch (ParameterNotExist ignored) {
         }
     }
 }

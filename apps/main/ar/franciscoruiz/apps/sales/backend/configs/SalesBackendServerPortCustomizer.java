@@ -19,8 +19,7 @@ public final class SalesBackendServerPortCustomizer implements WebServerFactoryC
         try {
             int port = param.getInt("SALES_BACKEND_SERVER_PORT");
             factory.setPort(port);
-        } catch (ParameterNotExist parameterNotExist) {
-            parameterNotExist.printStackTrace();
+        } catch (ParameterNotExist ignored) {
         }
     }
 }

@@ -18,8 +18,7 @@ public final class WorkoutsBackendServerPortCustomizer implements WebServerFacto
     public void customize(ConfigurableWebServerFactory factory) {
         try {
             factory.setPort(param.getInt("WORKOUTS_BACKEND_SERVER_PORT"));
-        } catch (ParameterNotExist parameterNotExist) {
-            parameterNotExist.printStackTrace();
+        } catch (ParameterNotExist ignored) {
         }
     }
 }

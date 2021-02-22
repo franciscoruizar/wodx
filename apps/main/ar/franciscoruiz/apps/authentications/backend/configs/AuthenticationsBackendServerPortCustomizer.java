@@ -18,8 +18,7 @@ public final class AuthenticationsBackendServerPortCustomizer implements WebServ
     public void customize(ConfigurableWebServerFactory factory) {
         try {
             factory.setPort(param.getInt("AUTHENTICATIONS_BACKEND_SERVER_PORT"));
-        } catch (ParameterNotExist parameterNotExist) {
-            factory.setPort(8080);
+        } catch (ParameterNotExist ignored) {
         }
     }
 }

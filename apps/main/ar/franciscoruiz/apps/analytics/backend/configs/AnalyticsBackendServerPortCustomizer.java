@@ -18,8 +18,7 @@ public final class AnalyticsBackendServerPortCustomizer implements WebServerFact
     public void customize(ConfigurableWebServerFactory factory) {
         try {
             factory.setPort(param.getInt("ANALYTICS_BACKEND_SERVER_PORT"));
-        } catch (ParameterNotExist parameterNotExist) {
-            parameterNotExist.printStackTrace();
+        } catch (ParameterNotExist ignored) {
         }
     }
 }
